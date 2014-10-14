@@ -1,3 +1,22 @@
-// Place all the styles related to the Courses controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+$darkgrey: #333;
+$white: #fff;
+$blue: #231a59;
+$brown: #4e3925;
+
+.course {
+	display: inline-block;
+	width: 35%;
+}
+
+.course h1 {
+	color: $white;
+	padding: 0.5em;
+}
+
+.blue-bg {
+	background-color: $blue;
+}
+
+.brown-bg {
+	background-color: $brown;
+}

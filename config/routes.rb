@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   get 'courses/index'
 
-  devise_for :users, controllers: {registrations: "users/registrations", sessions: "users/sessions", passwords: "users/passwords"}, skip: [:sessions, :registrations]
+  devise_for :users, controllers: {registrations: "users/registrations", sessions: "users/sessions", 
+    passwords: "users/passwords"}, skip: [:sessions, :registrations]
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   # The priority is based upon order of creation: first created -> highest priority.
@@ -9,6 +10,7 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'courses#index'
+  resources :courses
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
