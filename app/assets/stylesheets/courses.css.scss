@@ -1,22 +1,64 @@
 $darkgrey: #333;
+$grey: #999;
 $white: #fff;
+$lightblue: #2ed8f6;
 $blue: #231a59;
 $brown: #4e3925;
+$orange: #ffaa2c;
+
+.container {
+	width: 720px;
+	margin: auto;
+}
 
 .course {
 	display: inline-block;
-	width: 35%;
+	width: 100%;
 }
 
 .course h1 {
-	color: $white;
 	padding: 0.5em;
 }
 
-.blue-bg {
+.lessons {
+	list-style-type: none;
+}
+
+.lessons li {
+	margin-bottom: 1em;
+}
+
+.lessons .subtitle {
+	color: $grey;
+	font-size: 0.6em;
+	margin-top: -2px;
+}
+
+.photoshop {
+	color: $lightblue;
 	background-color: $blue;
 }
 
-.brown-bg {
+.illustrator {
+	color: $orange;
 	background-color: $brown;
 }
+
+.row {
+
+}
+
+.row > * {
+	float: left;
+}
+
+.col-10 { width: 10%; }
+.col-20 { width: 20%; }
+.col-30 { width: 30%; }
+.col-40 { width: 40%; }
+.col-50 { width: 50%; }
+.col-60 { width: 60%; }
+.col-70 { width: 70%; }
+.col-80 { width: 80%; }
+.col-90 { width: 90%; }
+.col-100 { width: 100%; }

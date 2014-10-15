@@ -1,3 +1,5 @@
+$black: #000;
+
 .brand {
 	font-size: 32px;
 	letter-spacing: 5px;
@@ -7,4 +9,18 @@ body {
 	font-size: 20px;
 	line-height: 120%;
 	font-family: "Open Sans", Futura, Helvetica, sans-serif;
+}
+
+a, a:visited {
+	color: $black;
+	text-decoration: none;
+}
+
+a:hover {
+	color: lighten($black, 50%);
+}
+
+ul {
+	margin: 0;
+	padding: 0;
 }
