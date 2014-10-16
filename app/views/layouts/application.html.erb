@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>GainSomething</title>
+  <title>Gain Something</title>
   <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
@@ -9,6 +9,15 @@
 <!-- Prelang: Analytics / Google Analytics -->
     <%= analytics_init if Rails.env.production? or Rails.env.development? %></head>
 <body>
+<!-- Menu -->
+<div id="menu">
+	<%- if @user %>
+		<div><%= @user.name %></div>
+		<%= link_to 'Log Out', destroy_user_session_path, method: 'DELETE' %>
+	<%- else %>
+		<%= link_to 'Log In', new_user_session_path %>
+	<% end %>
+</div>
 
 <%= yield %>
 
