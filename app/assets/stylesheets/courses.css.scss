@@ -9,6 +9,23 @@
 	width: 100%;
 }
 
+.course-btn {
+	display: inline-block;
+	float: right;
+	padding: 10px;
+	color: $black;
+	border: 1px solid $black;
+	opacity: 0.3;
+	font-size: 0.8em;
+	cursor: pointer;
+	@include transition-property(opacity);
+	@include transition-duration(150ms);
+
+	&:hover {
+		opacity: 1;
+	}
+}
+
 .course h1 {
 	padding: 0.5em;
 }
