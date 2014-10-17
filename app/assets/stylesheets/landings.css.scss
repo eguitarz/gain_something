@@ -1,3 +1,17 @@
-// Place all the styles related to the landings controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+body.landings #main {
+	background-image: image_url('skytree.jpg');
+	background-size: 100% 100%;
+
+	.brand {
+		position: relative;
+		top: 40%;
+		margin: auto;
+		line-height: 80px;
+		font-size: 4em;
+		color: $white;
+		text-shadow: 0 0 5px $blue;
+		text-align: center;
+		text-indent: 0.2em;
+		letter-spacing: 0.2em;
+	}
+}
