@@ -18,6 +18,7 @@
 	opacity: 0.3;
 	font-size: 0.8em;
 	cursor: pointer;
+	-webkit-backface-visibility: hidden;
 	@include transition-property(opacity);
 	@include transition-duration(150ms);
 
