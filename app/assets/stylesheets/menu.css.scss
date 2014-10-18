@@ -1,5 +1,5 @@
-body.users\/sessions #menu,
-body.users\/sessions .menu-btn {
+.users\/sessions #menu,
+.users\/sessions .menu-btn {
 	display: none;
 }
 
@@ -10,10 +10,18 @@ body.users\/sessions .menu-btn {
 	margin: 0;
 	padding: 0;
 	min-height: 100%;
-	width: 240px;
 	color: $white;
 	background-color: $darkgrey;
 	z-index: 0;
+}
+
+#menu .scrollable {
+	display: none;
+	width: 240px;
+}
+
+.siteMenuOpened #menu .scrollable {
+	display: block;
 }
 
 #menu a {

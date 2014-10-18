@@ -1,83 +1,81 @@
-.content
-	.brand Gain Something
-	.course-btn
-		Create new course
-	.course
-		%h1.photoshop Photoshop
-		.row
-			.col-50
-				%ul.lessons
-					%li
-						%a{href: "#"}
-							Photoshop 101
-						.subtitle
-							beginner • 7 episodes • Dale Ma
-					%li
-						%a{href: "#"}
-							Photoshop in a nutshell
-						.subtitle
-							beginner • 12 episodes • Ken Campbell
-					%li
-						%a{href: "#"}
-							Mastering Photoshop
-						.subtitle
-							intermediate • 13 episodes • Susan Hui
-			.col-50
-				%ul.lessons
-					%li
-						%a{href: "#"}
-							Photoshop 101
-						.subtitle
-							beginner • 7 episodes • Dale Ma
-					%li
-						%a{href: "#"}
-							Photoshop in a nutshell
-						.subtitle
-							beginner • 12 episodes • Ken Campbell
-					%li
-						%a{href: "#"}
-							Mastering Photoshop
-						.subtitle
-							intermediate • 13 episodes • Susan Hui
-		.row
-			.col-100
-				More
-	.course
-		%h1.illustrator Illustrator
-		.row
-			.col-50
-				%ul.lessons
-					%li
-						%a{href: "#"}
-							Illustrator 101
-						.subtitle
-							beginner • 7 episodes • Dale Ma
+.brand Gain Something
+= link_to '<div class="course-btn">Create new course</div>'.html_safe, new_course_path
+.course
+	%h1.photoshop Photoshop
+	.row
+		.col-50
+			%ul.lessons
+				%li
+					%a{href: "#"}
+						Photoshop 101
+					.subtitle
+						beginner • 7 episodes • Dale Ma
+				%li
+					%a{href: "#"}
+						Photoshop in a nutshell
+					.subtitle
+						beginner • 12 episodes • Ken Campbell
+				%li
+					%a{href: "#"}
+						Mastering Photoshop
+					.subtitle
+						intermediate • 13 episodes • Susan Hui
+		.col-50
+			%ul.lessons
+				%li
+					%a{href: "#"}
+						Photoshop 101
+					.subtitle
+						beginner • 7 episodes • Dale Ma
+				%li
+					%a{href: "#"}
+						Photoshop in a nutshell
+					.subtitle
+						beginner • 12 episodes • Ken Campbell
+				%li
+					%a{href: "#"}
+						Mastering Photoshop
+					.subtitle
+						intermediate • 13 episodes • Susan Hui
+	.row
+		.col-100
+			More
+.course
+	%h1.illustrator Illustrator
+	.row
+		.col-50
+			%ul.lessons
+				%li
+					%a{href: "#"}
+						Illustrator 101
+					.subtitle
+						beginner • 7 episodes • Dale Ma
 
-					%li
-						%a{href: "#"}
-							Illustrator for programmers
-						.subtitle
-							intermediate • 27 episodes • Dale Ma
-					%li
-						%a{href: "#"}
-							Mastering Illustrator
-						.subtitle
-							master • 17 episodes • Dale Ma
-			.col-50
-				%ul.lessons
-					%li
-						%a{href: "#"}
-							Illustrator 101
-						.subtitle
-							beginner • 7 episodes • Dale Ma
+				%li
+					%a{href: "#"}
+						Illustrator for programmers
+					.subtitle
+						intermediate • 27 episodes • Dale Ma
+				%li
+					%a{href: "#"}
+						Mastering Illustrator
+					.subtitle
+						master • 17 episodes • Dale Ma
+		.col-50
+			%ul.lessons
+				%li
+					%a{href: "#"}
+						Illustrator 101
+					.subtitle
+						beginner • 7 episodes • Dale Ma
 
-					%li
-						%a{href: "#"}
-							Illustrator for programmers
-						.subtitle
-							intermediate • 27 episodes • Dale Ma
-					%li
-						%a{href: "#"}
-							Mastering Illustrator
-						.subtitle
-							master • 17 episodes • Dale Ma
+				%li
+					%a{href: "#"}
+						Illustrator for programmers
+					.subtitle
+						intermediate • 27 episodes • Dale Ma
+				%li
+					%a{href: "#"}
+						Mastering Illustrator
+					.subtitle
+						master • 17 episodes • Dale Ma

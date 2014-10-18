@@ -1,0 +1,57 @@
+html {
+	margin: 0;
+	padding: 0;
+	&.siteMenuOpened {
+		height: 100%;
+	}	
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	font-size: 20px;
+	line-height: 120%;
+	font-family: "Open Sans", Futura, Helvetica, sans-serif;
+
+	&.siteMenuOpened {
+		height: 100%;
+	}
+}
+
+a, a:visited {
+	color: $black;
+	text-decoration: none;
+}
+
+a:hover {
+	color: lighten($black, 50%);
+}
+
+ul {
+	margin: 0;
+	padding: 0;
+}
+
+form {
+	width: 480px;
+	margin: auto;
+}
+
+input[type=text] {
+	width: 100%;
+	height: 1.5em;
+	font-size: 1.2em;
+	font-weight: bold;
+	color: $black;
+	border: 0;
+}
+
+textarea {
+	margin: 20px 0;
+	width: 100%;
+	height: 4em;
+	font-size: 0.8em;
+	color: $black;
+	border: 0;
+	resize: none;
+}

@@ -9,13 +9,15 @@
 		= analytics_init if Rails.env.production? or Rails.env.development?
 %body{class: "#{params[:controller]}"}
 	#menu
-		- if @user
-			%div
-				= @user.name
-			= link_to 'Log Out', destroy_user_session_path, method: 'DELETE'
-		- else
-			= link_to 'Log In', new_user_session_path
+		.scrollable
+			- if @user
+				%div
+					= @user.name
+				= link_to 'Log Out', destroy_user_session_path, method: 'DELETE'
+			- else
+				= link_to 'Log In', new_user_session_path
 	#overlay
 	#main
 		.menu-btn
-		= yield
+		.content
+			= yield
