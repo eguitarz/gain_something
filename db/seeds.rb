@@ -5,3 +5,5 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+User.create(email: 'dalema22@gmail.com', password: 'a1234567', :password_confirmation => 'a1234567')
+Course.create(name: 'Photoshop for beginners', description: 'Basic concepts of photoshoop')

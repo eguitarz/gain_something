@@ -5,31 +5,6 @@
 	.row
 		.col-100
 			= f.text_area :description, placeholder: "What will I learn in this course?"
-	.row.document
-		.col-10
-			.icon
-				§
-		.col-90
-			This is a text
-	.row.document
-		.col-10
-			.icon.photoshop
-				V
-		.col-90
-			This is a video
-	.row.document
-		.col-10
-			.icon.illustrator
-				F
-		.col-90
-			This is a file
-	.row.document-buttons
+	.row
 		.col-100
-			.resource-btn
-				+ Text
-			.resource-btn
-				+ Link
-			.resource-btn
-				+ Video
-			.resource-btn
-				+ File
+			= f.submit 'Create', class: 'btn-normal'

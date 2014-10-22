@@ -66,20 +66,3 @@
 	line-height: 1.5em;
 	margin: 2em 0;
 }
-
-.resource-btn {
-	display: inline-block;
-	width: 60px;
-	opacity: 0.3;
-	color: $black;
-	border: 1px solid $black;
-	font-size: 0.6em;
-	margin: 10px 10px 10px 0;
-	padding: 0 0.6em;
-	text-align: center;
-	cursor: pointer;
-	-webkit-backface-visibility: hidden;
-	&:hover {
-		opacity: 1;
-	}
-}

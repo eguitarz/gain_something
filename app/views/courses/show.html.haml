@@ -1,0 +1,13 @@
+.row
+	.col-100
+		= @course.name
+.row
+	.col-100
+		= @course.description
+- @course.resources.each do |r|
+	.row
+		.col-100
+			= r.title
+	.row
+		.col-100
+			= r.description

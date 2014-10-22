@@ -1,0 +1,38 @@
+= form_for @course do |f|
+	.row.toolbar
+		.col-100
+			= f.button 'Edit', class: 'btn-normal btn-edit-course right'
+			= f.submit 'Save', class: 'btn-normal right'
+	.row
+		.col-100
+			= f.text_field :name, placeholder: @course.name, disabled: true
+	.row
+		.col-100
+			= f.text_area :description, placeholder: @course.description, disabled: true
+	.row.document-buttons
+		.col-100
+			= link_to '<div class="resource-btn text-btn">+ Text</div>'.html_safe, new_course_resource_path(@course.id)
+			.resource-btn.link-btn
+				+ Link
+			.resource-btn.video-btn
+				+ Video
+			.resource-btn.file-btn
+				+ File
+	.row.document
+		.col-10
+			.icon
+				§
+		.col-90
+			This is a text
+	.row.document
+		.col-10
+			.icon.photoshop
+				V
+		.col-90
+			This is a video
+	.row.document
+		.col-10
+			.icon.illustrator
+				F
+		.col-90
+			This is a file

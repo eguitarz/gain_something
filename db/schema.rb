@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141017044141) do
+ActiveRecord::Schema.define(version: 20141022010602) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,14 +49,6 @@ ActiveRecord::Schema.define(version: 20141017044141) do
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
 
-  create_table "categories", force: true do |t|
-    t.string   "name"
-    t.text     "description"
-    t.boolean  "enabled"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "courses", force: true do |t|
     t.string   "name"
     t.text     "description"
@@ -65,11 +57,13 @@ ActiveRecord::Schema.define(version: 20141017044141) do
     t.datetime "updated_at"
   end
 
-  create_table "episodes", force: true do |t|
-    t.string   "name"
+  create_table "resources", force: true do |t|
+    t.integer  "course_id"
+    t.string   "title"
+    t.string   "mime"
     t.text     "description"
-    t.string   "video_id"
-    t.boolean  "approved"
+    t.string   "url"
+    t.integer  "priority"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

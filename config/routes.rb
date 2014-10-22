@@ -10,7 +10,9 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'courses#index'
-  resources :courses
+  resources :courses do
+    resources :resources
+  end
   get 'hi' => 'landings#index'
 
   # Example of regular route:

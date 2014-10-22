@@ -37,6 +37,14 @@ form {
 	margin: auto;
 }
 
+input, textarea, button {
+	outline: none;
+}
+
+input[type=submit], input[type=button], button {
+	background-color: $white;
+}
+
 input[type=text] {
 	width: 100%;
 	height: 1.5em;

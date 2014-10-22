@@ -1,0 +1,25 @@
+@mixin btn($width:60px) {
+	color: $black;
+	width: $width;
+	border: 1px solid $black;
+	opacity: 0.3;
+	display: inline-block;
+	font-size: 0.6em;
+	text-align: center;
+	cursor: pointer;
+	-webkit-backface-visibility: hidden;
+	&:hover {
+		opacity: 1;
+	}
+}
+
+.btn-normal {
+	@include btn;
+	padding: 5px 15px;
+}
+
+.resource-btn {
+	@include btn(60px);
+	margin: 10px 10px 10px 0;
+	padding: 0 5px;
+}

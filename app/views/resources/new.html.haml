@@ -1,0 +1,7 @@
+= form_for [@course, @resource] do |f|
+	= f.label "Course: #{@course.name}"
+	= f.text_field :title, placeholder: 'title'
+	= f.text_field :mime, placeholder: 'mime'
+	= f.text_area :description, id: 'resource-description', value: 'Write something...', class: 'hidden'
+	#mdeditor
+	= f.submit 'Create', class: 'btn-normal'
