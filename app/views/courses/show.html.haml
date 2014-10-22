@@ -3,11 +3,11 @@
 		= @course.name
 .row
 	.col-100
-		= @course.description
+		= @course.description.html_safe
 - @course.resources.each do |r|
 	.row
 		.col-100
 			= r.title
 	.row
 		.col-100
-			= r.description
+			= r.description.html_safe
