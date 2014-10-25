@@ -13,8 +13,11 @@ Rails.application.routes.draw do
   resources :courses do
     resources :resources
   end
+
   get 'hi' => 'landings#index'
 
+
+  resources :users, only: [:show]
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
