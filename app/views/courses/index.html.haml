@@ -1,4 +1,4 @@
-.new-course
+.course-header
 	.brand Gain Something
 	= link_to '<div class="course-btn">Create new course</div>'.html_safe, new_course_path
 .banner
@@ -10,4 +10,4 @@
 				.title
 					= c.name
 			.subtitle
-				beginner • 7 episodes • Dale Ma
+				= "<a href=\"#{user_path(c.user.id)}\">#{c.user.name}</a> • beginner • 7 episodes".html_safe

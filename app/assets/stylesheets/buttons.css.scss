@@ -23,3 +23,12 @@
 	margin: 10px 10px 10px 0;
 	padding: 0 5px;
 }
+
+.course-btn {
+	position: absolute;
+	top: 0;
+	right: 0;
+	@include btn(180px);
+	padding: 10px;
+	font-size: 0.8em;
+}

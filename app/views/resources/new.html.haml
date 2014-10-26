@@ -2,6 +2,5 @@
 	= f.label "Course: #{@course.name}"
 	= f.text_field :title, placeholder: 'title'
 	= f.hidden_field :mime, value: 'text'
-	= f.text_area :description, id: 'resource-description', value: 'Write something...', class: 'hidden'
-	#mdeditor
+	= f.text_area :description, id: 'resource-description', class: 'hidden'
 	= f.submit 'Create', class: 'btn-normal'

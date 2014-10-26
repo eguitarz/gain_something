@@ -1,0 +1,13 @@
+.courses
+	%h1 
+		= "#{@user.name}'s courses"
+	- @user.courses.each do |c|
+		.row
+			.course
+				.title
+					= c.name
+				.subtitle
+					= c.description
+				.resources
+					- c.resources.each do |r|
+						= r.title

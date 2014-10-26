@@ -1,6 +1,7 @@
-.row
-	.col-100
+.course-header
+	.title
 		= @course.name
+	= link_to '<div class="course-btn">Edit this course</div>'.html_safe, edit_course_path(@course.id)
 .row
 	.col-100
 		= @course.description.html_safe

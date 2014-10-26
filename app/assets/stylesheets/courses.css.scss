@@ -9,27 +9,13 @@
 	background-color: $blue;
 }
 
-.new-course {
+.course-header {
+	position: relative;
 	height: 80px;
 }
 
-.course-btn {
-	display: inline-block;
-	float: right;
-	margin-top: -46px;
-	padding: 10px;
-	color: $black;
-	border: 1px solid $black;
-	opacity: 0.3;
-	font-size: 0.8em;
-	cursor: pointer;
-	-webkit-backface-visibility: hidden;
-	@include transition-property(opacity);
-	@include transition-duration(150ms);
-
-	&:hover {
-		opacity: 1;
-	}
+.course-header .title {
+	width: 500px;
 }
 
 .course {
@@ -49,6 +35,10 @@
 	color: $grey;
 	font-size: 0.6em;
 	margin-top: -2px;
+
+	a, a:hover {
+		color: $grey;
+	}
 }
 
 .photoshop {
