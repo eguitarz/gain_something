@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 20141022010602) do
     t.string   "name"
     t.string   "snapshot"
     t.text     "description"
+    t.string   "difficulty"
     t.string   "pay_method"
     t.integer  "user_id"
     t.datetime "created_at"
@@ -62,6 +63,7 @@ ActiveRecord::Schema.define(version: 20141022010602) do
   create_table "resources", force: true do |t|
     t.integer  "course_id"
     t.string   "title"
+    t.string   "third_party_id"
     t.string   "mime"
     t.text     "description"
     t.string   "url"

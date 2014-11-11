@@ -3,6 +3,7 @@ class CreateResources < ActiveRecord::Migration
     create_table :resources do |t|
       t.belongs_to :course
     	t.string :title
+      t.string :third_party_id
     	t.string :mime
     	t.text :description
     	t.string :url

@@ -1,0 +1,24 @@
+.CodeMirror {
+	font-family: $title-fonts;
+	min-height: 480px;
+	margin: 20px 0;
+	height: auto;
+}
+.CodeMirror-scroll {
+  overflow-y: hidden;
+  overflow-x: auto;
+}
+
+.CodeMirror pre {
+  padding: 0;
+  line-height: 1.4em;
+}
+
+.CodeMirror-activeline-background {
+	background-color: $white;
+	border-bottom: 1px solid $lightgrey;
+}
+
+.CodeMirror-empty {
+	color: $lightgrey;
+}

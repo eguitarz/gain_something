@@ -1,6 +1,17 @@
 = form_for [@course, @resource] do |f|
-	= f.label "Course: #{@course.name}"
-	= f.text_field :title, placeholder: 'title'
-	= f.hidden_field :mime, value: 'text'
-	= f.text_area :description, id: 'resource-description', class: 'hidden'
-	= f.submit 'Create', class: 'btn-normal'
+	= f.hidden_field :mime, value: @mime
+	- if @mime == 'text'
+		= f.text_field :title, placeholder: 'Edit title here'
+		= f.text_area :description, id: 'resource-description', placeholder: 'Write something...'
+	- if @mime == 'video'
+		= f.text_field :url, placeholder: 'Post video url from Youtube, Vimeo or Vine', id: 'video-url'
+		= f.hidden_field :title, id: 'video-title'
+		= f.hidden_field :third_party_id, id: 'third-party-id'
+		#ytplayer
+		:javascript
+	- if @mime == 'link'
+		= f.text_field :url, placeholder: 'Post url'
+		= f.text_field :title, placeholder: 'Title'
+
+	= f.submit 'Attach', class: 'btn-big'
+	= f.button 'Cancel', class: 'btn-big btn-cancel', :'data-dest' => "#{edit_course_path(@course.id)}"

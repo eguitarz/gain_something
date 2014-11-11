@@ -13,5 +13,9 @@
 //= require jquery
 //= require jquery_ujs
 //= require codemirror
+//= require active-line
+//= require placeholder
+//= require meta
+//= require markdown
 //= require turbolinks
 //= require_tree .

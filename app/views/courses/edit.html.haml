@@ -11,28 +11,20 @@
 			= f.text_area :description, placeholder: @course.description, disabled: true
 	.row.document-buttons
 		.col-100
-			= link_to '<div class="resource-btn text-btn">+ Text</div>'.html_safe, new_course_resource_path(@course.id)
-			.resource-btn.link-btn
-				+ Link
-			.resource-btn.video-btn
-				+ Video
-			.resource-btn.file-btn
-				+ File
-	.row.document
-		.col-10
-			.icon
-				§
-		.col-90
-			This is a text
-	.row.document
-		.col-10
-			.icon.photoshop
-				V
-		.col-90
-			This is a video
-	.row.document
-		.col-10
-			.icon.illustrator
-				F
-		.col-90
-			This is a file
+			= link_to '<div class="resource-btn text-btn">+ Text</div>'.html_safe, new_course_resource_path(@course.id, mime: 'text')
+			= link_to '<div class="resource-btn video-btn">+ Video</div>'.html_safe, new_course_resource_path(@course.id, mime: 'video')
+			= link_to '<div class="resource-btn link-btn">+ Link</div>'.html_safe, new_course_resource_path(@course.id, mime: 'link')
+	- @course.resources.each do |r|
+		.row.document
+			.col-10
+				- if r.mime == 'text'
+					.icon
+						§
+				- elsif r.mime == 'video'
+					.icon.photoshop
+						V
+				- elsif r.mime == 'link'
+					.icon.illustrator
+						L
+			.col-90
+				= link_to r.title, course_resource_path(@course, r)

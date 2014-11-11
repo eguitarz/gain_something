@@ -11,7 +11,7 @@ body {
 	padding: 0;
 	font-size: 20px;
 	line-height: 120%;
-	font-family: "Open Sans", Futura, Helvetica, sans-serif;
+	font-family: $title-fonts;
 
 	&.siteMenuOpened {
 		height: 100%;
@@ -39,6 +39,7 @@ form {
 
 input, textarea, button {
 	outline: none;
+	font-family: $title-fonts;
 }
 
 input[type=submit], input[type=button], button {
@@ -62,4 +63,8 @@ textarea {
 	color: $black;
 	border: 0;
 	resize: none;
+}
+
+pre {
+	font-family: $title-fonts;
 }

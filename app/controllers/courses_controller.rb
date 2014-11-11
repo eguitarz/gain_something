@@ -8,7 +8,6 @@ class CoursesController < ApplicationController
 
   def show
     @course = Course.find params[:id]
-    process_markdown_contents_to_html
   end
 
   def new
@@ -47,15 +46,5 @@ class CoursesController < ApplicationController
 
   def create_params
     params.require(:course).permit(:name, :description)
-  end
-
-  def process_markdown_contents_to_html()
-    return if @course.nil?
-    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, extensions = {})
-    
-    @course.description = markdown.render @course.description
-    @course.resources.each do |r|
-      r.description = markdown.render r.description
-    end
   end
 end

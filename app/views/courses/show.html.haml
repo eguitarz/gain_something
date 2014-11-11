@@ -2,13 +2,11 @@
 	.title
 		= @course.name
 	= link_to '<div class="course-btn">Edit this course</div>'.html_safe, edit_course_path(@course.id)
-.row
+
+.course.row
 	.col-100
 		= @course.description.html_safe
-- @course.resources.each do |r|
-	.row
-		.col-100
-			= r.title
-	.row
-		.col-100
-			= r.description.html_safe
+	- @course.resources.each do |r|
+		.row
+			.title.col-100
+				= link_to r.title, course_resource_path(@course, r)
