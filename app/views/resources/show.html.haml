@@ -1,12 +1,8 @@
 .row
 	.col-100
-		= @resource.title
-.row
-	.col-100
-		= @resource.url
-.row
-	.col-100
-		= @resource.third_party_id
+		= link_to "Back to #{@course.name}", course_path(@course)
 .row
 	.col-100
 		= @resource.description.html_safe
+- if @resource.mime == 'video'
+	#ytplayer{:"data-video-id" => @resource.third_party_id}

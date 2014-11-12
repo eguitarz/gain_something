@@ -1,3 +1,3 @@
 $(document).on 'page:change', ->
-	$('.menu-btn').on 'click', ->
+	$('.menu-btn').off('click').on 'click', ->
 		$('body').toggleClass 'siteMenuOpened'

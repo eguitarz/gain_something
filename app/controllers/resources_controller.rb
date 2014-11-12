@@ -7,6 +7,7 @@ class ResourcesController < ApplicationController
 	end
 
 	def show
+		@course = Course.find params[:course_id]
 		@resource = Resource.find params[:id]
 		@resource.description = CoursesHelper::markdown_to_html(@resource.description)
 	end

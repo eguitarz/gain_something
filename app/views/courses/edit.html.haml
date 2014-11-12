@@ -1,7 +1,7 @@
 = form_for @course do |f|
 	.row.toolbar
 		.col-100
-			= f.button 'Edit', class: 'btn-normal btn-edit-course right'
+			= f.button 'Cancel', class: 'btn-normal btn-cancel right', :'data-dest' => "#{course_path(@course)}"
 			= f.submit 'Save', class: 'btn-normal right'
 	.row
 		.col-100
@@ -17,14 +17,6 @@
 	- @course.resources.each do |r|
 		.row.document
 			.col-10
-				- if r.mime == 'text'
-					.icon
-						§
-				- elsif r.mime == 'video'
-					.icon.photoshop
-						V
-				- elsif r.mime == 'link'
-					.icon.illustrator
-						L
+				- resource_icon(r.mime)
 			.col-90
 				= link_to r.title, course_resource_path(@course, r)

@@ -6,7 +6,7 @@ createMarkdownEditor = (elementId)->
 	})
 
 bindCancelButton = (selector)->
-	$(selector).on 'click', (e)->
+	$(selector).off('click').on 'click', (e)->
 		e.preventDefault()
 		e.stopPropagation()
 		window.location = $(@).data('dest')
@@ -46,8 +46,6 @@ createYoutubePlayer = (selector, videoId)->
 	firstScriptTag.parentNode.insertBefore(tag, firstScriptTag)
 
 	window.onYouTubePlayerAPIReady = ->
-		console.log playerId
-		console.log videoId
 		player = new YT.Player playerId, {
 			height: '390',
 			width: '640',
@@ -55,7 +53,7 @@ createYoutubePlayer = (selector, videoId)->
 		}
 
 bindOnPaste = (selector)->
-	$(selector).on 'paste', (e)->
+	$(selector).off('paste').on 'paste', (e)->
 		input = @
 		setTimeout ->
 			url = $(input).val()
@@ -74,3 +72,6 @@ $(document).on 'page:change', ->
 	createMarkdownEditor('resource-description') if $('#resource-description').length > 0
 	bindCancelButton('.btn-cancel')
 	bindOnPaste('#video-url')
+
+	videoId = $('#ytplayer').data('video-id')
+	createYoutubePlayer('#ytplayer', videoId) if videoId
