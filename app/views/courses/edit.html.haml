@@ -8,6 +8,12 @@
 			= f.text_field :name, placeholder: @course.name, disabled: true
 	.row
 		.col-100
+			= f.button 'None', class: 'btn-large'
+			= f.button 'Beginner', class: 'btn-large'
+			= f.button 'Intermediate', class: 'btn-large'
+			= f.button 'Expert', class: 'btn-large'
+	.row
+		.col-100
 			= f.text_area :description, placeholder: @course.description, disabled: true
 	.row.document-buttons
 		.col-100

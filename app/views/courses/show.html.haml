@@ -1,4 +1,6 @@
 .course-header
+	.back
+		= link_to 'Back to Course List', courses_path
 	.title
 		= @course.name
 	= link_to '<div class="course-btn">Edit this course</div>'.html_safe, edit_course_path(@course.id)

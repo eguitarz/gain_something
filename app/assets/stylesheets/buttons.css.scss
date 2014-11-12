@@ -18,6 +18,11 @@
 	padding: 5px 15px;
 }
 
+.btn-large {
+	@include btn(100px);
+	padding: 5px 15px;
+}
+
 .btn-big {
 	@include btn(120px);
 	line-height: 2em;
