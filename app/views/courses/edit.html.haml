@@ -5,21 +5,21 @@
 			= f.submit 'Save', class: 'btn-normal right'
 	.row
 		.col-100
-			= f.text_field :name, placeholder: @course.name, disabled: true
+			= f.text_field :name, value: @course.name
 	.row
 		.col-100
-			= f.button 'None', class: 'btn-large'
-			= f.button 'Beginner', class: 'btn-large'
-			= f.button 'Intermediate', class: 'btn-large'
-			= f.button 'Expert', class: 'btn-large'
+			= f.hidden_field :difficulty, id: 'course-difficulty'
+			- difficulty_btn('Beginner', 'beginner' == @course.difficulty)
+			- difficulty_btn('Intermediate', 'difficulty' == @course.difficulty)
+			- difficulty_btn('Expert', 'expert' == @course.difficulty)
 	.row
 		.col-100
-			= f.text_area :description, placeholder: @course.description, disabled: true
+			= f.text_area :description, value: @course.description
 	.row.document-buttons
 		.col-100
-			= link_to '<div class="resource-btn text-btn">+ Text</div>'.html_safe, new_course_resource_path(@course.id, mime: 'text')
-			= link_to '<div class="resource-btn video-btn">+ Video</div>'.html_safe, new_course_resource_path(@course.id, mime: 'video')
-			= link_to '<div class="resource-btn link-btn">+ Link</div>'.html_safe, new_course_resource_path(@course.id, mime: 'link')
+			= link_to '<div class="resource-btn">+ Text</div>'.html_safe, new_course_resource_path(@course.id, mime: 'text')
+			= link_to '<div class="resource-btn">+ Video</div>'.html_safe, new_course_resource_path(@course.id, mime: 'video')
+			= link_to '<div class="resource-btn">+ Link</div>'.html_safe, new_course_resource_path(@course.id, mime: 'link')
 	- @course.resources.each do |r|
 		.row.document
 			.col-10

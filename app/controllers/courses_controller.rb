@@ -25,6 +25,12 @@ class CoursesController < ApplicationController
   end
 
   def update
+    @course = Course.find params[:id]
+    if @course.update(create_params)
+      redirect_to action: :show
+    else
+      redirect_to action: :edit
+    end
   end
 
   def new_text
@@ -45,6 +51,6 @@ class CoursesController < ApplicationController
   end
 
   def create_params
-    params.require(:course).permit(:name, :description)
+    params.require(:course).permit(:name, :description, :difficulty)
   end
 end

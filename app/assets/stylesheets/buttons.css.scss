@@ -1,7 +1,7 @@
 @mixin btn($width:60px) {
-	color: $black;
+	color: $darkgrey;
 	width: $width;
-	border: 1px solid $black;
+	border: 1px solid $darkgrey;
 	opacity: 0.3;
 	display: inline-block;
 	font-size: 0.6em;
@@ -42,4 +42,9 @@
 	@include btn(180px);
 	padding: 10px;
 	font-size: 0.8em;
+}
+
+.btn-difficulty.selected {
+	background-color: $darkgrey;
+	color: $white;
 }
