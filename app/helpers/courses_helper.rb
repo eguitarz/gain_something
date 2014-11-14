@@ -1,7 +1,6 @@
 module CoursesHelper
 
 	def course_subtitle(course)
-		# = "<a href=\"#{user_path(c.user.id)}\">#{c.user.name}</a> • #{c.difficulty} • #{c.resources.count} items".html_safe
 		haml_tag :div, class: 'subtitle' do
 			haml_tag :a, href: "#{user_path(course.user.id)}" do
 				haml_concat course.user.name

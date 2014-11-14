@@ -16,6 +16,7 @@ class CoursesController < ApplicationController
 
   def create
     @course = Course.new create_params
+    @course.user = current_user
     @course.save
     redirect_to edit_course_path(@course.id)
   end
@@ -26,10 +27,15 @@ class CoursesController < ApplicationController
 
   def update
     @course = Course.find params[:id]
-    if @course.update(create_params)
-      redirect_to action: :show
-    else
-      redirect_to action: :edit
+
+    respond_to do |format|
+      if @course.update(create_params)
+        format.html { redirect_to action: :edit }
+        format.js {}
+      else
+        format.html { redirect_to action: :edit }
+        format.js { render status: :unprocessable_entity}
+      end
     end
   end
 
