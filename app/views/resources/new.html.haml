@@ -3,13 +3,7 @@
 	- if @mime == 'text'
 		= f.text_field :title, placeholder: 'Edit title here'
 		= f.text_area :description, id: 'resource-description', placeholder: 'Write something...'
-	- if @mime == 'video'
-		= f.text_field :url, placeholder: 'Post video url from Youtube, Vimeo or Vine', id: 'video-url'
-		= f.hidden_field :title, id: 'video-title'
-		= f.hidden_field :third_party_id, id: 'third-party-id'
-		#ytplayer
-		:javascript
-	- if @mime == 'link'
+	- if @mime == 'link' || @mime == 'video'
 		= f.text_field :url, placeholder: 'Post url', id: 'link-url'
 		= f.hidden_field :title, id: 'link-title'
 		= f.hidden_field :description, id: 'link-description'

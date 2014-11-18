@@ -11,47 +11,6 @@ bindCancelButton = (selector)->
 		e.stopPropagation()
 		window.location = $(@).data('dest')
 
-refreshVideo = (videoId)->
-	youtubeVideoInfoUrl = 'http://gdata.youtube.com/feeds/api/videos/'+videoId+'?v=2&alt=jsonc'
-	$.ajax(youtubeVideoInfoUrl)
-		.done (response)->
-			console.log 'Recieved data from youtube'
-			$('#video-title').val response.data.title
-			$('#third-party-id').val videoId
-		.error (reponse)->
-			console.log 'Unable to recieve data from youtube'
-			console.log response
-
-createYoutubePlayer = (selector, videoId)->
-	return unless $(selector).length > 0
-	
-	tag = document.getElementById('videoscript')
-	playerId = $(selector).attr('id')
-	
-	if tag
-		# remove youtube vars
-		window.YT = null
-		window.YTConfig = null
-
-		tag.remove() 
-		newPlayer = document.createElement('div')
-		$(selector).before(newPlayer)
-		$(selector).remove()
-		$(newPlayer).attr('id', playerId)
-
-	tag = document.createElement('script')
-	tag.id = 'videoscript'
-	tag.src = "https://www.youtube.com/player_api"
-	firstScriptTag = document.getElementsByTagName('script')[0]
-	firstScriptTag.parentNode.insertBefore(tag, firstScriptTag)
-
-	window.onYouTubePlayerAPIReady = ->
-		player = new YT.Player playerId, {
-			height: '390',
-			width: '640',
-			videoId: videoId
-		}
-
 bindOnPaste = (selector)->
 	$(selector).off('paste').on 'paste', (e)->
 		input = @
@@ -78,6 +37,3 @@ $(document).on 'page:change', ->
 	createMarkdownEditor('resource-description') if $('#resource-description').length > 0
 	bindCancelButton('.btn-cancel')
 	bindOnPaste('#link-url')
-
-	videoId = $('#ytplayer').data('video-id')
-	createYoutubePlayer('#ytplayer', videoId) if videoId
