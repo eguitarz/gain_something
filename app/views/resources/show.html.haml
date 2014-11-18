@@ -2,7 +2,15 @@
 	.col-100
 		= link_to "Back to #{@course.name}", course_path(@course)
 .row
-	.col-100
+	.title.col-100
+		= @resource.title
+.row
+	.embed.col-100
+		- cache @resource do
+			- if @resource.mime == 'video'
+				#ytplayer{:"data-video-id" => @resource.third_party_id}
+			- if @resource.mime == 'link' && @resource.embedded_html.present?
+				= @resource.embedded_html.html_safe
+.row
+	.description.col-100
 		= @resource.description.html_safe
-- if @resource.mime == 'video'
-	#ytplayer{:"data-video-id" => @resource.third_party_id}

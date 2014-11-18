@@ -10,8 +10,10 @@
 		#ytplayer
 		:javascript
 	- if @mime == 'link'
-		= f.text_field :url, placeholder: 'Post url'
-		= f.text_field :title, placeholder: 'Title'
+		= f.text_field :url, placeholder: 'Post url', id: 'link-url'
+		= f.hidden_field :title, id: 'link-title'
+		= f.hidden_field :description, id: 'link-description'
+		.preview
 
 	= f.submit 'Attach', class: 'btn-big'
 	= f.button 'Cancel', class: 'btn-big btn-cancel', :'data-dest' => "#{edit_course_path(@course.id)}"

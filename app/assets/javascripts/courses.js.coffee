@@ -14,6 +14,19 @@ bindDifficultyButton = (selector)->
 			$('#course-difficulty').val $('.btn-difficulty.selected').data('difficulty')
 		else
 			$('#course-difficulty').val('none')
+		setEditStatus(false)
+
+bindKeypress = (selector)->
+	$(selector).keypress (e)->
+		unless e.which == 0 # not a control character
+			setEditStatus(false)
+
+
+setEditStatus = (isSaved)->
+	if isSaved
+		$('body').removeClass('unsaved')
+	else
+		$('body').addClass('unsaved')
 
 $(document).on 'page:change', ->
 	return unless $('body#courses').length > 0
@@ -21,3 +34,4 @@ $(document).on 'page:change', ->
 
 	bindCancelButton('.btn-cancel')
 	bindDifficultyButton('.btn-difficulty')
+	bindKeypress('#course_name, #course_description')

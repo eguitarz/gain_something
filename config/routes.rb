@@ -14,6 +14,8 @@ Rails.application.routes.draw do
     resources :resources
   end
 
+  # TODO: Add a origin verifier to limit the request source
+  get 'preview' => 'resources#preview'
   get 'hi' => 'landings#index'
 
 

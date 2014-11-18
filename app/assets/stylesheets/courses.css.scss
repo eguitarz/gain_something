@@ -67,3 +67,7 @@
 	line-height: 1.5em;
 	margin: 2em 0;
 }
+
+body.unsaved .edit_course {
+	border: 1px solid red;
+}
