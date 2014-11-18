@@ -34,7 +34,7 @@ class CoursesController < ApplicationController
         format.js {}
       else
         format.html { redirect_to action: :edit }
-        format.js { render status: :unprocessable_entity}
+        format.js { render status: :unprocessable_entity }
       end
     end
   end

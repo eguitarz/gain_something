@@ -21,8 +21,10 @@
 			= link_to '<div class="resource-btn">+ Video</div>'.html_safe, new_course_resource_path(@course.id, mime: 'video')
 			= link_to '<div class="resource-btn">+ Link</div>'.html_safe, new_course_resource_path(@course.id, mime: 'link')
 	- @course.resources.each do |r|
-		.row.document
+		.row.document.deletable{id: "resource-#{r.id}"}
 			.col-10
 				- resource_icon(r.mime)
-			.col-90
+			.col-80
 				= link_to r.title, course_resource_path(@course, r)
+			.col-10
+				= link_to 'r', course_resource_path(@course, r), remote: true, method: :delete

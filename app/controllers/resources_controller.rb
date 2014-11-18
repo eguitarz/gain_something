@@ -2,26 +2,36 @@ require 'embedly'
 require 'json'
 
 class ResourcesController < ApplicationController
+	before_action :get_course, only: [:new, :show, :create, :destroy]
+	before_action :get_resource, only: [:show, :destroy]
 
 	def new
-		@course = Course.find params[:course_id]
 		@mime = params[:mime]
 		@resource = Resource.new
 	end
 
 	def show
-		@course = Course.find params[:course_id]
-		@resource = Resource.find params[:id]
 		@resource.description = CoursesHelper::markdown_to_html(@resource.description)
 	end
 
 	def create
-		@course = Course.find params[:course_id]
 		@resource = @course.resources.build(create_params)
 		create_and_append_embed(@resource) if @resource.mime != 'text'
 
 		@course.save
 		redirect_to edit_course_url(@course.id)
+	end
+
+	def destroy
+		@deleted_id = nil
+		respond_to do |format|
+			if @course.resources.delete(@resource)
+				@deleted_id = @resource.id
+				format.js {}
+			else
+				format.js { render status: :unprocessable_entity }
+			end
+		end
 	end
 
 	def preview
@@ -39,6 +49,14 @@ class ResourcesController < ApplicationController
 	end
 
 	private
+	def get_course
+		@course = Course.find params[:course_id]
+	end
+
+	def get_resource
+		@resource = Resource.find params[:id]
+	end
+
 	def create_params
 		params.require(:resource).permit(:title, :url, :third_party_id, :mime, :description)
 	end
