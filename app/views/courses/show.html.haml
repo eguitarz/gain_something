@@ -1,18 +1,26 @@
-.course-header
-	.back
-		= link_to 'Back to Course List', courses_path
-	.title
-		= @course.name
-	= link_to '<div class="course-btn">Edit this course</div>'.html_safe, edit_course_path(@course.id)
-	.difficulty
-		= @course.difficulty
-
-.document.row
-	.col-100
-		= @course.description.html_safe
-	- @course.resources.each do |r|
+- cache @course do
+	.course-header
 		.row
+			.col-100
+				= link_to 'Back to Course List', courses_path
+		.row
+			.col-60.title>
+				= @course.name
+			.col-30>
+				= link_to '<div class="course-btn">Edit this course</div>'.html_safe, edit_course_path(@course.id)
 			.col-10
-				- resource_icon(r.mime)
-			.title.col-90
-				= link_to r.title, course_resource_path(@course, r)
+				= link_to '<div class="delete-btn-large">D</div>'.html_safe, course_path(@course.id), method: :delete
+		.row
+			.col-100.difficulty
+				= @course.difficulty
+
+	.document.row
+		.description.col-100
+			= @course.description.html_safe
+		- @course.resources.each do |r|
+			- cache r do
+				.row
+					.col-10>
+						- resource_icon(r.mime)
+					.title.col-90
+						= link_to r.title, course_resource_path(@course, r)

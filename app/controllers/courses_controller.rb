@@ -1,13 +1,13 @@
 class CoursesController < ApplicationController
-	before_filter :authenticate_user!, except: [:index, :show]
-	before_filter :get_user
+	before_action :authenticate_user!, except: [:index, :show]
+	before_action :get_user
+  before_action :get_course, only: [:show, :edit, :update, :destroy]
 
   def index
     @courses = Course.all
   end
 
   def show
-    @course = Course.find params[:id]
   end
 
   def new
@@ -22,12 +22,9 @@ class CoursesController < ApplicationController
   end
 
   def edit
-    @course = Course.find params[:id]
   end
 
   def update
-    @course = Course.find params[:id]
-
     respond_to do |format|
       if @course.update(create_params)
         format.html { redirect_to action: :edit }
@@ -39,19 +36,16 @@ class CoursesController < ApplicationController
     end
   end
 
-  def new_text
-  end
-
-  def new_link
-  end
-
-  def new_video
-  end
-
-  def new_file
+  def destroy
+    @course.delete
+    redirect_to :root
   end
 
   private
+  def get_course
+    @course = Course.find params[:id]    
+  end
+
   def get_user
   	@user = current_user
   end

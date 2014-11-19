@@ -54,11 +54,11 @@
 
 .row {
 	width: 100%;
-	clear: both;
 }
 
 .row > * {
-	float: left;
+	display: inline-block;
+	vertical-align: middle;
 }
 
 .col-10 { width: 10%; }

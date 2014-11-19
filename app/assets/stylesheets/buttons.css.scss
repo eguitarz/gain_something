@@ -35,10 +35,13 @@
 	padding: 0 5px;
 }
 
+.delete-btn-large {
+	@include btn(20px);
+	padding: 10px;
+	font-size: 0.8em;
+}
+
 .course-btn {
-	position: absolute;
-	top: 0;
-	right: 0;
 	@include btn(180px);
 	padding: 10px;
 	font-size: 0.8em;

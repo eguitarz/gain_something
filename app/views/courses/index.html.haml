@@ -1,6 +1,9 @@
 .course-header
-	.brand Gain Something
-	= link_to '<div class="course-btn">Create new course</div>'.html_safe, new_course_path
+	.row
+		.col-70.brand>
+			Gain Something
+		.col-30
+			= link_to '<div class="course-btn">Create new course</div>'.html_safe, new_course_path, class: 'right'
 .banner
 
 .course-container

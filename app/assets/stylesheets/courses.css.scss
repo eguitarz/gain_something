@@ -10,12 +10,7 @@
 }
 
 .course-header {
-	position: relative;
-	height: 80px;
-}
-
-.course-header .title {
-	width: 500px;
+	margin-bottom: 20px;
 }
 
 .course {
@@ -51,8 +46,8 @@
 }
 
 .document {
-	height: 2em;
-	line-height: 2em;
+	height: 140%;
+	line-height: 140%;
 	margin: 0;
 	.icon {
 		width: 2em;
@@ -60,6 +55,16 @@
 		line-height: 2em;
 		text-align: center;
 	}
+
+	.title {
+	  white-space: nowrap;
+	  overflow: hidden;
+	  text-overflow: ellipsis;
+	}
+}
+
+.document .description {
+	margin-bottom: 40px;
 }
 
 .document-buttons {

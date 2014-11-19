@@ -1,14 +1,15 @@
-.row
-	.col-100
-		= link_to "Back to #{@course.name}", course_path(@course)
-.row
-	.title.col-100
-		= @resource.title
-.row
-	.embed.col-100
-		- cache @resource do
-			- if @resource.embedded_html.present?
+- cache @course do
+	.row
+		.col-100
+			= link_to "Back to #{@course.name}", course_path(@course)
+- cache @resource do
+	.row
+		.title.col-100
+			= @resource.title
+	- if @resource.embedded_html.present?
+		.row
+			.embed.col-100
 				= @resource.embedded_html.html_safe
-.row
-	.description.col-100
-		= @resource.description.html_safe
+	.row
+		.description.col-100
+			= @resource.description.html_safe
