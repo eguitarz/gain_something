@@ -1,16 +1,17 @@
-.course-header
-	.brand-row.row
-		.col-70.brand>
-			Gain Something
-		.col-30
-			= link_to '<div class="course-btn">Create new course</div>'.html_safe, new_course_path, class: 'right'
-.banner
-	Ads here...
+.content
+	.course-header
+		.brand-row.row
+			.col-70.brand>
+				Gain Something
+			.col-30
+				= link_to '<div class="course-btn">Create new course</div>'.html_safe, new_course_path, class: 'right'
+	.banner
+		Ads here...
 
-.course-container
-	- @courses.each do |c|
-		.course.col-50>
-			%a{href: "#{course_path(c.id)}"}
-				.title
-					= c.name
-			- course_subtitle(c)
+	.course-container
+		- @courses.each do |c|
+			.course.col-50>
+				%a{href: "#{course_path(c.id)}"}
+					.title
+						= c.name
+				- course_subtitle(c)

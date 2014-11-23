@@ -1,15 +1,14 @@
 - cache @course do
-	.row.back
+	.single-col.back
 		.col-100
 			= link_to "#{@course.name}", course_path(@course)
 - cache @resource do
-	.row
+	.single-col
 		.title.col-100
 			= link_to @resource.title, @resource.url, target: '_blank'
 	- if @resource.embedded_html.present?
-		.row
-			.embed.col-100
-				= @resource.embedded_html.html_safe
-	.row
+		.embed.col-100
+			= @resource.embedded_html.html_safe
+	.single-col
 		.description.col-100
 			= auto_link(@resource.description)
