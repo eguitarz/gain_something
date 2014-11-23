@@ -3,14 +3,12 @@
 	padding: 40px 0;
 }
 
-.banner {
-	width: 100%;
-	height: 200px;
-	background-color: $blue;
-}
-
 .course-header {
-	margin-bottom: 20px;
+	.title {
+		margin-top: 20px;
+		font-size: 1.8em;
+		line-height: 140%;
+	}
 }
 
 .course {
@@ -54,17 +52,21 @@
 		height: 2em;
 		line-height: 2em;
 		text-align: center;
+		cursor: default;
+		font-family: $content-fonts;
 	}
 
 	.title {
 	  white-space: nowrap;
 	  overflow: hidden;
-	  text-overflow: ellipsis;
+	  text-overflow: clip;
 	}
 }
 
 .document .description {
 	margin-bottom: 40px;
+	font-family: $content-fonts;
+	color: $deepgrey;
 }
 
 .document-buttons {

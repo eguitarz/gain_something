@@ -8,9 +8,16 @@
 	text-align: center;
 	cursor: pointer;
 	-webkit-backface-visibility: hidden;
+	@include border-radius(3px);
 	&:hover {
 		opacity: 1;
 	}
+}
+
+.btn-small {
+	@include btn(60px);
+	margin: 5px;
+	padding: 5px 5px;
 }
 
 .btn-normal {
@@ -39,6 +46,10 @@
 	@include btn(20px);
 	padding: 10px;
 	font-size: 0.8em;
+	text-indent: 1px;
+	&:hover {
+		color: $red;
+	}
 }
 
 .course-btn {

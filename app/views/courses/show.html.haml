@@ -1,18 +1,14 @@
 - cache @course do
 	.course-header
 		.row
-			.col-100
-				= link_to 'Back to Course List', courses_path
-		.row
-			.col-60.title>
-				= @course.name
+			.col-60>
 			.col-30>
-				= link_to '<div class="course-btn">Edit this course</div>'.html_safe, edit_course_path(@course.id)
+				= link_to '<div class="course-btn">Edit this course</div>'.html_safe, edit_course_path(@course.id), class: 'right'
 			.col-10
-				= link_to '<div class="delete-btn-large">D</div>'.html_safe, course_path(@course.id), method: :delete
+				= link_to "<div class=\"delete-btn-large\">#{icon('trash')}</div>".html_safe, course_path(@course.id), method: :delete, class: 'right'
 		.row
-			.col-100.difficulty
-				= @course.difficulty
+			.col-100.title
+				= @course.name
 
 	.document.row
 		.description.col-100
@@ -23,4 +19,4 @@
 					.col-10>
 						- resource_icon(r.mime)
 					.title.col-90
-						= link_to r.title, course_resource_path(@course, r)
+						= link_to r.title, course_resource_path(@course, r), title: r.title

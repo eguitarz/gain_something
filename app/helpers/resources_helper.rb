@@ -1,22 +1,19 @@
 module ResourcesHelper
 	def resource_icon(mime)
-		classes = 'icon'
 		content = ''
 		
 		case mime
 		when 'text'
 			content = 'T'
 		when 'video'
-			content = 'V'
-			classes += ' photoshop'
+			content = icon('video-camera')
 		when 'link'
-			content = 'L'
-			classes += ' illustrator'
+			content = icon('link')
 		else
 		end
 
-		haml_tag :div, :class => classes do
-			haml_concat content
+		haml_tag :div, class: 'icon' do
+			haml_concat html_escape(content)
 		end
 	end
 end
