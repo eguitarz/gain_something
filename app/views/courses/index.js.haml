@@ -1,0 +1,2 @@
+$('.courses').append("#{j(render 'courses', courses: @courses)}");
+$('#paginator').html("#{j(link_to_next_page @courses, '<div class="btn-large">more courses</div>'.html_safe, remote: true)}");

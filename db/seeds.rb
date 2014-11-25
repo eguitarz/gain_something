@@ -5,17 +5,17 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-courses =  Course.create([
-	{name: 'Photoshop for beginners', description: 'Basic concepts of photoshoop'},
-	{name: 'Illustrator for beginners', description: 'Basic concepts of illustrator'},
-	{name: 'This is a very long long long long long class name', description: 'Basic concepts of illustrator'},
-	{name: 'Test', description: 'Test class'}
-])
 
-user = User.create(
-	name: 'Dale Ma',
-	email: 'dalema22@gmail.com', 
-	password: 'a1234567', 
-	password_confirmation: 'a1234567', 
-	courses: courses
-)
+courses = 10.times.map do |i| 
+	Course.create(
+		{ name: Forgery(:lorem_ipsum).title(random: true), description: Forgery('lorem_ipsum').paragraphs(3, random: true), user_id: 1 }
+	)
+end
+
+# user = User.create(
+# 	name: 'Dale Ma',
+# 	email: 'dalema22@gmail.com', 
+# 	password: 'a1234567', 
+# 	password_confirmation: 'a1234567', 
+# 	courses: courses
+# )

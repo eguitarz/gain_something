@@ -1,0 +1,5 @@
+.course.col-50>
+	%a{href: "#{course_path(course.id)}"}
+		.title
+			= course.name
+	- course_subtitle(course)

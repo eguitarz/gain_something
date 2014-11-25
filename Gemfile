@@ -51,3 +51,5 @@ gem 'redcarpet'
 gem 'embedly'
 gem 'font-awesome-sass', '~> 4.2.0'
 gem 'rails_autolink'
+gem 'forgery', '0.6.0', group: :development
+gem 'kaminari'

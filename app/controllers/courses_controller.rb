@@ -4,7 +4,11 @@ class CoursesController < ApplicationController
   before_action :get_course, only: [:show, :edit, :update, :destroy]
 
   def index
-    @courses = Course.all
+    @courses = Course.order(:created_at).page params[:page]
+    respond_to do |format|
+      format.html {}
+      format.js {}
+    end
   end
 
   def show
