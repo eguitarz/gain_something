@@ -12,6 +12,7 @@ class CoursesController < ApplicationController
   end
 
   def show
+    @resources = @course.resources
   end
 
   def new

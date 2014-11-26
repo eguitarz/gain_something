@@ -14,10 +14,4 @@
 		.document.row
 			.description.col-100
 				= @course.description.html_safe
-			- @course.resources.each do |r|
-				- cache r do
-					.row
-						.col-10>
-							- resource_icon(r.mime)
-						.title.col-90
-							= link_to r.title, course_resource_path(@course, r), title: r.title
+			= render @resources
