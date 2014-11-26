@@ -5,10 +5,6 @@ module CoursesHelper
 			haml_tag :a, href: "#{user_path(course.user.id)}" do
 				haml_concat course.user.name
 			end
-			if course.difficulty.present?
-				haml_concat " • #{course.difficulty}"
-			end
-			haml_concat  " • #{course.resources.count} items"
 		end
 	end
 
