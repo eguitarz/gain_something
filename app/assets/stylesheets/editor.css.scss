@@ -6,3 +6,41 @@
 	width: 100%;
 	height: 100%;
 }
+
+.toolbar {
+	margin-top: 20px;
+}
+
+.toolbar .spacer {
+	display: inline-block;
+	width: 20px;
+}
+
+#markdown-preview {
+	@include codemirror;
+	margin-top: -4px;
+	display: none;
+}
+
+body.preview-mode {
+
+	#markdown-preview {
+		display: block;
+		min-height: 480px;
+	}	
+
+	#preview-btn {
+		color: $green;
+		border-color: $green;
+		opacity: 1 !important;
+	}
+
+	.CodeMirror {
+		display: none;
+	}
+
+	.btn-edit {
+		opacity: 0;
+		pointer-events: none;
+	}
+}

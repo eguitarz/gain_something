@@ -5,12 +5,13 @@ $black: #000;
 $deepgrey: #666;
 $grey: #999;
 $lightgrey: #efefef;
-$lightblue: #2ed8f6;
-$blue: #231a59;
-$brown: #4e3925;
-$orange: #ffaa2c;
+$green: hsl(120,30%,60%);
 $shift-distance: 240px;
 $red: #ff3333;
+
+$fast: 100ms;
+$medium: 300ms;
+$slow: 700ms;
 
 $title-fonts: "Open Sans", Futura, Helvetica, sans-serif;
 $content-fonts: "Slabo", Georgia, serif;

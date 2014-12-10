@@ -17,5 +17,6 @@
 //= require placeholder
 //= require meta
 //= require markdown
+//= require marked
 //= require turbolinks
 //= require_tree .

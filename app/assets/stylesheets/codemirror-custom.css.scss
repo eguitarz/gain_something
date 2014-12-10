@@ -1,8 +1,11 @@
-.CodeMirror {
-	font-family: $title-fonts;
+@mixin codemirror {
+	// font-family: $content-fonts;
 	min-height: 480px;
-	margin: 20px 0;
-	height: auto;
+	margin: 10px 0 20px 0;
+}
+
+.CodeMirror {
+	@include codemirror
 }
 .CodeMirror-scroll {
   overflow-y: hidden;

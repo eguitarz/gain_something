@@ -1,0 +1,6 @@
+- cache resource do
+	.row
+		.col-10>
+			- resource_icon(resource.mime)
+		.title.col-90
+			= link_to resource.title, course_resource_path(@course, resource), title: resource.title

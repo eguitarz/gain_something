@@ -1,13 +1,27 @@
-= form_for [@course, @resource] do |f|
-	= f.hidden_field :mime, value: @mime
-	- if @mime == 'text'
-		= f.text_field :title, placeholder: 'Edit title here'
-		= f.text_area :description, id: 'resource-description', placeholder: 'Write something...'
-	- if @mime == 'link' || @mime == 'video'
-		= f.text_field :url, placeholder: 'Post url', id: 'link-url'
-		= f.hidden_field :title, id: 'link-title'
-		= f.hidden_field :description, id: 'link-description'
-		.preview
+.content
+	= form_for [@course, @resource] do |f|
+		= f.hidden_field :mime, value: @mime
+		- if @mime == 'text'
+			= f.text_field :title, placeholder: 'Edit title here'
+			.toolbar.row
+				.col-100
+					= f.button 'H1', id:'h1-btn', class: 'btn-icon btn-edit'
+					= f.button 'H2', id:'h2-btn', class: 'btn-icon btn-edit'
+					= f.button 'H3', id:'h3-btn', class: 'btn-icon btn-edit'
+					= f.button icon('bold'), id:'bold-btn', class: 'btn-icon btn-edit'
+					= f.button icon('italic'), id:'italic-btn', class: 'btn-icon btn-edit'
+					.div.spacer
+					= f.button icon('link'), id:'link-btn', class: 'btn-icon btn-edit'
+					= f.button icon('image'), id:'image-btn', class: 'btn-icon btn-edit'
+					.div.spacer
+					= f.button icon('eye'), id:'preview-btn', class: 'btn-icon'
+			= f.text_area :description, id: 'resource-description', placeholder: 'Write something...'
+			#markdown-preview
+		- if @mime == 'link' || @mime == 'video'
+			= f.text_field :url, placeholder: 'Post url', id: 'link-url'
+			= f.hidden_field :title, id: 'link-title'
+			= f.hidden_field :description, id: 'link-description'
+			.preview
 
-	= f.submit 'Attach', class: 'btn-big'
-	= f.button 'Cancel', class: 'btn-big btn-cancel', :'data-dest' => "#{edit_course_path(@course.id)}"
+		= f.submit 'Attach', class: 'btn-big'
+		= f.button 'Cancel', class: 'btn-big btn-cancel', :'data-dest' => "#{edit_course_path(@course.id)}"

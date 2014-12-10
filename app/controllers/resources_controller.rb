@@ -11,12 +11,12 @@ class ResourcesController < ApplicationController
 	end
 
 	def show
-		@resource.description = CoursesHelper::markdown_to_html(@resource.description)
 	end
 
 	def create
+		p params
 		@resource = @course.resources.build(create_params)
-		create_and_append_embed(@resource) if @resource.mime != 'text'
+		create_and_append_embed(@resource) unless @resource.mime == 'text'
 
 		@course.save
 		redirect_to edit_course_url(@course.id)

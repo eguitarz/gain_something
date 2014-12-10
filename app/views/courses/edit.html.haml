@@ -1,30 +1,25 @@
-= form_for @course, remote: true do |f|
-	.row.toolbar
-		.col-100
-			= f.button 'Cancel', class: 'btn-small btn-cancel right', :'data-dest' => "#{course_path(@course)}"
-			= f.submit 'Save', class: 'btn-small right'
-	.row
-		.col-100
-			= f.text_field :name, value: @course.name
-	.row
-		.col-100
-			= f.hidden_field :difficulty, id: 'course-difficulty'
-			- difficulty_btn('Beginner', 'beginner' == @course.difficulty)
-			- difficulty_btn('Intermediate', 'difficulty' == @course.difficulty)
-			- difficulty_btn('Expert', 'expert' == @course.difficulty)
-	.row
-		.col-100
-			= f.text_area :description, value: @course.description
-	.row.document-buttons
-		.col-100
-			= link_to '<div class="resource-btn">+ Text</div>'.html_safe, new_course_resource_path(@course.id, mime: 'text')
-			= link_to '<div class="resource-btn">+ Video</div>'.html_safe, new_course_resource_path(@course.id, mime: 'video')
-			= link_to '<div class="resource-btn">+ Link</div>'.html_safe, new_course_resource_path(@course.id, mime: 'link')
-	- @course.resources.each do |r|
-		.row.document.deletable{id: "resource-#{r.id}"}
-			.col-10
-				- resource_icon(r.mime)
-			.title.col-80>
-				= link_to r.title, course_resource_path(@course, r), title: r.title
-			.remove.col-10
-				= link_to icon('trash'), course_resource_path(@course, r), remote: true, method: :delete, class: 'right'
+.content
+	= form_for @course, remote: true do |f|
+		.row.toolbar
+			.col-100
+				= f.button 'Cancel', class: 'btn-small btn-cancel right', :'data-dest' => "#{course_path(@course)}"
+				= f.submit 'Save', class: 'btn-small right'
+		.row
+			.col-100
+				= f.text_field :name, value: @course.name
+		.row
+			.col-100
+				= f.text_area :description, value: @course.description
+		.row.document-buttons
+			.col-100
+				= link_to '<div class="resource-btn">+ Text</div>'.html_safe, new_course_resource_path(@course.id, mime: 'text')
+				= link_to '<div class="resource-btn">+ Video</div>'.html_safe, new_course_resource_path(@course.id, mime: 'video')
+				= link_to '<div class="resource-btn">+ Link</div>'.html_safe, new_course_resource_path(@course.id, mime: 'link')
+		- @course.resources.each do |r|
+			.row.document.deletable{id: "resource-#{r.id}"}
+				.col-10
+					- resource_icon(r.mime)
+				.title.col-80>
+					= link_to r.title, course_resource_path(@course, r), title: r.title
+				.remove.col-10
+					= link_to icon('trash'), course_resource_path(@course, r), remote: true, method: :delete, class: 'right'
