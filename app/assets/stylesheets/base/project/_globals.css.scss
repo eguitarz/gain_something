@@ -1,0 +1,120 @@
+
+@include importOnce('project-globals') {
+
+  /* _____ GLOBAL DEFAULTS _____ */
+
+  *,
+  :before,
+  :after {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+
+  html {
+    font-size: 100%;
+    width: 100%;
+    &.siteMenuOpened {
+      height: 100%;
+    } 
+  }
+
+  body {
+    @include remIt(font-size, 16);
+    line-height: 120%;
+    background: #fff;
+    font-family: $title-fonts;
+    width: 100%;
+    color: #000;
+    min-height: 100%;
+    @include radial-gradient($color-main-light, $color-main);
+
+    &.siteMenuOpened {
+      height: 100%;
+    }
+  }
+
+  h1 {
+  }
+
+  h2 {
+  }
+
+  h3 {
+  }
+
+  h4 {
+  }
+
+  a,
+  a:visited {
+    color: $black;
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: lighten($black, 50%);
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+
+  pre {
+    background: #fff;
+    padding: 10px;
+  }
+
+  p {
+    margin: 0 0 20px;
+  }
+
+  form {
+    // width: 480px;
+    position: relative;
+    margin: 20px auto;
+  }
+
+  input, textarea, button {
+    outline: none;
+    font-family: $title-fonts;
+  }
+
+  input[type=submit], input[type=button], button {
+    background-color: $white;
+  }
+
+  input[type=text] {
+    width: 100%;
+    height: 1.5em;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: $black;
+    border: 0;
+  }
+
+  textarea {
+    margin: 20px 0;
+    width: 100%;
+    height: 4em;
+    font-size: 0.8em;
+    color: $black;
+    border: 0;
+    resize: none;
+  }
+
+  pre {
+    font-family: $title-fonts;
+  }
+
+  /* _____ LAYOUT _____ */
+
+  .mainContainer {
+    @extend %clearfix;
+    width: 100%;
+    max-width: #{$containerWidth}px;
+    margin: 0 auto;
+  }
+
+}

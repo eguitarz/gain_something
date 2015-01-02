@@ -83,18 +83,11 @@ bindOnPaste = (selector)->
 	$(selector).off('paste').on 'paste', (e)->
 		input = @
 		setTimeout ->
-			# url = encodeURIComponent($(input).val())
 			url = $(input).val()
 			$.getJSON "http://localhost:3000/preview.json?url=#{url}", (response)->
 				$('.preview').html response.html
 				$('#link-title').val response.title
 				$('#link-description').val response.description
-			# result = url.match('https?:\/\/www\.youtube\.com\/watch\\?v=(.*)')
-			# if result && result[1]
-			# 	videoId = result[1]
-			# 	refreshVideo(videoId)
-
-			# 	createYoutubePlayer('#ytplayer', videoId)	
 
 		, 100
 
@@ -108,6 +101,12 @@ $(document).on 'page:change', ->
 	bindCancelButton('.btn-cancel')
 	bindOnPaste('#link-url')
 
+	# bind title key events
+	$('#resource_title').on 'keypress', (e)->
+		if e.keyCode == 13
+			e.preventDefault()
+			e.stopPropagation()
+			editor.focus()
+
 	# parse markdown
-	# $('.text .description').html marked(escape($('#desc-value').value()))
-	$('.text .description').html marked(decodeURI($('#desc-value').val()))
+	$('.description').html marked(decodeURIComponent($('#desc-value').val()))

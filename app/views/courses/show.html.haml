@@ -2,16 +2,34 @@
 	- cache @course do
 		.course-header
 			.row
-				.col-60>
+				.col-40>
 				.col-30>
-					= link_to '<div class="course-btn">Edit this course</div>'.html_safe, edit_course_path(@course.id), class: 'right'
-				.col-10
-					= link_to "<div class=\"delete-btn-large\">#{icon('trash')}</div>".html_safe, course_path(@course.id), method: :delete, class: 'right'
+					= link_to "<div class=\"course-btn-narrow success-btn\">Publish</div>".html_safe, course_path(@course.id), class: 'right'
+				.col-30
+					= link_to "<div class=\"course-btn warning-btn\">Delete this course</div>".html_safe, course_path(@course.id), method: :delete, class: 'right'
 			.row
 				.col-100.title
-					= @course.name
+					- if @course.belongs_to?(current_user)
+						= form_for @course, remote:true, html: {class: 'no-margin editable'} do |f|
+							= f.text_field :name
+							.saved-icon
+								= icon('check')
+					- else
+						= @course.name
 
 		.document.row
-			.description.col-100
-				= @course.description.html_safe
-			= render @resources
+			.course-description.col-100
+				- if @course.belongs_to?(current_user)
+					= form_for @course, remote:true, html: {class: 'no-margin editable'} do |f|
+						= f.text_field :description
+						.saved-icon
+							= icon('check')
+				- else
+					= @course.description
+
+		- if @course.belongs_to?(current_user)
+			.row.document-buttons
+				.col-100
+					= link_to '<div class="resource-btn">+ Article</div>'.html_safe, new_course_resource_path(@course.id, mime: 'text')
+					= link_to '<div class="resource-btn">+ Link</div>'.html_safe, new_course_resource_path(@course.id, mime: 'link')
+		= render @resources

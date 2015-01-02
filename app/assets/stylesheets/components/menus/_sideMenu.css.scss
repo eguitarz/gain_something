@@ -1,0 +1,75 @@
+@import 'base/utils/__utils';
+
+// define component placeholders for component contents (no selector here)
+@include importOnce('sideMenu') {
+  %sideMenu {
+    position: fixed;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+  }
+
+  %sideMenu_item {
+    padding: 5px 25px;
+  }
+}
+
+@mixin sideMenu($selector, $defaultSkin: true) {
+
+  #{$selector} {
+    @extend %sideMenu;
+  }
+
+  #{$selector}_item {
+    @extend %sideMenu_item;
+  }
+
+  @if $defaultSkin != false {
+    @include sideMenu-skin-default($selector);
+  }
+}
+
+// define component placeholders for component skin (no selector here)
+@include importOnce('sideMenu-skin-default') {
+  %sideMenu-skin-default {
+    color: $white;
+    background-color: $darkgrey;
+  }
+
+  %sideMenu-skin-default_item {
+    color: $grey;
+  }
+
+  %sideMenu-skin-default_item_hover {
+    color: $white;
+  }
+
+  %sideMenu-skin-default_item_link {
+    color: $grey;
+  }
+
+}
+
+// provide a default skin for the component
+// only visual changes that don't affect the component layout should be in here
+@mixin sideMenu-skin-default($selector) {
+
+  #{$selector} {
+    @extend %sideMenu-skin-default;
+  }
+
+  #{$selector}_item {
+    @extend %sideMenu-skin-default_item;
+
+    a {
+      @extend %sideMenu-skin-default_item_link;
+
+      &:hover {
+        @extend %sideMenu-skin-default_item_hover;
+      }
+    }
+  }
+}

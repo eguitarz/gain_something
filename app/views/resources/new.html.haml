@@ -2,7 +2,7 @@
 	= form_for [@course, @resource] do |f|
 		= f.hidden_field :mime, value: @mime
 		- if @mime == 'text'
-			= f.text_field :title, placeholder: 'Edit title here'
+			= f.text_field :title, placeholder: 'Edit title here', autofocus: true
 			.toolbar.row
 				.col-100
 					= f.button 'H1', id:'h1-btn', class: 'btn-icon btn-edit'
@@ -18,10 +18,11 @@
 			= f.text_area :description, id: 'resource-description', placeholder: 'Write something...'
 			#markdown-preview
 		- if @mime == 'link' || @mime == 'video'
-			= f.text_field :url, placeholder: 'Post url', id: 'link-url'
+			= f.text_field :url, placeholder: 'Post url', id: 'link-url', autofocus: true
 			= f.hidden_field :title, id: 'link-title'
 			= f.hidden_field :description, id: 'link-description'
 			.preview
 
-		= f.submit 'Attach', class: 'btn-big'
-		= f.button 'Cancel', class: 'btn-big btn-cancel', :'data-dest' => "#{edit_course_path(@course.id)}"
+		.submission
+			= f.submit 'Attach', class: 'btn-big'
+			= f.button 'Cancel', class: 'btn-big btn-cancel', :'data-dest' => "#{edit_course_path(@course.id)}"

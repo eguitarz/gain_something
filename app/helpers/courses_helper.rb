@@ -14,11 +14,5 @@ module CoursesHelper
 		haml_tag :button, class: btn_class, :'data-difficulty' => difficulty.downcase() do
 			haml_concat difficulty
 		end
-	end
-
-	def markdown_to_html(content)
-		options = {fenced_code_blocks: true, disable_indented_code_blocks: true, prettify: true}
-    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, options)
-    markdown.render(content || '')
-  end
+	end 
 end

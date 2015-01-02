@@ -1,0 +1,15 @@
+.users\/sessions #menu,
+.users\/sessions .menu-btn {
+  display: none;
+}
+
+#menu .scrollable {
+  display: none;
+  width: 240px;
+}
+
+.siteMenuOpened #menu .scrollable {
+  display: block;
+}
+
+@include sideMenu('.sideMenu');

@@ -2,11 +2,9 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.4'
+gem 'rails'
 # Use postgresql as the database for Active Record
 gem 'pg'
-# Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views
@@ -46,10 +44,15 @@ gem 'google-analytics-rails'
 gem 'validates_formatting_of'
 gem 'tzinfo-data'
 gem 'haml-rails'
-gem 'compass-rails'
-gem 'redcarpet'
+gem "compass-rails", github: "Compass/compass-rails", branch: "master" 
+gem 'compass', '~> 1.0.1'
 gem 'embedly'
+gem 'sass', '~> 3.4.9'
+gem 'sass-rails', '~> 5.0.1'
 gem 'font-awesome-sass', '~> 4.2.0'
+gem 'sprockets', '~> 2.11.0'
+gem 'sprockets-rails', '~> 2.2.2'
 gem 'rails_autolink'
+gem 'tilt', '~> 1.1'
 gem 'forgery', '0.6.0', group: :development
 gem 'kaminari'

@@ -8,19 +8,35 @@
 		= javascript_include_tag 'application', 'data-turbolinks-track' => true
 		= csrf_meta_tags
 		= analytics_init if Rails.env.production? or Rails.env.development?
-%body{id: "#{params[:controller]}", class: "#{params[:action]}"}
-	#menu
+- body_class = params[:action]
+- body_class += ' present' if params[:p] == '1'
+- lightbox_class = @current_resource.mime if @current_resource.present?
+%body{id: "#{params[:controller]}", class: body_class}
+	#lightbox{class: lightbox_class}
+		.player
+			%input{id:'preview-desc-value', type:'hidden', value: get_description(@current_resource) }
+			.title
+				%h1
+					- print_title(@current_resource)
+			.display
+				- print_embedded_or_thumbnail(@current_resource)
+			.close-btn 
+				= link_to icon('close'), '#', remote: true
+	#notifier
+		= flash[:error]
+		= flash[:notice]
+	#menu.sideMenu
 		%ul.scrollable
-			%li
-				= link_to 'Home', root_path
+			%li.sideMenu_item
+				= link_to 'Home', root_path, class: 'sideMenu_link'
 			- if @user
-				%li
-					= link_to @user.name, user_path(@user)
-				%li
-					= link_to 'Log Out', destroy_user_session_path, method: 'DELETE'
+				%li.sideMenu_item
+					= link_to @user.name, user_path(@user), class: 'sideMenu_link'
+				%li.sideMenu_item
+					= link_to 'Log Out', destroy_user_session_path, method: 'DELETE', class: 'sideMenu_link'
 			- else
-				%li
-					= link_to 'Log In', new_user_session_path
+				%li.sideMenu_item
+					= link_to 'Log In', new_user_session_path, class: 'sideMenu_link'
 	#overlay
 	#main
 		.menu-btn

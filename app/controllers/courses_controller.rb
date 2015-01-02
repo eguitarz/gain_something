@@ -12,7 +12,11 @@ class CoursesController < ApplicationController
   end
 
   def show
-    @resources = @course.resources
+    @is_preview = params[:p] || false
+    @resource_index = params[:idx] || -1
+    @resource_index = @resource_index.to_i
+    @resources = @course.resources.order(updated_at: :desc)
+    @current_resource = @resources[@resource_index] if @resource_index >= 0 && @resource_index < @resources.length
   end
 
   def new
@@ -32,10 +36,10 @@ class CoursesController < ApplicationController
   def update
     respond_to do |format|
       if @course.update(create_params)
-        format.html { redirect_to action: :edit }
+        format.html { redirect_to action: :show }
         format.js {}
       else
-        format.html { redirect_to action: :edit }
+        format.html { redirect_to action: :show }
         format.js { render status: :unprocessable_entity }
       end
     end

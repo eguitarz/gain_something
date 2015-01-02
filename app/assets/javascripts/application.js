@@ -20,3 +20,5 @@
 //= require marked
 //= require turbolinks
 //= require_tree .
+
+window.GS = {}

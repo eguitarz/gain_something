@@ -11,15 +11,22 @@ class ResourcesController < ApplicationController
 	end
 
 	def show
+		respond_to do |format|
+			format.html {}
+			format.js {}
+		end
 	end
 
 	def create
-		p params
 		@resource = @course.resources.build(create_params)
 		create_and_append_embed(@resource) unless @resource.mime == 'text'
 
+		if @resource.mime == 'error'
+			flash[:error] = 'Some error happend while fetching your resource'
+		end
 		@course.save
-		redirect_to edit_course_url(@course.id)
+
+		redirect_to course_url(@course.id)
 	end
 
 	def destroy
@@ -58,24 +65,34 @@ class ResourcesController < ApplicationController
 	end
 
 	def create_params
-		params.require(:resource).permit(:title, :url, :third_party_id, :mime, :description)
+		params.require(:resource).permit(:title, :url, :mime, :description, :provider_name, 
+			:provider_url, :thumbnail, :thumbnail_width)
 	end
 
 	def create_and_append_embed(resource)
 		embed = create_embed_by_url(resource.url)
 		resource.title = embed[:title]
-		resource.description = embed[:description]
 		resource.embedded_html = embed[:html]
+		resource.mime = embed[:type]
+		resource.provider_name = embed[:provider_name]
+		resource.provider_url = embed[:provider_url]
+		resource.thumbnail = embed[:thumbnail]
+		resource.thumbnail_width = embed[:thumbnail_width]
+		resource.description = embed[:description]
 	end
 
 	def create_embed_by_url(url)
 		embedly_api = Embedly::API.new key: 'b782de7414f440b5bf31d9c76409acf9'
 		obj = embedly_api.oembed :url => url
-
 		{
 			html: obj[0]['html'],
 			url: url,
-			title: obj[0]['title'],
+			title: obj[0]['title'] || url,
+			type: obj[0]['type']  || 'unknown',
+			provider_name: obj[0]['provider_name'],
+			provider_url: obj[0]['provider_url'],
+			thumbnail: obj[0]['thumbnail_url'],
+			thumbnail_width: obj[0]['thumbnail_width'],
 			description: obj[0]['description']
 		}
 	end
