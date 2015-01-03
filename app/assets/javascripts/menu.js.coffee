@@ -1,3 +1,6 @@
 $(document).on 'page:change', ->
-	$('.menu-btn').off('click').on 'click', ->
-		$('body').toggleClass 'siteMenuOpened'
+	$('.btn-menu').off('click').on 'click', ->
+		$('body').toggleClass '_siteMenu_is_open'
+
+  $('#overlay').off('click').on 'click', ->
+    $('body').toggleClass '_siteMenu_is_open'

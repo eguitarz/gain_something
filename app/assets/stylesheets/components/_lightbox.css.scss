@@ -1,0 +1,159 @@
+@import 'base/utils/__utils';
+
+// define component placeholders for component contents (no selector here)
+@include importOnce('lightbox') {
+  %lightbox {
+    position: fixed;
+    top: 0;
+    left: -9999em;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+  }
+
+  %lightbox_player {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    /* video height / video width */
+    padding-bottom: 56.2%;
+    /* the above value * 0.5 */
+    margin-top: -28.1%;
+    margin-left: auto;
+    margin-right: auto;
+    height: 0;
+    min-height: 100%;
+    width: 1024px;
+  }
+
+  %lightbox_player_iframe {
+    display: block;
+    max-width: 1024px;
+    margin: auto;
+  }
+
+  %lightbox_player_image {
+    @extend %lightbox_player_iframe;
+  }
+
+  %lightbox_title {
+    font-size: 1.4em;
+    padding: 20px;
+    overflow: hidden;
+  }
+
+  %lightbox_display {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+@mixin lightbox($selector, $defaultSkin: true) {
+
+  #{$selector} {
+    @extend %lightbox;
+
+    #{$selector}_title {
+      @extend %lightbox_title;
+    }
+
+    #{$selector}_player {
+      @extend %lightbox_player;
+
+      iframe { @extend %lightbox_player_iframe; }
+      img { @extend %lightbox_player_image; }
+    }
+
+    #{$selector}_display {
+      @extend %lightbox_display;
+    }
+
+  }
+
+  @if $defaultSkin != false {
+    @include lightbox-skin-default($selector);
+  }
+}
+
+// define component placeholders for component skin (no selector here)
+@include importOnce('lightbox-skin-default') {
+  %lightbox-skin-default {
+    background-color: rgba(0,0,0,0.52);
+  }
+
+  %lightbox-skin-default__is_video_display {
+    background-color: $black;
+  }
+
+  %lightbox-skin-default__is_photo_display {
+    background-color: $black;
+  }
+
+  %lightbox-skin-default__is_photo_title {
+    display: none;
+  }
+
+  %lightbox-skin-default__is_video_title {
+    display: none;
+  }
+
+  %lightbox-skin-default__is_error_player {
+    background-color: $white;
+  }
+
+  %lightbox-skin-default__is_text_player {
+    background-color: $white;
+  }
+
+  %lightbox-skin-default__is_link_player {
+    background-color: $white;
+  }
+}
+
+// provide a default skin for the component
+// only visual changes that don't affect the component layout should be in here
+@mixin lightbox-skin-default($selector) {
+
+  #{$selector} {
+    @extend %lightbox-skin-default;
+
+    &._is_photo {
+      #{$selector}_display {
+        @extend %lightbox-skin-default__is_photo_display;
+      }
+
+      #{$selector}_title {
+        @extend %lightbox-skin-default__is_photo_title;
+      }
+    }
+
+    &._is_video {
+      #{$selector}_display {
+        @extend %lightbox-skin-default__is_video_display;
+      }
+
+      #{$selector}_title {
+        @extend %lightbox-skin-default__is_video_title;
+      }
+    }
+
+    &._is_text {
+      #{$selector}_player {
+        @extend %lightbox-skin-default__is_text_player;
+      }
+    }
+
+    &._is_link {
+      #{$selector}_player {
+        @extend %lightbox-skin-default__is_link_player;
+      }
+    }
+
+    &._is_error {
+      #{$selector}_player {
+        @extend %lightbox-skin-default__is_error_player;
+      }
+    }
+  }
+}

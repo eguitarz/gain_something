@@ -1,31 +1,31 @@
 - cache resource do
-  .row.document.deletable{id: "resource-#{resource.id}"}
+  .resourceList.deletable{id: "resource-#{resource.id}"}
     .row
       .icon-column
         - resource_icon(resource.mime)
-      .title.col-80>
+      .resourceList_title.col-80>
         - if resource.mime != 'text'
           = link_to resource.title, resource.url, title: resource.title
         - else
           = link_to resource.title, course_resource_path(@course, resource), title: resource.title
-      .resource-menu.col-10
-        .remove.btn
+      .resourceList_tools.col-10
+        .btn-square.right
           = link_to icon('trash'), course_resource_path(@course, resource), remote: true, method: :delete, class: 'right'
-        .view.btn
+        .btn-square.right
           = link_to icon('eye'), course_resource_path(@course, resource), remote: true, class: 'right embed', id: "resource_#{resource_counter}", :"data-mime" => resource.mime, :'data-base-url' => course_path(@course.id, p: 1, idx: resource_counter)
     - if resource.thumbnail.present? || resource.description.present?
-      .row.preview
+      .resourceList_preview
         .icon-column
         - if resource.thumbnail.present?
-          .thumbnails.col-20>
-            .thumb
+          .resourceList_preview_thumbnails.col-20>
+            .resourceList_preview_thumbnails_thumb
               = link_to image_tag(resource.thumbnail), resource.url, title: resource.title
           - if resource.description.present?
-            .title.col-60>
-              .digest
-                = resource.description.first(100) + '...'
+            .inline-block.col-60>
+              .resourceList_preview_digest
+                = resource.description.first(200) + '...'
         - else 
           - if resource.description.present?
-            .title.col-80>
-              .digest
-                = resource.description.first(100) + '...'
+            .inline-block.col-80>
+              .resourceList_preview_digest
+                = resource.description.first(200) + '...'

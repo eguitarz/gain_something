@@ -8,7 +8,16 @@
   width: 240px;
 }
 
-.siteMenuOpened #menu .scrollable {
+._siteMenu_is_open #menu .scrollable {
+  display: block;
+}
+
+._siteMenu_is_open #main {
+  @include transform("translate(#{$shift-distance})", false);
+}
+
+._siteMenu_is_open #overlay {
+  @include transform("translate(#{$shift-distance})", false);
   display: block;
 }
 

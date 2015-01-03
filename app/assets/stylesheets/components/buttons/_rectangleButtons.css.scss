@@ -1,0 +1,112 @@
+@import 'base/utils/__utils';
+
+// define component placeholders for component contents (no selector here)
+@include importOnce('rectangleButtons') {
+  %button {
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+    -webkit-backface-visibility: hidden;
+    margin: 1em 1em 1em 0;
+    padding: 0.2em 0.6em;
+    border-radius: 3px;
+  }
+
+  %flexible-button {
+    @extend %button;
+    padding: 10px 2em;
+  }
+
+  %sqaure-button {
+    @extend %button;
+    margin: 2px;
+    padding: 2px;
+    @include border-radius(0);
+  }
+}
+
+@mixin flexibleButton($selector, $font-size: 1em, $defaultSkin: true) {
+  #{$selector} {
+    @extend %flexible-button;
+    font-size: $font-size;
+  }
+
+  @if $defaultSkin != false {
+    @include rectangleButtons-skin-default($selector);
+  }
+}
+
+@mixin rectangleButton($selector, $width: 60px, $font-size: 1.2em, $defaultSkin: true) {
+
+  #{$selector} {
+    @extend %button;
+    width: $width;
+    font-size: $font-size;
+  }
+
+  @if $defaultSkin != false {
+    @include rectangleButtons-skin-default($selector);
+  }
+}
+
+@mixin squareButton($selector, $size: 32px, $font-size: 1em, $defaultSkin: true) {
+  #{$selector} {
+    @extend %sqaure-button;
+    width: $size;
+    height: $size;
+    line-height: $size;
+    font-size: $font-size;
+  }
+
+  @if $defaultSkin != false {
+    @include rectangleButtons-skin-noBorder($selector);
+  }
+}
+
+// define component placeholders for component skin (no selector here)
+@include importOnce('rectangleButtons-skin-default') {
+  %button-skin-default {
+    color: $darkgrey;
+    border: 1px solid $darkgrey;
+    opacity: 0.3;
+  }
+
+  %button-skin-default__hovered {
+    opacity: 1;
+  }
+
+  %button-skin-noBorder {
+    color: $black;
+    opacity: 0.3;
+  }
+
+  %button-skin-noBorder__hovered {
+    color: $black;
+    opacity: 0.87;
+  }
+
+}
+
+// provide a default skin for the component
+// only visual changes that don't affect the component layout should be in here
+@mixin rectangleButtons-skin-default($selector) {
+
+  #{$selector} {
+    @extend %button-skin-default;
+
+    &:hover {
+      @extend %button-skin-default__hovered;
+    }
+  }
+}
+
+@mixin rectangleButtons-skin-noBorder($selector) {
+
+  #{$selector} {
+    @extend %button-skin-noBorder;
+
+    &:hover, &:hover i {
+      @extend %button-skin-noBorder__hovered;
+    }
+  }
+}

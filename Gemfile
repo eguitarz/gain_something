@@ -44,8 +44,8 @@ gem 'google-analytics-rails'
 gem 'validates_formatting_of'
 gem 'tzinfo-data'
 gem 'haml-rails'
-gem "compass-rails", github: "Compass/compass-rails", branch: "master" 
-gem 'compass', '~> 1.0.1'
+# gem "compass-rails", github: "Compass/compass-rails", branch: "master" 
+# gem 'compass', '~> 1.0.1'
 gem 'embedly'
 gem 'sass', '~> 3.4.9'
 gem 'sass-rails', '~> 5.0.1'

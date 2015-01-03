@@ -10,17 +10,16 @@
 		= analytics_init if Rails.env.production? or Rails.env.development?
 - body_class = params[:action]
 - body_class += ' present' if params[:p] == '1'
-- lightbox_class = @current_resource.mime if @current_resource.present?
+- lightbox_class = "_is_#{@current_resource.mime}" if @current_resource.present?
 %body{id: "#{params[:controller]}", class: body_class}
 	#lightbox{class: lightbox_class}
-		.player
+		#lightbox_player
 			%input{id:'preview-desc-value', type:'hidden', value: get_description(@current_resource) }
-			.title
-				%h1
-					- print_title(@current_resource)
-			.display
+			%h1#lightbox_title
+				- print_title(@current_resource)
+			#lightbox_display
 				- print_embedded_or_thumbnail(@current_resource)
-			.close-btn 
+			.btn-close
 				= link_to icon('close'), '#', remote: true
 	#notifier
 		= flash[:error]
@@ -39,8 +38,7 @@
 					= link_to 'Log In', new_user_session_path, class: 'sideMenu_link'
 	#overlay
 	#main
-		.menu-btn
-		-# .content
+		.btn-menu
 		= yield
 		#editor
 			%form#text-form

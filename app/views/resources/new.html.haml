@@ -24,5 +24,5 @@
 			.preview
 
 		.submission
-			= f.submit 'Attach', class: 'btn-big'
-			= f.button 'Cancel', class: 'btn-big btn-cancel', :'data-dest' => "#{edit_course_path(@course.id)}"
+			= f.submit 'Attach', class: 'btn-normal'
+			= f.button 'Cancel', class: 'btn-normal btn-cancel', :'data-dest' => "#{course_path(@course.id)}"

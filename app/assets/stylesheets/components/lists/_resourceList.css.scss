@@ -1,0 +1,140 @@
+@import 'base/utils/__utils';
+
+// define component placeholders for component contents (no selector here)
+@include importOnce('resourceList') {
+  %resourceList {
+    line-height: 140%;
+  }
+
+  %resourceList__hovered_tools {
+    opacity: 1;
+  }
+
+  %resourceList_title {
+    vertical-align: top;
+    padding-bottom: 10px;
+    overflow: hidden;
+  }
+
+  %resourceList_tools {
+    opacity: 0;
+    vertical-align: top;
+  }
+
+  %resourceList_tools_link {
+    margin-left: 15px;
+  }
+
+  %resourceList_preview {
+    padding-bottom: 40px;
+  }
+
+  %resourceList_preview_digest {
+    width: 100%;
+    font-size: 0.8em;
+    line-height: 160%;
+    white-space: normal;
+  }
+
+  %resourceList_preview_thumbnails {
+    display: inline-block;
+    vertical-align: top;
+    padding-top: 3px;
+    padding-right: 10px;
+  }
+
+  %resourceList_preview_thumbnails_thumb {
+    display: inline-block;
+  }
+
+  %resourceList_preview_thumbnails_thumb_image {
+    width: 100%;
+    max-height: 200px;
+  }
+
+}
+
+@mixin resourceList($selector, $defaultSkin: true) {
+
+  #{$selector} {
+    @extend %resourceList;
+
+    &:hover #{$selector}_tools {
+      @extend %resourceList__hovered_tools;
+    }
+
+    #{$selector}_title {
+      @extend %resourceList_title;
+    }
+
+    #{$selector}_tools {
+      @extend %resourceList_tools;
+    }
+
+    #{$selector}_preview {
+      @extend %resourceList_preview;
+
+      #{$selector}_preview_digest {
+        @extend %resourceList_preview_digest;
+      }
+
+      #{$selector}_preview_thumbnails {
+        @extend %resourceList_preview_thumbnails;
+
+        #{$selector}_preview_thumbnails_thumb {
+          @extend %resourceList_preview_thumbnails_thumb;
+          img { @extend %resourceList_preview_thumbnails_thumb_image; }
+        }
+      }
+    }
+    
+  }
+
+  @if $defaultSkin != false {
+    @include resourceList-skin-default($selector);
+  }
+}
+
+// define component placeholders for component skin (no selector here)
+@include importOnce('resourceList-skin-default') {
+  %resourceList-skin-default {
+    padding-top: 20px;
+    background-color: $white;
+  }
+
+  %resourceList-skin-default_tools_link {
+    color: $grey;
+  }
+
+  %resourceList-skin-default_tools_link__hovered {
+    color: $black;
+  }
+
+  %resourceList-skin-default_preview_digest {
+    color: $grey;
+  }
+
+}
+
+// provide a default skin for the component
+// only visual changes that don't affect the component layout should be in here
+@mixin resourceList-skin-default($selector) {
+
+  #{$selector} {
+    @extend %resourceList-skin-default;
+
+    #{$selector}_preview {
+      #{$selector}_preview_digest {
+        @extend %resourceList-skin-default_preview_digest;
+      }
+    }
+  }
+
+  #{$selector}_tools_link {
+    @extend %resourceList-skin-default_tools_link;
+
+    &:hover {
+      @extend %resourceList-skin-default_tools_link__hovered;
+    }
+  }
+}

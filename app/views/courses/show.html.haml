@@ -1,12 +1,13 @@
+.row
+	.col-40>
+	.col-60>
+		= link_to "<div class=\"btn-large btn-publish\">#{icon('lock')}</div>".html_safe, course_path(@course.id), class: 'right'
+		= link_to "<div class=\"btn-large btn-delete\">Delete this course</div>".html_safe, course_path(@course.id), method: :delete, class: 'right'
+
+
 .content
 	- cache @course do
 		.course-header
-			.row
-				.col-40>
-				.col-30>
-					= link_to "<div class=\"course-btn-narrow success-btn\">Publish</div>".html_safe, course_path(@course.id), class: 'right'
-				.col-30
-					= link_to "<div class=\"course-btn warning-btn\">Delete this course</div>".html_safe, course_path(@course.id), method: :delete, class: 'right'
 			.row
 				.col-100.title
 					- if @course.belongs_to?(current_user)
@@ -30,6 +31,7 @@
 		- if @course.belongs_to?(current_user)
 			.row.document-buttons
 				.col-100
-					= link_to '<div class="resource-btn">+ Article</div>'.html_safe, new_course_resource_path(@course.id, mime: 'text')
-					= link_to '<div class="resource-btn">+ Link</div>'.html_safe, new_course_resource_path(@course.id, mime: 'link')
-		= render @resources
+					= link_to "<div class=\"btn-small\">#{icon('plus')} Article</div>".html_safe, new_course_resource_path(@course.id, mime: 'text')
+					= link_to "<div class=\"btn-small\">#{icon('plus')} Link</div>".html_safe, new_course_resource_path(@course.id, mime: 'link')
+		.resource-list
+			= render @resources

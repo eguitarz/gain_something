@@ -4,18 +4,6 @@ bindCancelButton = (selector)->
 		e.stopPropagation()
 		window.location = $(@).data('dest')
 
-bindDifficultyButton = (selector)->
-	$(selector).off('click').on 'click', (e)->
-		e.preventDefault()
-		e.stopPropagation()
-		$(@).toggleClass('selected').siblings().removeClass('selected')
-
-		if $('.btn-difficulty.selected').length > 0
-			$('#course-difficulty').val $('.btn-difficulty.selected').data('difficulty')
-		else
-			$('#course-difficulty').val('none')
-		setEditStatus(false)
-
 bindKeypress = (selector)->
 	$(selector).keypress (e)->
 		unless e.which == 0 # not a control character
@@ -33,7 +21,6 @@ $(document).on 'page:change', ->
 	console.log 'running courses.js - ' + (new Date)
 
 	bindCancelButton('.btn-cancel')
-	bindDifficultyButton('.btn-difficulty')
 	bindKeypress('#course_name, #course_description')
 
 	$('.embed').click (e)->
@@ -54,7 +41,7 @@ $(document).on 'page:change', ->
 	$('#lightbox').click ->
 		quitLightbox()
 
-	$('#lightbox .close-btn').click ->
+	$('#lightbox .btn-close').click ->
 		quitLightbox()
 
 	$('.editable input').on 'focus', ->
