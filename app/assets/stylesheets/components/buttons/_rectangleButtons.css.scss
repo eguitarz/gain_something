@@ -23,6 +23,16 @@
     padding: 2px;
     @include border-radius(0);
   }
+
+  %icon-button {
+    @extend %button;
+    margin: 0 8px 0 0;
+    padding: 2px;
+    width: 28px;
+    height: 28px;
+    line-height: 24px;
+    @include border-radius(3px);
+  }
 }
 
 @mixin flexibleButton($selector, $font-size: 1em, $defaultSkin: true) {
@@ -60,6 +70,16 @@
 
   @if $defaultSkin != false {
     @include rectangleButtons-skin-noBorder($selector);
+  }
+}
+
+@mixin iconButton($selector, $defaultSkin: true) {
+  #{$selector} {
+    @extend %icon-button;
+  }
+
+  @if $defaultSkin != false {
+    @include rectangleButtons-skin-default($selector);
   }
 }
 

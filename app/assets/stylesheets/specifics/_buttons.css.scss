@@ -2,6 +2,7 @@
 @include rectangleButton('.btn-normal', 120px, 1em);
 @include flexibleButton('.btn-large');
 @include squareButton('.btn-square', 20px);
+@include iconButton('.btn-icon');
 
 .btn-square {
   margin-top: 0;  

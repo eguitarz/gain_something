@@ -1,7 +1,7 @@
-.row
-	.col-40>
-	.col-60>
-		= link_to "<div class=\"btn-large btn-publish\">#{icon('lock')}</div>".html_safe, collection_path(@collection.id), class: 'right'
+.navbar
+	.navbar_item.col-40>
+	.navbar_item.col-60>
+		= #link_to "<div class=\"btn-large btn-publish\">#{icon('lock')}</div>".html_safe, collection_path(@collection.id), class: 'right'
 		= link_to "<div class=\"btn-large btn-delete\">Delete this collection</div>".html_safe, collection_path(@collection.id), method: :delete, class: 'right'
 
 

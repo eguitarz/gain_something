@@ -1,6 +1,8 @@
 require 'embedly'
 require 'json'
 
+RESOURCE_LIMIT = 1000
+
 class ResourcesController < ApplicationController
 	before_action :get_collection, only: [:new, :show, :create, :destroy]
 	before_action :get_resource, only: [:show, :destroy]
@@ -8,6 +10,11 @@ class ResourcesController < ApplicationController
 	def new
 		@mime = params[:mime]
 		@resource = Resource.new
+
+		if @collection.resources.count >= RESOURCE_LIMIT
+			flash[:error] = "Reach the resource limit (#{RESOURCE_LIMIT})"
+			redirect_to collection_url(@collection.id)
+		end
 	end
 
 	def show

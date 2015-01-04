@@ -21,13 +21,14 @@
 				- print_embedded_or_thumbnail(@current_resource)
 			.btn-close
 				= link_to icon('close'), '#', remote: true
-	#notifier
-		= flash[:error]
-		= flash[:notice]
+	- if flash.present?
+		#notifier
+			= flash[:error]
+			= flash[:notice]
 	#menu.sideMenu
 		%ul.scrollable
-			%li.sideMenu_item
-				= link_to 'Home', root_path, class: 'sideMenu_link'
+			-# %li.sideMenu_item
+			-# 	= link_to 'Home', root_path, class: 'sideMenu_link'
 			- if current_user
 				%li.sideMenu_item
 					= link_to 'My collections', user_path(current_user), class: 'sideMenu_link'

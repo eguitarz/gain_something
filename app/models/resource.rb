@@ -3,5 +3,4 @@ class Resource < ActiveRecord::Base
 
 	validate :title, precense: true
 	validate :url, precense: true
-	validate :third_party_id, precense: true
 end
