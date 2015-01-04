@@ -6,7 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-collections = 4.times.map do |i| 
+collections = 15.times.map do |i| 
 	Collection.create(
 		{ name: Forgery(:lorem_ipsum).title(random: true), description: Forgery('lorem_ipsum').paragraphs(3, random: true), user_id: 1 }
 	)
@@ -19,5 +19,5 @@ user = User.first || User.create(
   password_confirmation: 'a1234567'
 )
 
-user.collections = collections
+user.collections << collections
 user.save

@@ -1,0 +1,2 @@
+$('.collections').append("#{j(render @collections)}");
+$('#paginator').html("#{j(link_to_next_page @collections, '<div class="btn-large">more collections</div>'.html_safe, remote: true)}");

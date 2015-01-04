@@ -4,7 +4,7 @@ class UsersController < ApplicationController
     @collections = Collection.order(updated_at: :desc).page params[:page]
     respond_to do |format|
       format.html {}
-      format.js {}
+      format.js { render partial: 'collections/load_more' }
     end
 	end
 end
