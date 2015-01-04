@@ -20,7 +20,7 @@ class CollectionsController < ApplicationController
     @is_preview = params[:p] || false
     @resource_index = params[:idx] || -1
     @resource_index = @resource_index.to_i
-    @resources = @collection.resources.order(updated_at: :desc)
+    @resources = @collection.resources.order(:created_at)
     @current_resource = @resources[@resource_index] if @resource_index >= 0 && @resource_index < @resources.length
   end
 
