@@ -12,13 +12,15 @@
 - body_class += ' present' if params[:p] == '1'
 - lightbox_class = "_is_#{@current_resource.mime}" if @current_resource.present?
 %body{id: "#{params[:controller]}", class: body_class}
-	#lightbox{class: lightbox_class}
-		#lightbox_player
-			%input{id:'preview-desc-value', type:'hidden', value: get_description(@current_resource) }
-			%h1#lightbox_title
-				- print_title(@current_resource)
-			#lightbox_display
-				- print_embedded_or_thumbnail(@current_resource)
+	- if @current_resource.present?
+		#lightbox{class: lightbox_class}
+			%input{type: 'hidden', value: @collection.resources.count, id: 'lightbox_resource_count'}
+			#lightbox_player
+				%input{id:'preview-desc-value', type:'hidden', value: get_description(@current_resource) }
+				%h1#lightbox_title
+					- print_title(@current_resource, true)
+				#lightbox_display
+					- print_embedded_or_thumbnail(@current_resource)
 			.btn-close
 				= link_to icon('close'), '#', remote: true
 	- if flash.present?

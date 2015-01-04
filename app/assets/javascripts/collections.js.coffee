@@ -38,6 +38,10 @@ $(document).on 'page:change', ->
     newUrl = window.location.href.replace(window.location.search, '')
     window.history.pushState(null, 'GS',  newUrl)
 
+  # prevent passing click event to #lightbox
+  $('#lightbox_player').click (e)->
+    e.stopPropagation();
+
   $('#lightbox').click ->
     quitLightbox()
 
@@ -81,14 +85,14 @@ $(document).on 'page:change', ->
           k.indexOf('idx') >= 0
         currentId = resourceIndex[0].split('=')[1]
         currentId = parseInt(currentId, 10)
+        resourceCount = parseInt( $('#lightbox_resource_count').val(), 10)
         if currentId >= 0
           if keyEvent == 'left'
             nextId = currentId - 1
           else if keyEvent == 'right'
             nextId = currentId + 1
 
-          console.log nextId
-          if nextId >= 0
+          if nextId >= 0 && nextId < resourceCount
             window.location.search = "p=1&idx=#{nextId}"
       catch error
         window.location.search = ""

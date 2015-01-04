@@ -1,0 +1,48 @@
+@import 'base/utils/__utils';
+
+// define component placeholders for component contents (no selector here)
+@include importOnce('navbar') {
+  $navbar-height: 60px;
+
+  %navbar {
+    position: absolute;
+    top: 0;
+    height: 0;
+    width: 100%;
+  }
+
+  %navbar_item {
+    display: inline-block;
+  }
+}
+
+@mixin navbar($selector, $defaultSkin: true) {
+
+  #{$selector} {
+    @extend %navbar;
+
+    #{$selector}_item {
+      @extend %navbar_item;
+    }
+  }
+
+  @if $defaultSkin != false {
+    @include navbar-skin-default($selector);
+  }
+}
+
+// define component placeholders for component skin (no selector here)
+@include importOnce('navbar-skin-default') {
+  %navbar-skin-default {
+    color: $black;
+  }
+}
+
+// provide a default skin for the component
+// only visual changes that don't affect the component layout should be in here
+@mixin navbar-skin-default($selector) {
+
+  #{$selector} {
+    @extend %navbar-skin-default;
+  }
+}

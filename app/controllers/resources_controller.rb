@@ -41,7 +41,7 @@ class ResourcesController < ApplicationController
 
 	def edit
 		@mime = @resource.mime
-		redirect_to collection_url(@collection.id) if @mime != 'text'
+		redirect_to collection_resource_url(@collection.id) if @mime != 'text'
 	end
 
 	def update
@@ -57,8 +57,10 @@ class ResourcesController < ApplicationController
 			if @collection.resources.delete(@resource)
 				@deleted_id = @resource.id
 				format.js {}
+				format.html { redirect_to collection_url(@collection.id) }
 			else
 				format.js { render status: :unprocessable_entity }
+				format.html { redirect_to collection_url(@collection.id) }
 			end
 		end
 	end
@@ -109,7 +111,7 @@ class ResourcesController < ApplicationController
 		{
 			html: obj[0]['html'],
 			url: url,
-			title: obj[0]['title'] || url,
+			title: obj[0]['title'] || url.first(250),
 			type: obj[0]['type']  || 'unknown',
 			provider_name: obj[0]['provider_name'],
 			provider_url: obj[0]['provider_url'],

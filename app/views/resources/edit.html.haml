@@ -1,0 +1,27 @@
+.navbar
+  .navbar_item.col-100
+    = link_to "<div class=\"btn-large btn-delete\">Delete this item</div>".html_safe, collection_resource_path(@collection.id, @resource.id), method: :delete, class: 'right'
+
+.content
+  = form_for [@collection, @resource] do |f|
+    = f.hidden_field :mime, value: @mime
+    - if @mime == 'text'
+      = f.text_field :title, placeholder: 'Edit title here', autofocus: true
+      .toolbar.row
+        .col-100
+          = f.button 'H1', id:'h1-btn', class: 'btn-icon btn-edit'
+          = f.button 'H2', id:'h2-btn', class: 'btn-icon btn-edit'
+          = f.button 'H3', id:'h3-btn', class: 'btn-icon btn-edit'
+          = f.button icon('bold'), id:'bold-btn', class: 'btn-icon btn-edit'
+          = f.button icon('italic'), id:'italic-btn', class: 'btn-icon btn-edit'
+          .div.spacer
+          = f.button icon('link'), id:'link-btn', class: 'btn-icon btn-edit'
+          = f.button icon('image'), id:'image-btn', class: 'btn-icon btn-edit'
+          .div.spacer
+          = f.button icon('eye'), id:'preview-btn', class: 'btn-icon'
+      = f.text_area :description, id: 'resource-description', placeholder: 'Write something...'
+      #markdown-preview
+
+    .submission
+      = f.submit 'Update', class: 'btn-normal'
+      = f.button 'Cancel', class: 'btn-normal btn-cancel', :'data-dest' => "#{collection_path(@collection.id)}"

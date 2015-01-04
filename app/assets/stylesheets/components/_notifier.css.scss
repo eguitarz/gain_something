@@ -1,0 +1,58 @@
+@import 'base/utils/__utils';
+
+// define component placeholders for component contents (no selector here)
+@include importOnce('notifier') {
+  $notifier-height: 60px;
+
+  %notifier {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: $notifier-height;
+    z-index: 99998;
+    border-radius: 0 0 5px 5px;
+    text-align: center;
+    font-size: 2em;
+    line-height: $notifier-height;
+    @include transition("transform #{$slow} 3s", false);
+    @include box-shadow("0 0 3px 0 #{$black}", '', false);
+  }
+
+  %notifier__hide {
+    pointer-events: none;
+    @include transform("translateY(#{-$notifier-height})", false);
+  }
+}
+
+@mixin notifier($selector, $defaultSkin: true) {
+
+  #{$selector} {
+    @extend %notifier;
+
+    &.hide {
+      @extend %notifier__hide;
+    }
+
+  }
+
+  @if $defaultSkin != false {
+    @include notifier-skin-default($selector);
+  }
+}
+
+// define component placeholders for component skin (no selector here)
+@include importOnce('notifier-skin-default') {
+  %notifier-skin-default {
+    background-color: $green;
+    color: $white;
+  }
+}
+
+// provide a default skin for the component
+// only visual changes that don't affect the component layout should be in here
+@mixin notifier-skin-default($selector) {
+
+  #{$selector} {
+    @extend %notifier-skin-default;
+  }
+}

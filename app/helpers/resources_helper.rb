@@ -22,8 +22,12 @@ module ResourcesHelper
 		end
 	end
 
-	def print_title(resource)
-		haml_concat link_to(resource.title, resource.url, title: resource.title) if resource
+	def print_title(resource, no_link=false)
+		if no_link
+			haml_concat resource.title
+		else
+			haml_concat link_to(resource.title, resource.url, title: resource.title)
+		end
 	end
 
 	def has_embedded_or_thumbnail?(resource)
