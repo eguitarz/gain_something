@@ -40,6 +40,10 @@ module ResourcesHelper
 		end
 	end
 
+	def print_description(resource)
+		haml_concat get_description(resource)
+	end
+
 	def get_description(resource)
 		if resource && resource.description.present?
 			URI.encode(resource.description)

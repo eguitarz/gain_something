@@ -68,7 +68,7 @@ $(document).on 'page:change', ->
     $('#lightbox').removeClass()
     $('#lightbox').addClass $element.data('mime')
 
-  $('#lightbox.text .display').html marked(decodeURIComponent($('#preview-desc-value').val()))
+  $('#lightbox._is_text #lightbox_display').html marked(decodeURIComponent($('#preview-desc-value').val()))
 
   $(document).on 'keyup', (e)->
     if e.keyCode == 39

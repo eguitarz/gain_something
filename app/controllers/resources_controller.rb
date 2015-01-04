@@ -4,8 +4,8 @@ require 'json'
 RESOURCE_LIMIT = 1000
 
 class ResourcesController < ApplicationController
-	before_action :get_collection, only: [:new, :show, :create, :destroy]
-	before_action :get_resource, only: [:show, :destroy]
+	before_action :get_collection, only: [:new, :show, :create, :edit, :update, :destroy]
+	before_action :get_resource, only: [:show, :destroy, :edit]
 
 	def new
 		@mime = params[:mime]
@@ -25,13 +25,28 @@ class ResourcesController < ApplicationController
 	end
 
 	def create
-		@resource = @collection.resources.build(create_params)
+		@resource = @collection.resources.build(resource_params)
 		create_and_append_embed(@resource) unless @resource.mime == 'text'
 
 		if @resource.mime == 'error'
 			flash[:error] = 'Some error happend while fetching your resource'
 		end
-		@collection.save
+		
+		unless @collection.save
+			flash[:error] = @resource.errors.full_messages.join(', ')
+		end
+
+		redirect_to collection_url(@collection.id)
+	end
+
+	def edit
+		@mime = @resource.mime
+		redirect_to collection_url(@collection.id) if @mime != 'text'
+	end
+
+	def update
+		@resource = Resource.find params[:id] 
+		@resource.update resource_params
 
 		redirect_to collection_url(@collection.id)
 	end
@@ -71,7 +86,7 @@ class ResourcesController < ApplicationController
 		@resource = Resource.find params[:id]
 	end
 
-	def create_params
+	def resource_params
 		params.require(:resource).permit(:title, :url, :mime, :description, :provider_name, 
 			:provider_url, :thumbnail, :thumbnail_width)
 	end
