@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'collections#index'
+  
   resources :collections do
     resources :resources
   end

@@ -4,10 +4,15 @@ class CollectionsController < ApplicationController
   before_action :get_collection, only: [:show, :edit, :update, :destroy]
 
   def index
-    @collections = Collection.order(updated_at: :desc).page params[:page]
-    respond_to do |format|
-      format.html {}
-      format.js {}
+    # @collections = Collection.order(updated_at: :desc).page params[:page]
+    # respond_to do |format|
+    #   format.html {}
+    #   format.js {}
+    # end
+    if current_user.present?
+      redirect_to user_path(current_user)
+    else
+      redirect_to new_user_session_path
     end
   end
 
