@@ -7,12 +7,12 @@
         - if resource.mime != 'text'
           = link_to resource.title, resource.url, title: resource.title
         - else
-          = link_to resource.title, course_resource_path(@course, resource), title: resource.title
+          = link_to resource.title, collection_resource_path(@collection, resource), title: resource.title
       .resourceList_tools.col-10
         .btn-square.right
-          = link_to icon('trash'), course_resource_path(@course, resource), remote: true, method: :delete, class: 'right'
+          = link_to icon('trash'), collection_resource_path(@collection, resource), remote: true, method: :delete, class: 'right'
         .btn-square.right
-          = link_to icon('eye'), course_resource_path(@course, resource), remote: true, class: 'right embed', id: "resource_#{resource_counter}", :"data-mime" => resource.mime, :'data-base-url' => course_path(@course.id, p: 1, idx: resource_counter)
+          = link_to icon('eye'), collection_resource_path(@collection, resource), remote: true, class: 'right embed', id: "resource_#{resource_counter}", :"data-mime" => resource.mime, :'data-base-url' => collection_path(@collection.id, p: 1, idx: resource_counter)
     - if resource.thumbnail.present? || resource.description.present?
       .resourceList_preview
         .icon-column

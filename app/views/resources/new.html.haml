@@ -1,5 +1,5 @@
 .content
-	= form_for [@course, @resource] do |f|
+	= form_for [@collection, @resource] do |f|
 		= f.hidden_field :mime, value: @mime
 		- if @mime == 'text'
 			= f.text_field :title, placeholder: 'Edit title here', autofocus: true
@@ -25,4 +25,4 @@
 
 		.submission
 			= f.submit 'Attach', class: 'btn-normal'
-			= f.button 'Cancel', class: 'btn-normal btn-cancel', :'data-dest' => "#{course_path(@course.id)}"
+			= f.button 'Cancel', class: 'btn-normal btn-cancel', :'data-dest' => "#{collection_path(@collection.id)}"

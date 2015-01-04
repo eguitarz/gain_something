@@ -1,9 +1,9 @@
-.course-container {
+.collection-container {
   width: 100%;
   padding: 40px 0;
 }
 
-.course-header {
+.collection-header {
   .title {
     margin-top: 20px;
     font-size: 1.8em;
@@ -12,7 +12,7 @@
   }
 }
 
-.course {
+.collection {
   display: inline-block;
   width: 100%;
   min-height: 60px;
@@ -20,7 +20,7 @@
   vertical-align: top;
 }
 
-.course .subtitle {
+.collection .subtitle {
   color: $grey;
   font-size: 0.6em;
   margin-top: -2px;
@@ -30,7 +30,7 @@
   }
 }
 
-.course-description {
+.collection-description {
   color: $grey;
   font-family: $content-fonts;
 }

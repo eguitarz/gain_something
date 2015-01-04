@@ -2,7 +2,7 @@ require 'embedly'
 require 'json'
 
 class ResourcesController < ApplicationController
-	before_action :get_course, only: [:new, :show, :create, :destroy]
+	before_action :get_collection, only: [:new, :show, :create, :destroy]
 	before_action :get_resource, only: [:show, :destroy]
 
 	def new
@@ -18,21 +18,21 @@ class ResourcesController < ApplicationController
 	end
 
 	def create
-		@resource = @course.resources.build(create_params)
+		@resource = @collection.resources.build(create_params)
 		create_and_append_embed(@resource) unless @resource.mime == 'text'
 
 		if @resource.mime == 'error'
 			flash[:error] = 'Some error happend while fetching your resource'
 		end
-		@course.save
+		@collection.save
 
-		redirect_to course_url(@course.id)
+		redirect_to collection_url(@collection.id)
 	end
 
 	def destroy
 		@deleted_id = nil
 		respond_to do |format|
-			if @course.resources.delete(@resource)
+			if @collection.resources.delete(@resource)
 				@deleted_id = @resource.id
 				format.js {}
 			else
@@ -56,8 +56,8 @@ class ResourcesController < ApplicationController
 	end
 
 	private
-	def get_course
-		@course = Course.find params[:course_id]
+	def get_collection
+		@collection = Collection.find params[:collection_id]
 	end
 
 	def get_resource

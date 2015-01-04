@@ -1,7 +1,7 @@
 class CreateResources < ActiveRecord::Migration
   def change
     create_table :resources do |t|
-      t.belongs_to :course
+      t.belongs_to :collection
     	t.string :title
       t.string :third_party_id
     	t.string :mime

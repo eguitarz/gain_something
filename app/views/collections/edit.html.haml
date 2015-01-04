@@ -1,0 +1,25 @@
+.content
+	= form_for @collection, remote: true do |f|
+		.row.toolbar
+			.col-100
+				= f.button 'Cancel', class: 'btn-small btn-cancel right', :'data-dest' => "#{collection_path(@collection)}"
+				= f.submit 'Save', class: 'btn-small right'
+		.row
+			.col-100
+				= f.text_field :name, value: @collection.name
+		.row
+			.col-100
+				= f.text_area :description, value: @collection.description
+		.row.document-buttons
+			.col-100
+				= link_to '<div class="resource-btn">+ Text</div>'.html_safe, new_collection_resource_path(@collection.id, mime: 'text')
+				= link_to '<div class="resource-btn">+ Video</div>'.html_safe, new_collection_resource_path(@collection.id, mime: 'video')
+				= link_to '<div class="resource-btn">+ Link</div>'.html_safe, new_collection_resource_path(@collection.id, mime: 'link')
+		- @collection.resources.each do |r|
+			.row.document.deletable{id: "resource-#{r.id}"}
+				.col-10
+					- resource_icon(r.mime)
+				.title.col-80>
+					= link_to r.title, collection_resource_path(@collection, r), title: r.title
+				.remove.col-10
+					= link_to icon('trash'), collection_resource_path(@collection, r), remote: true, method: :delete, class: 'right'

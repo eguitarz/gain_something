@@ -28,9 +28,9 @@
 		%ul.scrollable
 			%li.sideMenu_item
 				= link_to 'Home', root_path, class: 'sideMenu_link'
-			- if @user
+			- if current_user
 				%li.sideMenu_item
-					= link_to @user.name, user_path(@user), class: 'sideMenu_link'
+					= link_to 'My collections', user_path(current_user), class: 'sideMenu_link'
 				%li.sideMenu_item
 					= link_to 'Log Out', destroy_user_session_path, method: 'DELETE', class: 'sideMenu_link'
 			- else
