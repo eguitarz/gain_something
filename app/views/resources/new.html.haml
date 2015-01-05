@@ -21,8 +21,8 @@
 			= f.text_field :url, placeholder: 'Post url', id: 'link-url', autofocus: true
 			= f.hidden_field :title, id: 'link-title'
 			= f.hidden_field :description, id: 'link-description'
-			.preview
 
 		.submission
 			= f.submit 'Create', class: 'btn-normal'
 			= f.button 'Cancel', class: 'btn-normal btn-cancel', :'data-dest' => "#{collection_path(@collection.id)}"
+		.preview
