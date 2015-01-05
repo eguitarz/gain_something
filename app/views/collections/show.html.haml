@@ -6,32 +6,31 @@
 
 
 .content
-	- cache @collection do
-		.collection-header
-			.row
-				.col-100.title
-					- if @collection.belongs_to?(current_user)
-						= form_for @collection, remote:true, html: {class: 'no-margin editable'} do |f|
-							= f.text_field :name
-							.saved-icon
-								= icon('check')
-					- else
-						= @collection.name
-
-		.document.row
-			.collection-description.col-100
+	.collection-header
+		.row
+			.col-100.title
 				- if @collection.belongs_to?(current_user)
 					= form_for @collection, remote:true, html: {class: 'no-margin editable'} do |f|
-						= f.text_field :description, placeholder: 'Description (optional)'
+						= f.text_field :name
 						.saved-icon
 							= icon('check')
 				- else
-					= @collection.description
+					= @collection.name
 
-		- if @collection.belongs_to?(current_user)
-			.row.document-buttons
-				.col-100
-					= link_to "<div class=\"btn-small\">#{icon('plus')} Article</div>".html_safe, new_collection_resource_path(@collection.id, mime: 'text')
-					= link_to "<div class=\"btn-small\">#{icon('plus')} Link</div>".html_safe, new_collection_resource_path(@collection.id, mime: 'link')
-		.resource-list
-			= render @resources
+	.document.row
+		.collection-description.col-100
+			- if @collection.belongs_to?(current_user)
+				= form_for @collection, remote:true, html: {class: 'no-margin editable'} do |f|
+					= f.text_field :description, placeholder: 'Description (optional)'
+					.saved-icon
+						= icon('check')
+			- else
+				= @collection.description
+
+	- if @collection.belongs_to?(current_user)
+		.row.document-buttons
+			.col-100
+				= link_to "<div class=\"btn-small\">#{icon('plus')} Article</div>".html_safe, new_collection_resource_path(@collection.id, mime: 'text')
+				= link_to "<div class=\"btn-small\">#{icon('plus')} Link</div>".html_safe, new_collection_resource_path(@collection.id, mime: 'link')
+	.resource-list
+		= render @resources
