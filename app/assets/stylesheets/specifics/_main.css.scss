@@ -76,3 +76,37 @@ body.present {
 .inline-block {
   display: inline-block;
 }
+
+@mixin loginForm {
+  input {
+    max-width: 240px;
+    border: 1px solid $grey;
+    border-radius: 3px;
+    margin: 8px 0;
+    padding: 4px 8px;
+  }
+
+  input[type=text], input[type=password], input[type=email] {
+    height: 1.8em;
+  }
+}
+
+[id^=users] .content {
+  width: 40%;
+}
+
+[id^=users] form {
+  @include loginForm;
+}
+
+.deviseLinks {
+  width: 100%;
+  border-top: 1px solid $lightgrey;
+  margin-top: 40px;
+
+  a {
+    display: inline-block;
+    margin: 5px 20px 0 0;
+    font-size: 0.8em;
+  }
+}
