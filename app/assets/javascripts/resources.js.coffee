@@ -99,7 +99,8 @@ $(document).on 'page:change', ->
 	window.editor = editor
 	initEditorButtons(editor)
 	bindCancelButton('.btn-cancel')
-	bindOnPaste('#link-url')
+	# This has CORS problem
+	# bindOnPaste('#link-url')
 
 	# bind title key events
 	$('#resource_title').on 'keypress', (e)->
