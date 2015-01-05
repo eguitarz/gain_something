@@ -9,7 +9,7 @@ module CollectionsHelper
         haml_concat ' · '
       end
 
-      if collection.description.presnet?
+      if collection.description.present?
         haml_tag :div, class: 'collection_subtitle_description' do
           haml_tag :a, href: "#{collection_path(collection.id)}" do
             haml_concat collection.description
