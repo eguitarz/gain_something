@@ -6,6 +6,9 @@ RESOURCE_LIMIT = 1000
 class ResourcesController < ApplicationController
 	before_action :get_collection, only: [:new, :show, :create, :edit, :update, :destroy]
 	before_action :get_resource, only: [:show, :destroy, :edit]
+	before_action only: [:new, :create, :edit, :update, :destroy] do
+    require_owner @collection.user
+  end
 	before_action :require_user_signed_in, except: [:show]
 
 	def new
@@ -34,7 +37,7 @@ class ResourcesController < ApplicationController
 		end
 		
 		unless @collection.save
-			flash[:error] = @collection.errors.full_messages.join(', ') + @resource.errors.full_messages.join(', ')
+			flash[:error] = [@collection.errors.full_messages.join(', '), @resource.errors.full_messages.join(', ')].join(', ')
 		end
 
 		redirect_to collection_url(@collection.id)

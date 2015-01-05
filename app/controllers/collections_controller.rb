@@ -1,6 +1,9 @@
 class CollectionsController < ApplicationController
   before_action :get_user
   before_action :get_collection, only: [:show, :edit, :update, :destroy]
+  before_action only: [:edit, :update, :destroy] do
+    require_owner @collection.user
+  end
   before_action :require_user_signed_in, except: [:index, :show]
 
   def index
