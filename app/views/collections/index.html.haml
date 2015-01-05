@@ -10,6 +10,6 @@
 
 	.collection-container
 		.collections
-			= render @collections
+			= render(@collections)
 		#paginator
 			= link_to_next_page @collections, '<div class="btn-large">more collections</div>'.html_safe, remote: true

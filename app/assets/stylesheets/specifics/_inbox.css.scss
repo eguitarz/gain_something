@@ -17,10 +17,17 @@
   min-height: 60px;
   margin-bottom: 1em;
   vertical-align: top;
+  padding-right: 10px;
+}
 
-  .title {
-    padding-right: 10px;
-  }
+.collection_title {
+  font-weight: 900;
+}
+
+.collections_empty {
+  color: $grey;
+  font-size: 1.6em;
+  line-height: 140%;
 }
 
 .collection .subtitle {
@@ -33,7 +40,18 @@
   }
 }
 
-.collection-description {
+.collection_subtitle_description {
+  font-size: 0.8rem;
+  color: $grey;
+  font-family: $title-fonts;
+
+  a, a:hover {
+    font-weight: 100;
+    color: $black !important;
+  }
+}
+
+.collection_description {
   color: $grey;
   font-family: $content-fonts;
 }

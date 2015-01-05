@@ -1,5 +1,5 @@
 .collection.col-50>
 	%a{href: "#{collection_path(collection.id)}"}
-		.title
+		.collection_title
 			= collection.name
 	- collection_subtitle(collection, !is_user_controller?(params[:controller]) )
