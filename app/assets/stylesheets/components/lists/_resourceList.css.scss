@@ -59,7 +59,7 @@
   #{$selector} {
     @extend %resourceList;
 
-    &:hover #{$selector}_tools {
+    #{$selector}_item:hover #{$selector}_tools {
       @extend %resourceList__hovered_tools;
     }
 
