@@ -79,6 +79,9 @@ $(document).on 'page:change', ->
       keyEvent = 'right'
     if e.keyCode == 37
       keyEvent = 'left'
+    if e.keyCode == 27
+      quitLightbox()
+
     if keyEvent && $('body').hasClass('present') && window.location.search
       try
         resourceIndex = window.location.search.substr(1).split('&').filter (k)->
