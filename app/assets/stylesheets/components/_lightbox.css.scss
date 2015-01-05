@@ -37,6 +37,7 @@
 
   %lightbox_player_image {
     @extend %lightbox_player_iframe;
+    max-width: 90%;
   }
 
   %lightbox_title {
@@ -46,8 +47,7 @@
   }
 
   %lightbox_display {
-    padding-left: 20px;
-    padding-right: 20px;
+    padding: 20px 40px;
   }
 }
 
