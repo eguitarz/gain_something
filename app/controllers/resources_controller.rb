@@ -33,7 +33,7 @@ class ResourcesController < ApplicationController
 		end
 		
 		unless @collection.save
-			flash[:error] = @resource.errors.full_messages.join(', ')
+			flash[:error] = @collection.errors.full_messages.join(', ') + @resource.errors.full_messages.join(', ')
 		end
 
 		redirect_to collection_url(@collection.id)
@@ -95,7 +95,7 @@ class ResourcesController < ApplicationController
 
 	def create_and_append_embed(resource)
 		embed = create_embed_by_url(resource.url)
-		resource.title = embed[:title]
+		resource.title = embed[:title].first(255)
 		resource.embedded_html = embed[:html]
 		resource.mime = embed[:type]
 		resource.provider_name = embed[:provider_name]
@@ -111,7 +111,7 @@ class ResourcesController < ApplicationController
 		{
 			html: obj[0]['html'],
 			url: url,
-			title: obj[0]['title'] || url.first(250),
+			title: obj[0]['title'] || url,
 			type: obj[0]['type']  || 'unknown',
 			provider_name: obj[0]['provider_name'],
 			provider_url: obj[0]['provider_url'],
