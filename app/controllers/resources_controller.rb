@@ -6,6 +6,7 @@ RESOURCE_LIMIT = 1000
 class ResourcesController < ApplicationController
 	before_action :get_collection, only: [:new, :show, :create, :edit, :update, :destroy]
 	before_action :get_resource, only: [:show, :destroy, :edit]
+	before_action :require_user_signed_in, except: [:show]
 
 	def new
 		@mime = params[:mime]

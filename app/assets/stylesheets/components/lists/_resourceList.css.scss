@@ -3,6 +3,7 @@
 // define component placeholders for component contents (no selector here)
 @include importOnce('resourceList') {
   %resourceList {
+    padding-top: 20px;
     line-height: 140%;
   }
 
@@ -31,7 +32,6 @@
 
   %resourceList_preview_digest {
     width: 100%;
-    font-size: 0.8em;
     line-height: 160%;
     white-space: normal;
   }
@@ -98,8 +98,11 @@
 // define component placeholders for component skin (no selector here)
 @include importOnce('resourceList-skin-default') {
   %resourceList-skin-default {
-    padding-top: 20px;
     background-color: $white;
+  }
+
+  %resourceList-skin-default_title {
+    font-weight: 900;
   }
 
   %resourceList-skin-default_tools_link {
@@ -111,7 +114,10 @@
   }
 
   %resourceList-skin-default_preview_digest {
-    color: $grey;
+    font-family: $title-fonts;
+    font-size: 0.8em;
+    font-weight: 100;
+    color: $black;
   }
 
 }
@@ -128,6 +134,10 @@
         @extend %resourceList-skin-default_preview_digest;
       }
     }
+  }
+
+  #{$selector}_title {
+    @extend %resourceList-skin-default_title;
   }
 
   #{$selector}_tools_link {

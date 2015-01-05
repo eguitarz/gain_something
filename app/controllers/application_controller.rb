@@ -32,4 +32,9 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def require_owner(user)
+    if !user || !current_user || current_user.id != user.id
+      redirect_to fallback_redirect, flash: {error: "You must sign in as the owner."}
+    end
+  end
 end

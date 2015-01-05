@@ -1,7 +1,7 @@
 class CollectionsController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show]
   before_action :get_user
   before_action :get_collection, only: [:show, :edit, :update, :destroy]
+  before_action :require_user_signed_in, except: [:index, :show]
 
   def index
     # @collections = Collection.order(updated_at: :desc).page params[:page]
