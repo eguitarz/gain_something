@@ -9,10 +9,12 @@ module CollectionsHelper
         haml_concat ' · '
       end
 
-      haml_tag :div, class: 'collection_subtitle_description' do
-        haml_tag :a, href: "#{collection_path(collection.id)}" do
-          haml_concat collection.description
-          haml_concat ' · '
+      if collection.description.presnet?
+        haml_tag :div, class: 'collection_subtitle_description' do
+          haml_tag :a, href: "#{collection_path(collection.id)}" do
+            haml_concat collection.description
+            haml_concat ' · '
+          end
         end
       end
 
