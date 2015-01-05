@@ -103,8 +103,8 @@ $(document).on 'page:change', ->
 	# bindOnPaste('#link-url')
 
 	# bind title key events
-	$('#resource_title').on 'keypress', (e)->
-		if e.keyCode == 13
+	$('#resource_title').on 'keydown', (e)->
+		if e.keyCode == 13 || e.keyCode == 9
 			e.preventDefault()
 			e.stopPropagation()
 			editor.focus()
