@@ -1,7 +1,10 @@
 !!!
 %html
 	%head
-		%title Gain Something
+		%title 
+			= yield(:title).empty? ? "Gain Something" : yield(:title)
+		%meta{name:'twitter:title', property:'og:title', itemprop: 'title name', content: yield(:title).empty? ? "Gain Something" : yield(:title)}
+		%meta{name:'twitter:description', property:'og:description', itemprop: 'description', content: yield(:description).empty? ? "Gain Something - A simple website collector" : yield(:description)}
 		%link{href:'http://fonts.googleapis.com/css?family=Open+Sans', rel:'stylesheet', type:'text/css'}
 		%link{href:'http://fonts.googleapis.com/css?family=Slabo+13px', rel:'stylesheet', type:'text/css'}
 		= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
