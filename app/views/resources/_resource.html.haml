@@ -24,9 +24,9 @@
         - if resource.description.present?
           .inline-block.col-60>
             .resourceList_preview_digest
-              - print_partial_string(resource.description, 200, '...')
+              = link_to get_partial_string(resource.description, 200, '...'), collection_resource_path(@collection, resource)
       - else 
         - if resource.description.present?
           .inline-block.col-80>
             .resourceList_preview_digest
-              - print_partial_string(resource.description, 200, '...')
+              = link_to get_partial_string(resource.description, 200, '...'), collection_resource_path(@collection, resource)

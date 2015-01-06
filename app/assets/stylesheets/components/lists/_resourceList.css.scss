@@ -37,6 +37,7 @@
     width: 100%;
     line-height: 160%;
     white-space: normal;
+    a, a:hover { color: $black; }
   }
 
   %resourceList_preview_thumbnails {

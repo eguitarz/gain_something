@@ -75,12 +75,12 @@ module ResourcesHelper
 
 	end
 
-	def print_partial_string(string, limit, tail)
+	def get_partial_string(string, limit, tail)
 		concated_string = string.first(limit)
 		if concated_string.length < string.length
-			haml_concat concated_string + tail
+			concated_string + tail
 		else
-			haml_concat concated_string
+			concated_string
 		end 
 	end
 
