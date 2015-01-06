@@ -211,11 +211,16 @@ body.landings #main {
 
 #resources .embed {
   padding: 40px 0;
+  line-height: 160%;
 }
 
 #resources .embed > iframe {
   display: block;
   margin: auto;
+}
+
+.embed img {
+  max-width: 100%;
 }
 
 .back {
