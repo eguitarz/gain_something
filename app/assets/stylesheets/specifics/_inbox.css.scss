@@ -57,17 +57,18 @@
   font-family: $content-fonts;
 }
 
+.icon {
+  width: 2em;
+  height: 2em;
+  text-align: left;
+  cursor: default;
+  font-family: $content-fonts;
+}
+
 .document {
   height: 140%;
   line-height: 140%;
   margin: 0;
-  .icon {
-    width: 2em;
-    height: 2em;
-    text-align: left;
-    cursor: default;
-    font-family: $content-fonts;
-  }
 
   .title {
     vertical-align: top;
