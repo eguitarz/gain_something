@@ -28,8 +28,8 @@
     @extend %button;
     margin: 0 8px 0 0;
     padding: 2px;
-    width: 28px;
-    height: 28px;
+    width: 2em;
+    height: 2em;
     line-height: 24px;
     @include border-radius(3px);
   }
@@ -83,6 +83,26 @@
   }
 }
 
+@mixin editorButton($selector, $defaultSkin: true) {
+  #{$selector} {
+    @extend %icon-button;
+  }
+
+  @if $defaultSkin != false {
+    @include rectangleButtons-skin-editor($selector);
+  }
+}
+
+@mixin resourceButton($selector, $defaultSkin: true) {
+  #{$selector} {
+    @extend %icon-button;
+  }
+
+  @if $defaultSkin != false {
+    @include rectangleButtons-skin-resource($selector);
+  }
+}
+
 // define component placeholders for component skin (no selector here)
 @include importOnce('rectangleButtons-skin-default') {
   %button-skin-default {
@@ -105,6 +125,17 @@
     opacity: 0.87;
   }
 
+  %button-skin-resource {
+    @extend %button-skin-default;
+    text-align: left;
+    font-family: $content-fonts;
+  }
+
+  %button-skin-editor {
+    @extend %button-skin-default;
+    font-family: $content-fonts;
+  }
+
 }
 
 // provide a default skin for the component
@@ -113,6 +144,28 @@
 
   #{$selector} {
     @extend %button-skin-default;
+
+    &:hover {
+      @extend %button-skin-default__hovered;
+    }
+  }
+}
+
+@mixin rectangleButtons-skin-resource($selector) {
+
+  #{$selector} {
+    @extend %button-skin-resource;
+
+    &:hover {
+      @extend %button-skin-default__hovered;
+    }
+  }
+}
+
+@mixin rectangleButtons-skin-editor($selector) {
+
+  #{$selector} {
+    @extend %button-skin-editor;
 
     &:hover {
       @extend %button-skin-default__hovered;

@@ -3,6 +3,8 @@
 @include flexibleButton('.btn-large');
 @include squareButton('.btn-square', 20px);
 @include iconButton('.btn-icon');
+@include editorButton('.btn-editor');
+@include resourceButton('.btn-resource');
 @include roundButton('.btn-round');
 
 .btn-square {

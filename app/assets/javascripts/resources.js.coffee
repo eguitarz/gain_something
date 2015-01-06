@@ -42,7 +42,7 @@ initEditorButtons = (editor)->
 		editor.replaceSelection( taggedSelection, cursorPosition )
 		editor.focus()
 
-	$('.btn-icon').on 'click', (e)->
+	$('.btn-editor').on 'click', (e)->
 		e.preventDefault()
 		e.stopPropagation()
 

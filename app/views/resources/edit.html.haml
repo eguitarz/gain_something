@@ -9,16 +9,16 @@
       = f.text_field :title, placeholder: 'Edit title here', autofocus: true
       .toolbar.row
         .col-100
-          = f.button 'H1', id:'h1-btn', class: 'btn-icon btn-edit'
-          = f.button 'H2', id:'h2-btn', class: 'btn-icon btn-edit'
-          = f.button 'H3', id:'h3-btn', class: 'btn-icon btn-edit'
-          = f.button icon('bold'), id:'bold-btn', class: 'btn-icon btn-edit'
-          = f.button icon('italic'), id:'italic-btn', class: 'btn-icon btn-edit'
+          = f.button 'H1', id:'h1-btn', class: 'btn-editor btn-edit'
+          = f.button 'H2', id:'h2-btn', class: 'btn-editor btn-edit'
+          = f.button 'H3', id:'h3-btn', class: 'btn-editor btn-edit'
+          = f.button icon('bold'), id:'bold-btn', class: 'btn-editor btn-edit'
+          = f.button icon('italic'), id:'italic-btn', class: 'btn-editor btn-edit'
           .div.spacer
-          = f.button icon('link'), id:'link-btn', class: 'btn-icon btn-edit'
-          = f.button icon('image'), id:'image-btn', class: 'btn-icon btn-edit'
+          = f.button icon('link'), id:'link-btn', class: 'btn-editor btn-edit'
+          = f.button icon('image'), id:'image-btn', class: 'btn-editor btn-edit'
           .div.spacer
-          = f.button icon('eye'), id:'preview-btn', class: 'btn-icon'
+          = f.button icon('eye'), id:'preview-btn', class: 'btn-editor'
       = f.text_area :description, id: 'resource-description', placeholder: 'Write something...'
       #markdown-preview
 
