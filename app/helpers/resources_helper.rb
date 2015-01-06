@@ -57,19 +57,19 @@ module ResourcesHelper
 	end
 
 	def print_resource_tools(collection, resource, resource_counter)
-		if collection.belongs_to? current_user || !collection.user_id.present?
+		if collection.belongs_to?(current_user)
 			haml_tag :div, class: 'btn-square right' do
-				haml_concat link_to(icon('trash'), collection_resource_path(@collection, resource), remote: true, method: :delete, class: 'right')
+				haml_concat link_to(icon('trash'), collection_resource_path(collection, resource), remote: true, method: :delete, class: 'right')
 			end
 		end
 
 		haml_tag :div, class: 'btn-square right' do
-			haml_concat link_to(icon('eye'), collection_resource_path(@collection, resource), remote: true, class: 'right embed', id: "resource_#{resource_counter}", :"data-mime" => resource.mime, :'data-base-url' => collection_path(@collection.id, p: 1, idx: resource_counter))
+			haml_concat link_to(icon('eye'), collection_resource_path(collection, resource), remote: true, class: 'right embed', id: "resource_#{resource_counter}", :"data-mime" => resource.mime, :'data-base-url' => collection_path(@collection.id, p: 1, idx: resource_counter))
 		end
 
 		if resource.mime == 'text' && collection.belongs_to?(current_user)
 			haml_tag :div, class: 'btn-square right' do
-				haml_concat link_to(icon('edit'), edit_collection_resource_path(@collection, resource), class: 'right')
+				haml_concat link_to(icon('edit'), edit_collection_resource_path(collection, resource), class: 'right')
 			end
 		end
 
