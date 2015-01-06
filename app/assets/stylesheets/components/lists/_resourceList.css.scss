@@ -17,6 +17,7 @@
   %resourceList_title {
     vertical-align: middle;
     overflow: hidden;
+    line-height: 160%;
   }
 
   %resourceList_tools {
@@ -34,7 +35,7 @@
 
   %resourceList_preview_digest {
     width: 100%;
-    line-height: 150%;
+    line-height: 160%;
     white-space: normal;
     a, a:hover { color: $black; }
   }
