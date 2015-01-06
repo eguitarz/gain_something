@@ -15,14 +15,22 @@
 	- if @current_resource.present?
 		#lightbox{class: lightbox_class}
 			%input{type: 'hidden', value: @collection.resources.count, id: 'lightbox_resource_count'}
-			#lightbox_player
-				%input{id:'preview-desc-value', type:'hidden', value: get_description(@current_resource) }
-				%h1#lightbox_title
-					- print_title(@current_resource, true)
-				#lightbox_display
-					- print_embedded_or_thumbnail(@current_resource)
-			.btn-close
-				= link_to icon('close'), '#', remote: true
+			#lightbox_player_wrapper
+				#lightbox_previous_button
+					.btn-round.btn-prev
+						= icon('angle-left')
+				#lightbox_next_button
+					.btn-round.btn-next
+						= icon('angle-right')
+				#lightbox_player
+					%input{id:'preview-desc-value', type:'hidden', value: get_description(@current_resource) }
+					%h1#lightbox_title
+						- print_title(@current_resource, true)
+					#lightbox_display
+						- print_embedded_or_thumbnail(@current_resource)
+				#lightbox_close_button
+					.btn-round.btn-close
+						= icon('close')
 	- if flash.present?
 		#notifier
 			= flash[:error]

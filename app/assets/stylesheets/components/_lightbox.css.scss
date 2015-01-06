@@ -11,22 +11,26 @@
     z-index: 9999;
   }
 
-  %lightbox_player {
+  %lightbox_player_wrapper {
     position: absolute;
     left: 0;
     right: 0;
     top: 5%;
+    height: 100%;
+    width: 1024px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  %lightbox_player {
     /* video height / video width */
     // padding-bottom: 56.2%;
     /* the above value * 0.5 */
     // margin-top: -28.1%;
-    margin-left: auto;
-    margin-right: auto;
-    max-height: 90%;
     overflow-y: scroll;
     overflow-x: hidden;
+    max-height: 90%;
     // min-height: 100%;
-    width: 1024px;
   }
 
   %lightbox_player_iframe {
@@ -49,6 +53,27 @@
   %lightbox_display {
     padding: 20px 40px;
   }
+
+  %lightbox_previous_button {
+    position: absolute;
+    top: 50%;
+    left: -40px;
+    margin-top: -40px;
+  }
+
+  %lightbox_next_button {
+    position: absolute;
+    top: 50%;
+    right: -58px;
+    margin-top: -40px;
+  }
+
+  %lightbox_close_button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-right: -60px;
+  }
 }
 
 @mixin lightbox($selector, $defaultSkin: true) {
@@ -60,11 +85,27 @@
       @extend %lightbox_title;
     }
 
-    #{$selector}_player {
-      @extend %lightbox_player;
+    #{$selector}_player_wrapper {
+      @extend %lightbox_player_wrapper;
 
-      iframe { @extend %lightbox_player_iframe; }
-      img { @extend %lightbox_player_image; }
+      #{$selector}_previous_button {
+        @extend %lightbox_previous_button;
+      }
+
+      #{$selector}_next_button {
+        @extend %lightbox_next_button; 
+      }
+
+      #{$selector}_close_button {
+        @extend %lightbox_close_button; 
+      }
+
+      #{$selector}_player {
+        @extend %lightbox_player;
+
+        iframe { @extend %lightbox_player_iframe; }
+        img { @extend %lightbox_player_image; }
+      }
     }
 
     #{$selector}_display {

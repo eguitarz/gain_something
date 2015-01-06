@@ -39,7 +39,7 @@ $(document).on 'page:change', ->
     window.history.pushState(null, 'GS',  newUrl)
 
   # prevent passing click event to #lightbox
-  $('#lightbox_player').click (e)->
+  $('#lightbox_player, #lightbox_previous_button, #lightbox_next_button').click (e)->
     e.stopPropagation();
 
   $('#lightbox').click ->
@@ -47,6 +47,12 @@ $(document).on 'page:change', ->
 
   $('#lightbox .btn-close').click ->
     quitLightbox()
+
+  $('#lightbox_previous_button').click ->
+    setNextItemInLightbox(getCurrentId(), false)
+
+  $('#lightbox_next_button').click ->
+    setNextItemInLightbox(getCurrentId(), true)
 
   $('.editable input').on 'focus', ->
     $(@).parent('.editable').removeClass 'saved'
@@ -74,6 +80,39 @@ $(document).on 'page:change', ->
 
   $('#lightbox._is_text #lightbox_display').html marked(decodeURIComponent($('#preview-desc-value').val()))
 
+  getResourceCount = ()->    
+    parseInt( $('#lightbox_resource_count').val(), 10)
+
+  getCurrentId = ()->
+    try
+      resourceIndex = window.location.search.substr(1).split('&').filter (k)->
+        k.indexOf('idx') >= 0
+      currentId = resourceIndex[0].split('=')[1]
+      currentId = parseInt(currentId, 10)
+    catch error
+        window.location.search = ""
+
+  hasPreviousItem = ()->
+    getCurrentId() > 0
+
+  hasNextItem = () ->
+    getCurrentId() < getResourceCount() - 1
+
+  if hasPreviousItem()
+    $('#lightbox_previous_button').removeClass 'hide'
+  else
+    $('#lightbox_previous_button').addClass 'hide'
+
+  if hasNextItem()
+    $('#lightbox_next_button').removeClass 'hide'
+  else
+    $('#lightbox_next_button').addClass 'hide'
+
+  setNextItemInLightbox = (id, isNext)->
+    nextId = if isNext then id + 1 else id - 1
+    if nextId >= 0 && nextId < getResourceCount()
+      window.location.search = "p=1&idx=#{nextId}"
+
   $(document).on 'keyup', (e)->
     if e.keyCode == 39
       keyEvent = 'right'
@@ -82,22 +121,14 @@ $(document).on 'page:change', ->
     if e.keyCode == 27
       quitLightbox()
 
-    if keyEvent && $('body').hasClass('present') && window.location.search
-      try
-        resourceIndex = window.location.search.substr(1).split('&').filter (k)->
-          k.indexOf('idx') >= 0
-        currentId = resourceIndex[0].split('=')[1]
-        currentId = parseInt(currentId, 10)
-        resourceCount = parseInt( $('#lightbox_resource_count').val(), 10)
-        if currentId >= 0
-          if keyEvent == 'left'
-            nextId = currentId - 1
-          else if keyEvent == 'right'
-            nextId = currentId + 1
+    if keyEvent && $('body').hasClass('present') && window.location.search 
+      currentId = getCurrentId()
+      if currentId >= 0
+        if keyEvent == 'left'
+          setNextItemInLightbox(currentId, false)
+        else if keyEvent == 'right'
+          setNextItemInLightbox(currentId, true)
 
-          if nextId >= 0 && nextId < resourceCount
-            window.location.search = "p=1&idx=#{nextId}"
-      catch error
-        window.location.search = ""
+          
 
       
