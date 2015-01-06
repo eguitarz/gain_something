@@ -90,7 +90,7 @@ $(document).on 'page:change', ->
       currentId = resourceIndex[0].split('=')[1]
       currentId = parseInt(currentId, 10)
     catch error
-        window.location.search = ""
+      return -1
 
   hasPreviousItem = ()->
     getCurrentId() > 0
