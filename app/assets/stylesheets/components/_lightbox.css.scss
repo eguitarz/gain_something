@@ -58,22 +58,22 @@
   %lightbox_previous_button {
     position: absolute;
     top: 50%;
-    left: -40px;
+    left: -32px;
     margin-top: -40px;
   }
 
   %lightbox_next_button {
     position: absolute;
     top: 50%;
-    right: -58px;
+    right: -32px;
     margin-top: -40px;
   }
 
   %lightbox_close_button {
     position: absolute;
     top: 0;
-    right: 0;
-    margin-right: -60px;
+    right: -32px;
+    font-size: 0.6em;
   }
 }
 
