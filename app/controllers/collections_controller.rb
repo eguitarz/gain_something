@@ -13,7 +13,7 @@ class CollectionsController < ApplicationController
     #   format.js {}
     # end
     if current_user.present?
-      redirect_to user_path(current_user)
+      redirect_to user_path(current_user.username)
     else
       redirect_to new_user_session_path
     end

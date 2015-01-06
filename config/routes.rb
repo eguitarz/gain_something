@@ -15,12 +15,10 @@ Rails.application.routes.draw do
     resources :resources
   end
 
-  # TODO: Add a origin verifier to limit the request source
-  get 'preview' => 'resources#preview'
   get 'hi' => 'landings#index'
+  get '/u/:username' => 'users#show', as: :user
 
-
-  resources :users, only: [:show]
+  # get 'user/:username' => 'users#show'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
