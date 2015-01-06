@@ -11,7 +11,7 @@ module CollectionsHelper
       end
 
       if show_user
-        haml_tag :a, href: "#{user_path(collection.user.id)}" do
+        haml_tag :a, href: "#{user_path(collection.user.username)}" do
           haml_concat collection.user.name
         end
         haml_concat ' · '
