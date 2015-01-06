@@ -1,33 +1,32 @@
-- cache resource do
-  .resourceList_item.deletable{id: "resource-#{resource.id}"}
-    .row
-      .icon-column
-        - resource_icon(resource.mime)
-      .resourceList_title.col-80>
-        - if resource.mime == 'text' || resource.mime == 'video'
-          = link_to resource.title, collection_resource_path(@collection, resource), title: resource.title
-        - else
-          = link_to resource.title, resource.url, title: resource.title
-          
-      .resourceList_tools.col-10
-        - print_resource_tools(@collection, resource, resource_counter)
+.resourceList_item.deletable{id: "resource-#{resource.id}"}
+  .row
+    .icon-column
+      - resource_icon(resource.mime)
+    .resourceList_title.col-80>
+      - if resource.mime == 'text' || resource.mime == 'video'
+        = link_to resource.title, collection_resource_path(@collection, resource), title: resource.title
+      - else
+        = link_to resource.title, resource.url, title: resource.title
         
-    - if resource.thumbnail.present? || resource.description.present?
-      .resourceList_preview
-        .icon-column
-        - if resource.thumbnail.present?
-          .resourceList_preview_thumbnails.col-20>
-            .resourceList_preview_thumbnails_thumb
-              - if resource.mime == 'text' || resource.mime == 'video'
-                = link_to image_tag(resource.thumbnail), collection_resource_path(@collection, resource), title: resource.title
-              - else
-                = link_to image_tag(resource.thumbnail), resource.url, title: resource.title
-          - if resource.description.present?
-            .inline-block.col-60>
-              .resourceList_preview_digest
-                - print_partial_string(resource.description, 200, '...')
-        - else 
-          - if resource.description.present?
-            .inline-block.col-80>
-              .resourceList_preview_digest
-                - print_partial_string(resource.description, 200, '...')
+    .resourceList_tools.col-10
+      - print_resource_tools(@collection, resource, resource_counter)
+      
+  - if resource.thumbnail.present? || resource.description.present?
+    .resourceList_preview
+      .icon-column
+      - if resource.thumbnail.present?
+        .resourceList_preview_thumbnails.col-20>
+          .resourceList_preview_thumbnails_thumb
+            - if resource.mime == 'text' || resource.mime == 'video'
+              = link_to image_tag(resource.thumbnail), collection_resource_path(@collection, resource), title: resource.title
+            - else
+              = link_to image_tag(resource.thumbnail), resource.url, title: resource.title
+        - if resource.description.present?
+          .inline-block.col-60>
+            .resourceList_preview_digest
+              - print_partial_string(resource.description, 200, '...')
+      - else 
+        - if resource.description.present?
+          .inline-block.col-80>
+            .resourceList_preview_digest
+              - print_partial_string(resource.description, 200, '...')
