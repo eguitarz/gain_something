@@ -57,7 +57,7 @@ module ResourcesHelper
 	end
 
 	def print_resource_tools(collection, resource, resource_counter)
-		if collection.belongs_to? current_user
+		if collection.belongs_to? current_user || !collection.user_id.present?
 			haml_tag :div, class: 'btn-square right' do
 				haml_concat link_to(icon('trash'), collection_resource_path(@collection, resource), remote: true, method: :delete, class: 'right')
 			end

@@ -2,7 +2,7 @@ class CollectionsController < ApplicationController
   before_action :get_user
   before_action :get_collection, only: [:show, :edit, :update, :destroy]
   before_action only: [:edit, :update, :destroy] do
-    require_owner @collection.user
+    require_owner @collection.user if @collection.user.present?
   end
   before_action :require_user_signed_in, except: [:index, :show]
 

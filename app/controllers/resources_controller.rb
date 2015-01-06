@@ -7,7 +7,7 @@ class ResourcesController < ApplicationController
 	before_action :get_collection, only: [:new, :show, :create, :edit, :update, :destroy]
 	before_action :get_resource, only: [:show, :destroy, :edit]
 	before_action only: [:new, :create, :edit, :update, :destroy] do
-    require_owner @collection.user
+    require_owner @collection.user if @collection.user.present?
   end
 	before_action :require_user_signed_in, except: [:show]
 
