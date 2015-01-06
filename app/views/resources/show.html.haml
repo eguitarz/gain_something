@@ -1,4 +1,4 @@
-- html_title(@resource.name.first(50))
+- html_title(@resource.title.first(50))
 - html_description(@resource.description)
 - cache @resource do
 	.content{class: @resource.mime}
