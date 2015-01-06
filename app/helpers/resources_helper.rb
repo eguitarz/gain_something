@@ -84,4 +84,9 @@ module ResourcesHelper
 		end 
 	end
 
+	def print_resource_digest(resource, limit, tail)
+		link = resource.is_fulltext? ? collection_resource_path(resource.collection, resource) : resource.url
+		haml_concat link_to(get_partial_string(resource.description, 200, '...'), link)
+	end
+
 end
