@@ -17,7 +17,7 @@ module ResourcesHelper
 			content = icon('question')
 		end
 
-		haml_tag :div, class: 'icon' do
+		haml_tag :div, class: 'btn-resource' do
 			haml_concat html_escape(content)
 		end
 	end

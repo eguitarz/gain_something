@@ -11,9 +11,12 @@
     opacity: 1;
   }
 
+  %resourceList_item {
+    padding-bottom: 20px;
+  }
+
   %resourceList_title {
-    vertical-align: top;
-    padding-bottom: 10px;
+    vertical-align: middle;
     overflow: hidden;
   }
 
@@ -58,6 +61,10 @@
 
   #{$selector} {
     @extend %resourceList;
+
+    #{$selector}_item {
+      @extend %resourceList_item;      
+    }
 
     #{$selector}_item:hover #{$selector}_tools {
       @extend %resourceList__hovered_tools;

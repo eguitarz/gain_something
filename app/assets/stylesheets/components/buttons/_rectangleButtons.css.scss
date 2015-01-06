@@ -5,7 +5,6 @@
   %button {
     display: inline-block;
     text-align: center;
-    cursor: pointer;
     -webkit-backface-visibility: hidden;
     margin: 1em 1em 1em 0;
     padding: 0.2em 0.6em;
@@ -29,7 +28,6 @@
     margin: 0 8px 0 0;
     padding: 2px;
     width: 2em;
-    height: 2em;
     line-height: 24px;
     @include border-radius(3px);
   }
@@ -106,6 +104,7 @@
 // define component placeholders for component skin (no selector here)
 @include importOnce('rectangleButtons-skin-default') {
   %button-skin-default {
+    cursor: pointer;
     color: $darkgrey;
     border: 1px solid $darkgrey;
     opacity: 0.3;
@@ -116,6 +115,7 @@
   }
 
   %button-skin-noBorder {
+    cursor: pointer;
     color: $black;
     opacity: 0.3;
   }
@@ -126,7 +126,8 @@
   }
 
   %button-skin-resource {
-    @extend %button-skin-default;
+    cursor: default;
+    color: $black;
     text-align: left;
     font-family: $content-fonts;
   }
