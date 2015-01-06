@@ -56,8 +56,12 @@
 }
 
 .collection_description {
-  color: $grey;
-  font-family: $content-fonts;
+  padding: 0 0.09em;
+  font-weight: 100;
+
+  input {
+    font-weight: 100;
+  }
 }
 
 .icon {

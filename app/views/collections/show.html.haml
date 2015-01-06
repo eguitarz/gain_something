@@ -20,7 +20,7 @@
 					= @collection.name
 
 	.document.row
-		.collection-description.col-100
+		.collection_description.col-100
 			- if @collection.belongs_to?(current_user)
 				= form_for @collection, remote:true, html: {class: 'no-margin editable'} do |f|
 					= f.text_field :description, placeholder: 'Description (optional)'
