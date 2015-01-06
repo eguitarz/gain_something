@@ -4,6 +4,6 @@ module ApplicationHelper
   end
 
   def html_description(description)
-    content_for :description, description.to_s
+    content_for :description, description.to_s.first(255)
   end
 end
