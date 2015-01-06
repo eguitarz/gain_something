@@ -85,11 +85,19 @@ class ResourcesController < ApplicationController
 
 	private
 	def get_collection
-		@collection = Collection.find params[:collection_id]
+		begin
+			@collection = Collection.find params[:collection_id]
+		rescue
+			redirect_to :root
+		end
 	end
 
 	def get_resource
-		@resource = Resource.find params[:id]
+		begin
+			@resource = Resource.find params[:id]
+		rescue
+			redirect_to :root
+		end
 	end
 
 	def resource_params

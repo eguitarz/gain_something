@@ -60,7 +60,11 @@ class CollectionsController < ApplicationController
 
   private
   def get_collection
-    @collection = Collection.find params[:id]    
+    begin
+      @collection = Collection.find params[:id]    
+    rescue
+      redirect_to :root
+    end
   end
 
   def get_user
@@ -70,4 +74,5 @@ class CollectionsController < ApplicationController
   def create_params
     params.require(:collection).permit(:name, :description, :difficulty)
   end
+
 end
