@@ -26,6 +26,9 @@
   @if $defaultSkin != false {
     @include roundButton-skin-default($selector);
   }
+  @else {
+    @include roundButton-skin-noBorder($selector);
+  }
 }
 
 // define component placeholders for component skin (no selector here)
@@ -42,7 +45,11 @@
     opacity: 1;
   }
 
-
+  %roundButton-skin-noBorder {
+    @extend %roundButton-skin-default;
+    border: 0;
+    box-shadow: none;
+  }
 }
 
 // provide a default skin for the component
@@ -51,6 +58,16 @@
 
   #{$selector} {
     @extend %roundButton-skin-default;
+
+    &:hover {
+      @extend %roundButton-skin-default__hovered;
+    }
+  }
+}
+
+@mixin roundButton-skin-noBorder($selector) {
+  #{$selector} {
+    @extend %roundButton-skin-noBorder;
 
     &:hover {
       @extend %roundButton-skin-default__hovered;

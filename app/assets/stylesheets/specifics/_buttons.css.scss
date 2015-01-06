@@ -5,7 +5,7 @@
 @include iconButton('.btn-icon');
 @include editorButton('.btn-editor');
 @include resourceButton('.btn-resource');
-@include roundButton('.btn-round');
+@include roundButton('.btn-round', 32px, 1.4em, false);
 
 .btn-square {
   margin-top: 0;  
