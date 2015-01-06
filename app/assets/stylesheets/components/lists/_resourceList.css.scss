@@ -4,7 +4,6 @@
 @include importOnce('resourceList') {
   %resourceList {
     padding-top: 20px;
-    line-height: 140%;
   }
 
   %resourceList__hovered_tools {
@@ -35,7 +34,7 @@
 
   %resourceList_preview_digest {
     width: 100%;
-    line-height: 160%;
+    line-height: 150%;
     white-space: normal;
     a, a:hover { color: $black; }
   }
