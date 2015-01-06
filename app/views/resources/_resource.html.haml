@@ -4,10 +4,11 @@
       .icon-column
         - resource_icon(resource.mime)
       .resourceList_title.col-80>
-        - if resource.mime != 'text'
-          = link_to resource.title, resource.url, title: resource.title
-        - else
+        - if resource.mime == 'text' || resource.mime == 'video'
           = link_to resource.title, collection_resource_path(@collection, resource), title: resource.title
+        - else
+          = link_to resource.title, resource.url, title: resource.title
+          
       .resourceList_tools.col-10
         - print_resource_tools(@collection, resource, resource_counter)
         
@@ -17,7 +18,10 @@
         - if resource.thumbnail.present?
           .resourceList_preview_thumbnails.col-20>
             .resourceList_preview_thumbnails_thumb
-              = link_to image_tag(resource.thumbnail), resource.url, title: resource.title
+              - if resource.mime == 'text' || resource.mime == 'video'
+                = link_to image_tag(resource.thumbnail), collection_resource_path(@collection, resource), title: resource.title
+              - else
+                = link_to image_tag(resource.thumbnail), resource.url, title: resource.title
           - if resource.description.present?
             .inline-block.col-60>
               .resourceList_preview_digest
