@@ -114,6 +114,10 @@
     font-family: $content-fonts;
   }
 
+  a, a:active, a:focus, a:hover {
+    outline: 0;
+  }
+
   /* _____ LAYOUT _____ */
 
   .mainContainer {

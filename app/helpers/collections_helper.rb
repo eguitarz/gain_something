@@ -42,7 +42,7 @@ module CollectionsHelper
       haml_concat link_to( \
         "<div class=\"btn-large btn-delete\">Delete Collection</div>".html_safe, \
         collection_path(collection.id), method: :delete, \
-        :'data-confirm' => "Delete collection - \"#{collection.name}\" ?", \
+        :'data-confirm' => "Delete collection - “#{collection.name}” ?", \
         class: 'right', id: "collection-#{collection.id}" \
       )
     end

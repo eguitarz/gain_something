@@ -120,6 +120,7 @@ $(document).on 'page:change', ->
       keyEvent = 'left'
     if e.keyCode == 27
       quitLightbox()
+      $('body').removeClass '_is_confirmation'
 
     if keyEvent && $('body').hasClass('present') && window.location.search 
       currentId = getCurrentId()
