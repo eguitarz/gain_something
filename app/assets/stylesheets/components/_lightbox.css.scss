@@ -41,18 +41,26 @@
   }
 
   %lightbox_player_image {
-    @extend %lightbox_player_iframe;
     max-width: 90%;
   }
 
   %lightbox_title {
     font-size: 1.4em;
-    padding: 20px;
+    padding: 20px 40px 0 40px;
     overflow: hidden;
   }
 
   %lightbox_display {
-    padding: 20px 40px;
+    padding: 0 40px 120px 40px;
+  }
+
+  %lightbox_display_image_container {
+    margin: auto;
+    text-align: center;
+  }
+
+  %lightbox_display_description {
+    padding-bottom: 40px;
   }
 
   %lightbox_previous_button {
@@ -111,6 +119,14 @@
 
     #{$selector}_display {
       @extend %lightbox_display;
+
+      .display_image_container {
+        @extend %lightbox_display_image_container;
+      }
+
+      #{$selector}_display_description {
+        @extend %lightbox_display_description;
+      }
     }
 
   }

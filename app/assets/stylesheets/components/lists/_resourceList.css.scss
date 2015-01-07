@@ -49,11 +49,10 @@
 
   %resourceList_preview_thumbnails_thumb {
     display: inline-block;
-  }
-
-  %resourceList_preview_thumbnails_thumb_image {
     width: 100%;
-    max-height: 200px;
+    height: 120px;
+    background-size: cover;
+    background-repeat: no-repeat;
     border: 1px solid $lightgrey;
     border-radius: 2px;
   }
@@ -93,7 +92,6 @@
 
         #{$selector}_preview_thumbnails_thumb {
           @extend %resourceList_preview_thumbnails_thumb;
-          img { @extend %resourceList_preview_thumbnails_thumb_image; }
         }
       }
     }

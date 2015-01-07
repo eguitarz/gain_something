@@ -16,11 +16,7 @@
       .icon-column
       - if resource.thumbnail.present?
         .resourceList_preview_thumbnails.col-20>
-          .resourceList_preview_thumbnails_thumb
-            - if resource.mime == 'text' || resource.mime == 'video'
-              = link_to image_tag(resource.thumbnail), collection_resource_path(@collection, resource), title: resource.title
-            - else
-              = link_to image_tag(resource.thumbnail), resource.url, title: resource.title
+          - print_thumbnail_link(resource)
         - if resource.description.present?
           .inline-block.col-60>
             .resourceList_preview_digest

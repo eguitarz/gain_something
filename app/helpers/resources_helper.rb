@@ -39,13 +39,19 @@ module ResourcesHelper
 			if resource.embedded_html.present?
 				haml_concat resource.embedded_html.html_safe
 			elsif resource.thumbnail.present?
-				haml_concat link_to(image_tag(resource.thumbnail), resource.url)
+				haml_tag :div, class: 'display_image_container' do
+					haml_concat link_to(image_tag(resource.thumbnail), resource.url)
+				end
 			end
 		end
 	end
 
-	def print_description(resource)
-		haml_concat get_description(resource)
+	def print_description_column(resource)
+		if resource.mime == 'link'
+			haml_tag :div, id: 'lightbox_display_description' do
+				haml_concat resource.description
+			end
+		end
 	end
 
 	def get_description(resource)
@@ -91,6 +97,21 @@ module ResourcesHelper
 	def print_resource_digest(resource, limit, tail)
 		link = resource.is_fulltext? ? collection_resource_path(resource.collection, resource) : resource.url
 		haml_concat link_to(get_partial_string(resource.description, 200, '...'), link)
+	end
+
+	def print_thumbnail_link(resource)
+		link = resource.is_fulltext? ? collection_resource_path(resource.collection, resource) : resource.url
+		thumbnail_lambda.call(resource, link)
+	end
+
+	def thumbnail_lambda
+		
+		lambda do |resource, link|
+			haml_tag :a, href: link do
+				haml_tag(:div, class: 'resourceList_preview_thumbnails_thumb', style: "background-image:url(#{resource.thumbnail})")
+			end
+		end
+
 	end
 
 end

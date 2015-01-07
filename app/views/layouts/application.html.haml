@@ -39,6 +39,7 @@
 					%h1#lightbox_title
 						- print_title(@current_resource, true)
 					#lightbox_display
+						- print_description_column(@current_resource)
 						- print_embedded_or_thumbnail(@current_resource)
 				#lightbox_close_button
 					.btn-round.btn-close
