@@ -37,9 +37,11 @@
 				#lightbox_player
 					%input{id:'preview-desc-value', type:'hidden', value: get_description(@current_resource) }
 					%h1#lightbox_title
-						- print_title(@current_resource, true)
+						- print_title(@current_resource, false)
 					#lightbox_display
-						- print_description_column(@current_resource)
+						- if @current_resource.mime == 'link'
+							#lightbox_display_description
+								= @current_resource.description
 						- print_embedded_or_thumbnail(@current_resource)
 				#lightbox_close_button
 					.btn-round.btn-close

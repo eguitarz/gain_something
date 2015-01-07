@@ -22,11 +22,12 @@ module ResourcesHelper
 		end
 	end
 
-	def print_title(resource, no_link=false)
-		if no_link
-			haml_concat resource.title
+	def print_title(resource, link='', with_link=true)
+		if with_link
+			link = link.present? ? link : resource.url
+			haml_concat link_to(resource.title, link, title: resource.title)
 		else
-			haml_concat link_to(resource.title, resource.url, title: resource.title)
+			haml_concat resource.title
 		end
 	end
 
@@ -46,12 +47,11 @@ module ResourcesHelper
 		end
 	end
 
-	def print_description_column(resource)
-		if resource.mime == 'link'
-			haml_tag :div, id: 'lightbox_display_description' do
-				haml_concat resource.description
-			end
-		end
+	def print_description(resource, link='')
+		link = resource.url unless link.present?
+		haml_concat link_to(
+			get_partial_string(resource.description, 200, '...'), link
+		)
 	end
 
 	def get_description(resource)
@@ -94,11 +94,6 @@ module ResourcesHelper
 		end 
 	end
 
-	def print_resource_digest(resource, limit, tail)
-		link = resource.is_fulltext? ? collection_resource_path(resource.collection, resource) : resource.url
-		haml_concat link_to(get_partial_string(resource.description, 200, '...'), link)
-	end
-
 	def print_thumbnail_link(resource)
 		link = resource.is_fulltext? ? collection_resource_path(resource.collection, resource) : resource.url
 		thumbnail_lambda.call(resource, link)
@@ -107,7 +102,7 @@ module ResourcesHelper
 	def thumbnail_lambda
 		
 		lambda do |resource, link|
-			haml_tag :a, href: link do
+			haml_tag :a, href: link, title: resource.title do
 				haml_tag(:div, class: 'resourceList_preview_thumbnails_thumb', style: "background-image:url(#{resource.thumbnail})")
 			end
 		end

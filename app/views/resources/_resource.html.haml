@@ -3,10 +3,8 @@
     .icon-column
       - resource_icon(resource.mime)
     .resourceList_title.col-80>
-      - if resource.mime == 'text' || resource.mime == 'video'
-        = link_to resource.title, collection_resource_path(@collection, resource), title: resource.title
-      - else
-        = link_to resource.title, resource.url, title: resource.title
+      - link = resource.is_fulltext? ? collection_resource_path(@collection, resource) : resource.url
+      - print_title(resource, link)
         
     .resourceList_tools.col-10
       - print_resource_tools(@collection, resource, resource_counter)
@@ -20,9 +18,9 @@
         - if resource.description.present?
           .inline-block.col-60>
             .resourceList_preview_digest
-              - print_resource_digest(resource, 200, '...')
-      - else 
-        - if resource.description.present?
-          .inline-block.col-80>
-            .resourceList_preview_digest
-              = link_to get_partial_string(resource.description, 200, '...'), collection_resource_path(@collection, resource)
+              - print_description(resource, link)
+      - elsif resource.description.present?
+        .inline-block.col-80>
+          .resourceList_preview_digest
+            - link = resource.is_fulltext? ? collection_resource_path(resource.collection, resource) : resource.url
+            - print_description(resource, link)
