@@ -33,6 +33,11 @@ body.present {
   z-index: 100;
 }
 
+._is_confirmation #overlay{
+  display: block;
+  background-color: rgba(0,0,0,0.67);
+}
+
 .row {
   width: 100%;
 }

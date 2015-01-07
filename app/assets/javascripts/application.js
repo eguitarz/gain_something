@@ -21,4 +21,28 @@
 //= require turbolinks
 //= require_tree .
 
-window.GS = {}
+$(document).ready( function() {
+window.GS = {};
+$.rails.allowAction = function(link) {
+  if(link.attr('data-confirm')) {
+    $('body').addClass('_is_confirmation')
+    $.rails.showConfirmDialog(link);
+    return false;
+  } else {
+    return true;
+  }
+};
+
+$.rails.confirmed = function(link) {
+  link.removeAttr('data-confirm')
+  $('body').removeClass('_is_confirmation');
+  link.trigger('click.rails');
+};
+
+$.rails.showConfirmDialog = function(link) {
+  var message = link.data('confirm');
+  $('#confirmDialog').data( 'resource-id', link.attr('id') )
+  $('#confirmDialog_text').text(message);
+};
+
+});

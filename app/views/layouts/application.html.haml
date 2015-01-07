@@ -15,6 +15,15 @@
 - body_class += ' present' if params[:p] == '1'
 - lightbox_class = "_is_#{@current_resource.mime}" if @current_resource.present?
 %body{id: "#{params[:controller]}", class: body_class}
+	#confirmDialog
+		#confirmDialog_text
+		#confirmDialog_buttons
+			#confirmDialog_buttons_cancel
+				.btn-small.btn-no
+					Cancel
+			#confirmDialog_buttons_confirm
+				.btn-small.btn-yes
+					Delete
 	- if @current_resource.present?
 		#lightbox{class: lightbox_class}
 			%input{type: 'hidden', value: @collection.resources.count, id: 'lightbox_resource_count'}

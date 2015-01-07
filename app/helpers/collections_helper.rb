@@ -39,7 +39,12 @@ module CollectionsHelper
 
   def print_collection_delete_button(collection)
     if collection.belongs_to? current_user
-      haml_concat link_to("<div class=\"btn-large btn-delete\">Delete Collection</div>".html_safe, collection_path(collection.id), method: :delete, class: 'right')
+      haml_concat link_to( \
+        "<div class=\"btn-large btn-delete\">Delete Collection</div>".html_safe, \
+        collection_path(collection.id), method: :delete, \
+        :'data-confirm' => "Delete collection - \"#{collection.name}\" ?", \
+        class: 'right', id: "collection-#{collection.id}" \
+      )
     end
   end
 end

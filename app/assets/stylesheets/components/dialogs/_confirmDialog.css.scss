@@ -1,0 +1,87 @@
+@import 'base/utils/__utils';
+
+// define component placeholders for component contents (no selector here)
+@include importOnce('confirmDialog') {
+  %confirmDialog {
+    position: fixed;
+    top: 50%;
+    left: -9999em;
+    margin-top: -180px;
+    margin-left: -15%;
+    width: 30%;
+    min-width: 320px;
+    min-height: 180px;
+    z-index: 9999;
+    padding: 30px 40px;
+  }
+
+  %confirmDialog_title {
+    font-size: 1.4em;
+    padding: 20px;
+    overflow: hidden;
+  }
+
+  %confirmDialog_buttons {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 20px;
+    text-align: right;
+  }
+
+  %confirmDialog_buttons_confirm {
+    display: inline-block;
+  }
+
+  %confirmDialog_buttons_cancel {
+    display: inline-block;
+  }
+}
+
+@mixin confirmDialog($selector, $defaultSkin: true) {
+
+  #{$selector} {
+    @extend %confirmDialog;
+
+    #{$selector}_title {
+      @extend %confirmDialog_title;
+    }
+
+    #{$selector}_buttons {
+      @extend %confirmDialog_buttons;
+
+      #{$selector}_buttons_confirm {
+        @extend %confirmDialog_buttons_confirm;
+      }
+
+      #{$selector}_buttons_cancel {
+       @extend %confirmDialog_buttons_cancel; 
+      }
+    }
+
+  }
+
+  @if $defaultSkin != false {
+    @include confirmDialog-skin-default($selector);
+  }
+}
+
+// define component placeholders for component skin (no selector here)
+@include importOnce('confirmDialog-skin-default') {
+  %confirmDialog-skin-default {
+    background-color: $white;
+    border-radius: 6px;
+    border: 1px solid $grey;
+    @include box-shadow("0 0 3px 0 #{$grey}", '', false);
+  }
+}
+
+// provide a default skin for the component
+// only visual changes that don't affect the component layout should be in here
+@mixin confirmDialog-skin-default($selector) {
+
+  #{$selector} {
+    @extend %confirmDialog-skin-default;
+  }
+}
