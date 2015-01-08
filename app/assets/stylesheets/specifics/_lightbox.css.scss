@@ -1,4 +1,4 @@
 @include lightbox('#lightbox');
-.present #lightbox {
+._is_lightbox_mode #lightbox {
   left: 0;
 }

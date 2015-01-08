@@ -32,7 +32,7 @@ $(document).on 'page:change', ->
   quitLightbox = ->
     $('iframe').first().attr('src', '')
     $('#lightbox .player .content').html ''
-    $('body').removeClass 'present'
+    $('body').removeClass '_is_lightbox_mode'
     $('#lightbox').removeClass()
 
     newUrl = window.location.href.replace(window.location.search, '')
@@ -122,7 +122,7 @@ $(document).on 'page:change', ->
       quitLightbox()
       $('body').removeClass '_is_confirmation'
 
-    if keyEvent && $('body').hasClass('present') && window.location.search 
+    if keyEvent && $('body').hasClass('_is_lightbox_mode') && window.location.search 
       currentId = getCurrentId()
       if currentId >= 0
         if keyEvent == 'left'

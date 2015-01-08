@@ -12,56 +12,17 @@
 		= csrf_meta_tags
 		= analytics_init if Rails.env.production? or Rails.env.development?
 - body_class = params[:action]
-- body_class += ' present' if params[:p] == '1'
+- body_class += ' _is_lightbox_mode' if params[:p] == '1'
 %body{id: "#{params[:controller]}", class: body_class}
-	#confirmDialog
-		#confirmDialog_text
-		#confirmDialog_buttons
-			#confirmDialog_buttons_cancel
-				.btn-small.btn-no
-					Cancel
-			#confirmDialog_buttons_confirm
-				.btn-small.btn-yes
-					Delete
+	= render partial: 'partials/dialog'
 	- if @current_resource.present?
 		= render partial: 'partials/lightbox', :locals => {resource: @current_resource}
 	- if flash.present?
 		#notifier
 			= flash[:error]
 			= flash[:notice]
-	#menu.sideMenu
-		%ul.scrollable
-			-# %li.sideMenu_item
-			-# 	= link_to 'Home', root_path, class: 'sideMenu_link'
-			- if current_user
-				%li.sideMenu_item
-					= link_to 'My collections', user_path(current_user.username), class: 'sideMenu_link'
-				%li.sideMenu_item
-					= link_to 'Log Out', destroy_user_session_path, method: 'DELETE', class: 'sideMenu_link'
-			- else
-				%li.sideMenu_item
-					= link_to 'Log In', new_user_session_path, class: 'sideMenu_link'
+	= render partial: 'partials/menu'
 	#overlay
 	#main
 		.btn-menu
 		= yield
-		#editor
-			%form#text-form
-				#mdeditor
-				.resource-cancel-btn
-					Cancel
-			%form#link-form
-				%label
-					Link Mode
-				.resource-cancel-btn
-					Cancel
-			%form#video-form
-				%label
-					Video Mode
-				.resource-cancel-btn
-					Cancel
-			%form#file-form
-				%label
-					File Mode
-				.resource-cancel-btn
-					Cancel
