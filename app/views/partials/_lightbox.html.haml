@@ -1,0 +1,21 @@
+#lightbox{class: "_is_#{resource.mime}"}
+  %input{type: 'hidden', value: @collection.resources.count, id: 'lightbox_resource_count'}
+  #lightbox_player_wrapper
+    #lightbox_previous_button
+      .btn-round.btn-prev
+        = icon('angle-left')
+    #lightbox_next_button
+      .btn-round.btn-next
+        = icon('angle-right')
+    #lightbox_player
+      %input{id:'preview-desc-value', type:'hidden', value: get_description(resource) }
+      %h1#lightbox_title
+        - print_title(resource, false)
+      #lightbox_display
+        - if resource.mime == 'link'
+          #lightbox_display_description
+            = resource.description
+        - print_embedded_or_thumbnail(resource)
+    #lightbox_close_button
+      .btn-round.btn-close
+        = icon('close')
