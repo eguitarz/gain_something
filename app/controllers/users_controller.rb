@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 		@user = User.where(username: params[:username]).first
 
     if @user.present?
-      @collections = @user.collections.order(updated_at: :desc).page params[:page]
+      @collections = @user.collections.order(:name).page params[:page]
       respond_to do |format|
         format.html {}
         format.js { render partial: 'collections/load_more' }
