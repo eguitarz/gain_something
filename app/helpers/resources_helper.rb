@@ -35,16 +35,14 @@ module ResourcesHelper
 		resource.embedded_html.present? || resource.thumbnail.present?
 	end
 
-	def print_embedded_or_thumbnail(resource)
-		if resource
-			if resource.embedded_html.present?
-				haml_concat resource.embedded_html.html_safe
-			elsif resource.thumbnail.present?
-				haml_tag :div, class: 'display_image_container' do
-					haml_concat link_to(image_tag(resource.thumbnail), resource.url)
-				end
-			end
-		end
+	def print_embed(resource)
+		haml_concat resource.embedded_html.html_safe
+	end
+
+	def print_thumbnail(resource)
+		# haml_tag :a, href: resource.url do
+		haml_tag :img, class: 'display_image', src: resource.thumbnail
+		# end
 	end
 
 	def print_description(resource, link='')

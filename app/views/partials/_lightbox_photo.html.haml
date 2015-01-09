@@ -1,0 +1,6 @@
+#lightbox_display
+  = link_to resource.url do
+    .display_image_container{style:"background-image:url(#{resource.thumbnail});"}
+  #lightbox_text_container
+    #lightbox_display_description
+      = auto_link resource.description

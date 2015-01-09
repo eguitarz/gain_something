@@ -1,0 +1,6 @@
+%h1#lightbox_text_container
+  #lightbox_title
+    - print_title(resource)
+#lightbox_display
+  - if resource.embedded_html.present?
+    - print_embed(resource)

@@ -18,7 +18,7 @@
         - if resource.description.present?
           .inline-block.col-60>
             .resourceList_preview_digest
-              - print_description(resource, link)
+              - print_description(resource, link) unless resource.mime == 'photo'
       - elsif resource.description.present?
         .inline-block.col-80>
           .resourceList_preview_digest
