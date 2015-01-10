@@ -9,7 +9,7 @@
 
 .content
 	.backLink
-		= link_to "#{collections_path}", id: 'navbar_back' do
+		= link_to "#{user_path(@collection.user.username)}", id: 'navbar_back' do
 			= "	#{icon('arrow-left')} Go Back".html_safe
 
 	.collection-header
