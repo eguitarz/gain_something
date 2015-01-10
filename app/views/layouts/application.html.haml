@@ -17,7 +17,7 @@
 	= render partial: 'partials/dialog'
 	- if @current_resource.present?
 		= render partial: 'partials/lightbox', :locals => {resource: @current_resource}
-	- if flash.present?
+	- if flash[:error].present? || flash[:notice].present?
 		#notifier
 			= flash[:error]
 			= flash[:notice]

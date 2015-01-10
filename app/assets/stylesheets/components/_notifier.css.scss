@@ -18,7 +18,7 @@
     @include box-shadow("0 0 3px 0 #{$black}", '', false);
   }
 
-  %notifier__hide {
+  %notifier__is_hide {
     pointer-events: none;
     @include transform("translateY(#{-$notifier-height})", false);
   }
@@ -29,8 +29,8 @@
   #{$selector} {
     @extend %notifier;
 
-    &.hide {
-      @extend %notifier__hide;
+    &._is_hide {
+      @extend %notifier__is_hide;
     }
 
   }
