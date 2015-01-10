@@ -8,6 +8,10 @@
 
 
 .content
+	.backLink
+		= link_to "#{collections_path}", id: 'navbar_back' do
+			= "	#{icon('arrow-left')} Go Back".html_safe
+
 	.collection-header
 		.row
 			.col-100.title

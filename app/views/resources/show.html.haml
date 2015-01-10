@@ -2,6 +2,10 @@
 - html_description(@resource.description)
 - cache @resource do
 	.content{class: @resource.mime}
+		.backLink
+			= link_to "#{collection_path(@resource.collection.id)}", id: 'navbar_back' do
+				= "	#{icon('arrow-left')} Go Back".html_safe
+
 		.single-col
 			.title.col-100
 				- print_title(@resource, false)

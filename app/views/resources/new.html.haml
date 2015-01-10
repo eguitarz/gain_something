@@ -1,4 +1,7 @@
 .content
+	.backLink
+		= link_to "#{collection_path(@collection.id)}", id: 'navbar_back' do
+			= "	#{icon('arrow-left')} Go Back".html_safe
 	= form_for [@collection, @resource] do |f|
 		= f.hidden_field :mime, value: @mime
 		- if @mime == 'text'
@@ -18,11 +21,10 @@
 			= f.text_area :description, id: 'resource-description', placeholder: 'Write something...'
 			#markdown-preview
 		- if @mime == 'link' || @mime == 'video'
-			= f.text_field :url, placeholder: 'Post url', id: 'link-url', autofocus: true
+			= f.text_field :url, placeholder: 'Post url here', id: 'link-url', autofocus: true
 			= f.hidden_field :title, id: 'link-title'
 			= f.hidden_field :description, id: 'link-description'
 
 		.submission
 			= f.submit 'Create', class: 'btn-normal'
-			= f.button 'Cancel', class: 'btn-normal btn-cancel', :'data-dest' => "#{collection_path(@collection.id)}"
 		.preview
