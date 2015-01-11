@@ -227,3 +227,15 @@ body.landings #main {
 .back {
   font-size: 0.6em;
 }
+
+._is_public .collection_is_private_visibility {
+  display: none;
+}
+
+._is_private .collection_is_public_visibility {
+  display: none;
+}
+
+.visibility {
+  vertical-align: text-bottom;
+}

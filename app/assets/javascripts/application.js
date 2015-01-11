@@ -24,9 +24,9 @@
 $(document).ready( function() {
 window.GS = {};
 $.rails.allowAction = function(link) {
-  if(link.attr('data-confirm')) {
+  if(link.attr('data-modal') == 'true') {
     $('body').addClass('_is_confirmation')
-    $.rails.showConfirmDialog(link);
+    $.rails.showConfirmDialog(link, link.data('method') == 'delete');
     return false;
   } else {
     return true;
@@ -34,15 +34,26 @@ $.rails.allowAction = function(link) {
 };
 
 $.rails.confirmed = function(link) {
-  link.removeAttr('data-confirm')
+  var confrimMsg = link.attr('data-confirm');
+  link.attr('data-modal', 'false')
   $('body').removeClass('_is_confirmation');
   link.trigger('click.rails');
 };
 
-$.rails.showConfirmDialog = function(link) {
-  var message = link.data('confirm');
-  $('#confirmDialog').data( 'resource-id', link.attr('id') )
+$.rails.showConfirmDialog = function(link, isDeletion) {
+  console.log(link);
+  console.log(link.attr('data-confirm'));
+  var message = link.attr('data-confirm');
   $('#confirmDialog_text').text(message);
+  $('#confirmDialog').data( 'resource-id', link.attr('id') )
+  $('.btn-yes').removeClass('btn-error').removeClass('btn-success');
+  
+  if (isDeletion) {
+    $('.btn-yes').addClass('btn-error');
+  }
+  else {
+    $('.btn-yes').addClass('btn-success');
+  }
 };
 
 });

@@ -41,9 +41,9 @@ module CollectionsHelper
     if collection.belongs_to? current_user
       haml_concat link_to( \
         "<div class=\"btn-large btn-delete\">Delete Collection</div>".html_safe, \
-        collection_path(collection.id), method: :delete, \
+        collection_path(collection.id), method: :delete, :'data-modal' => 'true', \
         :'data-confirm' => "Delete collection - “#{collection.name}” ?", \
-        class: 'right', id: "collection-#{collection.id}" \
+        class: 'right', id: "collection-delete-#{collection.id}" \
       )
     end
   end

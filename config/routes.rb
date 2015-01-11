@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   root 'collections#index'
   
   resources :collections do
+    put 'toggle_visibility' => 'collections#toggle_visibility', as: :visibility
     resources :resources
   end
 

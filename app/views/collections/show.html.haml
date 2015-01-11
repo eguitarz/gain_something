@@ -6,15 +6,15 @@
 		= #link_to "<div class=\"btn-large btn-publish\">#{icon('lock')}</div>".html_safe, collection_path(@collection.id), class: 'right'
 		- print_collection_delete_button(@collection)
 
-
-.content
+- visibility_class = @collection.is_visible? ? '_is_public' : '_is_private'
+#collection.content{class: visibility_class}
 	.backLink
 		= link_to "#{user_path(@collection.user.username)}", id: 'navbar_back' do
 			= "	#{icon('arrow-left')} Go Back".html_safe
 
 	.collection-header
 		.row
-			.col-100.title
+			.col-80.title>
 				- if @collection.belongs_to?(current_user)
 					= form_for @collection, remote:true, html: {class: 'no-margin editable'} do |f|
 						= f.text_field :name
@@ -22,6 +22,15 @@
 							= icon('check')
 				- else
 					= @collection.name
+			.col-20.visibility
+				- message_to_public = 'Change visibility to “public” ?'
+				- message_to_private = 'Change visibility to “only me” ?'
+				- confirm_message = @collection.is_visible? ? message_to_private : message_to_public
+				= link_to collection_visibility_path(@collection), :'data-confirm' => confirm_message, method: 'put', remote: true, id: "collection-visibility-#{@collection.id}", :'data-modal' => 'true', :'data-message-to-public' => message_to_public, :'data-message-to-private' => message_to_private, class: 'right' do 
+					.collection_is_public_visibility
+						= "#{icon('globe')} public".html_safe
+					.collection_is_private_visibility
+						= "#{icon('lock')} only me".html_safe
 
 	.document.row
 		.collection_description.col-100

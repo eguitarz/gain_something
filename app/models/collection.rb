@@ -6,6 +6,8 @@ class Collection < ActiveRecord::Base
   validates :description, length: { maximum: 140 }
   paginates_per 10
 
+  attr_accessor :is_visible
+
   def belongs_to?(user)
     user && self.user_id == user.id
   end

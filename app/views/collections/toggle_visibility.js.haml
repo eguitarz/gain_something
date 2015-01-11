@@ -1,0 +1,9 @@
+$('#collection').removeClass('_is_public').removeClass('_is_private');
+link = $("#collection-visibility-#{@collection.id}");
+
+- if @collection.is_visible?
+  $('#collection').addClass('_is_public');
+  link.attr('data-confirm', link.attr('data-message-to-private'));
+- else
+  $('#collection').addClass('_is_private');
+  link.attr('data-confirm', link.attr('data-message-to-public'));

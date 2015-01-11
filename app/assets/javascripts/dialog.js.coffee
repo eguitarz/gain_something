@@ -5,3 +5,4 @@ $(document).on 'page:change', ->
   $('#confirmDialog_buttons_confirm > .btn-yes').on 'click', (e)->
     link = $('#' + $('#confirmDialog').data('resource-id'))
     $.rails.confirmed(link)
+    link.attr('data-modal', 'true')

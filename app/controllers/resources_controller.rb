@@ -11,6 +11,7 @@ class ResourcesController < ApplicationController
   end
 	before_action :require_user_signed_in, except: [:show]
 	before_action :check_resources_limit, only: [:new, :create]
+	before_action :check_visibility, only: [:show]
 
 	def new
 		@mime = params[:mime]
@@ -135,4 +136,11 @@ class ResourcesController < ApplicationController
 	    redirect_to :back
 	  end
 	end
+
+	def check_visibility
+    if !@resource.collection.is_visible? && (!current_user.present? || @resource.collection.user.id != current_user.id)
+      flash[:notice] = 'This resource belong to a private collection, only author can access it.'
+      redirect_to :root
+    end
+  end
 end

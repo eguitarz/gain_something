@@ -1,10 +1,11 @@
 class CollectionsController < ApplicationController
   before_action :get_user
-  before_action :get_collection, only: [:show, :edit, :update, :destroy]
+  before_action :get_collection, only: [:show, :edit, :update, :destroy, :toggle_visibility]
   before_action only: [:edit, :update, :destroy] do
     require_owner @collection.user
   end
   before_action :require_user_signed_in, except: [:index, :show]
+  before_action :check_visibility, only: [:show]
 
   def index
     # @collections = Collection.order(updated_at: :desc).page params[:page]
@@ -58,11 +59,25 @@ class CollectionsController < ApplicationController
     redirect_to :root
   end
 
+  def toggle_visibility
+    begin
+      @collection.toggle! :is_visible
+    rescue => e
+      puts e
+    end
+    visibility = @collection.is_visible?
+
+    respond_to do |format|
+      format.js {}
+    end
+  end
+
   private
   def get_collection
     begin
-      @collection = Collection.find params[:id]    
-    rescue
+      @collection = Collection.find params[:id] || params[:collection_id]  
+    rescue => e
+      puts e
       redirect_to :root
     end
   end
@@ -73,6 +88,13 @@ class CollectionsController < ApplicationController
 
   def create_params
     params.require(:collection).permit(:name, :description, :difficulty)
+  end
+
+  def check_visibility
+    if !@collection.is_visible? && (!current_user.present? || @collection.user.id != current_user.id)
+      flash[:notice] = 'This collection is private, only author can access it.'
+      redirect_to :root
+    end
   end
 
 end

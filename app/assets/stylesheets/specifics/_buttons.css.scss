@@ -22,7 +22,7 @@
   }
 }
 
-.btn-publish, .btn-success {
+.btn-success {
   position: relative;
   z-index: 10;
   
@@ -30,6 +30,16 @@
     color: $green;
     border-color: $green;
   }
+}
+
+.btn-error {
+  position: relative;
+  z-index: 10;
+  
+  &:hover {
+    color: $red;
+    border-color: $red;
+  } 
 }
 
 .btn-menu {
