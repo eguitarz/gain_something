@@ -66,6 +66,9 @@
     // width: 480px;
     position: relative;
     margin: 0 auto 20px 0;
+    .row {
+      margin-bottom: 10px;
+    }
   }
 
   input, textarea, button {

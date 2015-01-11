@@ -5,6 +5,10 @@
         = f.text_field :name, placeholder: "Collection Name"
     .row
       .col-100
+        visibility: 
+        = select(:collection, :is_visible, [['public', true], ['only me', false]])
+    .row
+      .col-100
         = f.text_area :description, placeholder: "Description here (optional)"
     .row
       .col-100

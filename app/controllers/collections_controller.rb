@@ -22,8 +22,7 @@ class CollectionsController < ApplicationController
 
   def show
     @is_preview = params[:p] || false
-    @resource_index = params[:idx] || -1
-    @resource_index = @resource_index.to_i
+    @resource_index = (params[:idx] || -1).to_i
     @resources = @collection.resources.order(:created_at)
     @current_resource = @resources[@resource_index] if @resource_index >= 0 && @resource_index < @resources.length
   end
@@ -35,8 +34,12 @@ class CollectionsController < ApplicationController
   def create
     @collection = Collection.new create_params
     @collection.user = current_user
-    @collection.save
-    redirect_to collection_path(@collection.id)
+    if @collection.save
+      redirect_to collection_path(@collection.id)
+    else
+      flash[:error] = @collection.errors.full_messages.join(', ')
+      redirect_to :back
+    end
   end
 
   def edit
@@ -87,7 +90,7 @@ class CollectionsController < ApplicationController
   end
 
   def create_params
-    params.require(:collection).permit(:name, :description, :difficulty)
+    params.require(:collection).permit(:name, :description, :is_visible)
   end
 
   def check_visibility

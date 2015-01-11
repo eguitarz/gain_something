@@ -8,8 +8,6 @@ class Collection < ActiveRecord::Base
 
   scope :visible, -> { where(is_visible: true) }
 
-  attr_accessor :is_visible
-
   def belongs_to?(user)
     user && self.user_id == user.id
   end
