@@ -13,7 +13,9 @@ Rails.application.routes.draw do
   
   resources :collections do
     put 'toggle_visibility' => 'collections#toggle_visibility', as: :visibility
-    resources :resources
+    resources :resources do
+      put 'move/:new_collection_id' => 'resources#change_parent', as: :move
+    end
   end
 
   get 'hi' => 'landings#index'

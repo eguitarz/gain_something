@@ -7,6 +7,7 @@ class Collection < ActiveRecord::Base
   paginates_per 10
 
   scope :visible, -> { where(is_visible: true) }
+  default_scope { order(:name) }
 
   def belongs_to?(user)
     user && self.user_id == user.id

@@ -1,6 +1,6 @@
 .resourceList_item.deletable{id: "resource-#{resource.id}"}
   .row
-    .icon-column
+    .icon-column>
       - resource_icon(resource.mime)
     .resourceList_title.col-80>
       - link = resource.is_fulltext? ? collection_resource_path(@collection, resource) : resource.url
@@ -11,7 +11,7 @@
       
   - if resource.thumbnail.present? || resource.description.present?
     .resourceList_preview
-      .icon-column
+      .icon-column>
       - if resource.thumbnail.present?
         .resourceList_preview_thumbnails.col-20>
           - print_thumbnail_link(resource)
@@ -24,3 +24,20 @@
           .resourceList_preview_digest
             - link = resource.is_fulltext? ? collection_resource_path(resource.collection, resource) : resource.url
             - print_description(resource, link)
+  .row
+    .icon-column>
+    .resourceList_bottomTools
+      move to 
+      - if @owned_collections.count > 1
+        %select{class: 'selectable-resource', :'data-resource-id' => resource.id, :'data-collection-id' => @collection.id}
+          - owned_collections_exclude_self = @owned_collections.reject{|c| c.id == @collection.id }
+          - owned_collections_exclude_self.each do |c|
+            %option{value: c.id}
+              = c.name.first(50)
+        = link_to collection_resource_move_path(@collection, resource, owned_collections_exclude_self.first.id), method: 'put', id: "resource-moveto-#{resource.id}", remote: true do
+          .btn-square
+            = icon('arrow-right')
+      - else
+        %select
+          %option
+            you don't have other collections to move to

@@ -130,6 +130,13 @@ $(document).on 'page:change', ->
         else if keyEvent == 'right'
           setNextItemInLightbox(currentId, true)
 
-          
+  $('.selectable-resource').on 'change', (e)->
+    new_collection_id = $('option:selected', @).val()
+
+    #update link
+    collection_id = $(@).attr('data-collection-id')
+    resource_id = $(@).attr('data-resource-id')
+    move_path = "/collections/#{collection_id}/resources/#{resource_id}/move/#{new_collection_id}"
+    $("#resource-moveto-#{resource_id}").attr('href', move_path)
 
       

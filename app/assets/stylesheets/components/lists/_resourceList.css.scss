@@ -57,6 +57,12 @@
     border-radius: 3px;
   }
 
+  %resourceList_bottomTools {
+    opacity: 0;
+    font-size: 0.8em;
+    color: $grey;
+  }
+
 }
 
 @mixin resourceList($selector, $defaultSkin: true) {
@@ -94,6 +100,14 @@
           @extend %resourceList_preview_thumbnails_thumb;
         }
       }
+    }
+
+    #{$selector}_item:hover #{$selector}_bottomTools {
+      @extend %resourceList__hovered_tools;
+    }
+
+    #{$selector}_bottomTools {
+      @extend %resourceList_bottomTools;
     }
     
   }

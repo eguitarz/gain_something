@@ -6,6 +6,7 @@ class CollectionsController < ApplicationController
   end
   before_action :require_user_signed_in, except: [:index, :show]
   before_action :check_visibility, only: [:show]
+  before_action :user_owned_collections, only: [:show]
 
   def index
     # @collections = Collection.order(updated_at: :desc).page params[:page]
@@ -100,4 +101,7 @@ class CollectionsController < ApplicationController
     end
   end
 
+  def user_owned_collections
+    @owned_collections = current_user.collections
+  end
 end
