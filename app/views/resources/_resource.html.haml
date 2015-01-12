@@ -27,15 +27,22 @@
   .row
     .icon-column>
     .resourceList_bottomTools
-      move to 
+      - if resource.collection.belongs_to? current_user
+        move to
+      - else
+        copy to
       - if @owned_collections.count > 1
         %select{class: 'selectable-resource', :'data-resource-id' => resource.id, :'data-collection-id' => @collection.id}
           - owned_collections_exclude_self = @owned_collections.reject{|c| c.id == @collection.id }
           - owned_collections_exclude_self.each do |c|
             %option{value: c.id}
               = c.name.first(50)
-        = link_to collection_resource_move_path(@collection, resource, owned_collections_exclude_self.first.id), method: 'put', id: "resource-moveto-#{resource.id}", remote: true do
-          .btn-square
+        - if resource.collection.belongs_to? current_user
+          = link_to collection_resource_move_path(@collection, resource, owned_collections_exclude_self.first.id), method: 'put', id: "resource-moveto-#{resource.id}", remote: true do
+            .btn-square
+        - else
+          = link_to collection_resource_copy_path(@collection, resource, owned_collections_exclude_self.first.id), method: 'put', id: "resource-moveto-#{resource.id}", remote: true do
+            .btn-square
             = icon('arrow-right')
       - else
         %select

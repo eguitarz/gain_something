@@ -5,7 +5,7 @@ RESOURCE_LIMIT = 150
 
 class ResourcesController < ApplicationController
 	before_action :get_collection, only: [:new, :show, :create, :edit, :update, :destroy, :change_parent]
-	before_action :get_resource, only: [:show, :destroy, :edit, :change_parent]
+	before_action :get_resource, only: [:show, :destroy, :edit, :change_parent, :copy]
 	before_action only: [:new, :create, :edit, :update, :destroy, :change_parent] do
     require_owner @collection.user
   end
@@ -93,6 +93,24 @@ class ResourcesController < ApplicationController
 
 		respond_to do |format|
 			format.js {render 'resources/move.js.haml', locals: {resource_id: @resource.id} }
+		end
+	end
+
+	def copy
+		new_collection_id = params[:new_collection_id]
+
+		if new_collection_id
+			@new_collection = Collection.find new_collection_id
+			
+			if @new_collection.present? && @new_collection.belongs_to?(current_user)
+				new_resource = Resource.new @resource.attributes.except('id', 'collection_id')
+				new_resource.collection_id = @new_collection.id
+				new_resource.save
+			end
+		end
+
+		respond_to do |format|
+			format.js {render 'resources/copy.js.haml', locals: {resource_id: @resource.id} }
 		end
 	end
 
