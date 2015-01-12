@@ -66,7 +66,7 @@ module ResourcesHelper
 				haml_concat link_to( icon('trash'), \
 					collection_resource_path(collection, resource), \
 					remote: true, \
-					:'data-confirm' => "Delete resource - ”#{resource.title}” ?", \
+					:'data-confirm' => "Delete resource - ”#{resource.title}” ?", :'data-modal' => true,\
 					method: :delete, class: 'right', id: "resource_#{resource.id}")
 			end
 		end
