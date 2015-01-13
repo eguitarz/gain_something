@@ -140,8 +140,8 @@ $(document).on 'page:change', ->
     $("#resource-moveto-#{resource_id}").attr('href', move_path)
 
   # draggable
-  $('.resourceList').sortable()
-  $('.resourceList').disableSelection()
+  # $('.resourceList').sortable()
+  # $('.resourceList').disableSelection()
   $('.resourceList').on 'sortupdate', (e, ui)->
     collection_id = $(@).attr('data-collection-id')
     $.ajax

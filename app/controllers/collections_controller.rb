@@ -114,6 +114,10 @@ class CollectionsController < ApplicationController
   end
 
   def user_owned_collections
-    @owned_collections = current_user.collections
+    if current_user
+      @owned_collections = current_user.collections
+    else
+      @owned_collections = []
+    end
   end
 end
