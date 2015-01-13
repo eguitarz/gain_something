@@ -56,3 +56,4 @@ gem 'rails_autolink'
 gem 'tilt', '~> 1.1'
 gem 'forgery', '0.6.0', group: :development
 gem 'kaminari'
+gem 'jquery-ui-rails'

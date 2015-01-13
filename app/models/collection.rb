@@ -12,4 +12,8 @@ class Collection < ActiveRecord::Base
   def belongs_to?(user)
     user && self.user_id == user.id
   end
+
+  def find_resource(id)
+    self.resources.where id: id
+  end
 end

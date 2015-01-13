@@ -1,7 +1,7 @@
 class CollectionsController < ApplicationController
   before_action :get_user
-  before_action :get_collection, only: [:show, :edit, :update, :destroy, :toggle_visibility]
-  before_action only: [:edit, :update, :destroy] do
+  before_action :get_collection, only: [:show, :edit, :update, :destroy, :toggle_visibility, :sort]
+  before_action only: [:edit, :update, :destroy, :toggle_visibility, :sort] do
     require_owner @collection.user
   end
   before_action :require_user_signed_in, except: [:index, :show]
@@ -24,7 +24,7 @@ class CollectionsController < ApplicationController
   def show
     @is_preview = params[:p] || false
     @resource_index = (params[:idx] || -1).to_i
-    @resources = @collection.resources.order(:created_at)
+    @resources = @collection.resources.order(:priority, :created_at)
     @current_resource = @resources[@resource_index] if @resource_index >= 0 && @resource_index < @resources.length
   end
 
@@ -73,6 +73,18 @@ class CollectionsController < ApplicationController
 
     respond_to do |format|
       format.js {}
+    end
+  end
+
+  def sort
+    if params[:resource].present? && params[:resource].kind_of?(Array)
+      params[:resource].each_with_index do |id, i|
+        @collection.find_resource(id).first.update_attribute(:priority, i)
+      end
+    end
+
+    respond_to do |format|
+      format.js { render }
     end
   end
 

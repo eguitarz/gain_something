@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   
   resources :collections do
     put 'toggle_visibility' => 'collections#toggle_visibility', as: :visibility
+    put 'sort' => 'collections#sort', as: :sort
     resources :resources do
       put 'move/:new_collection_id' => 'resources#change_parent', as: :move
       put 'copy/:new_collection_id' => 'resources#copy', as: :copy

@@ -139,4 +139,12 @@ $(document).on 'page:change', ->
     move_path = "/collections/#{collection_id}/resources/#{resource_id}/move/#{new_collection_id}"
     $("#resource-moveto-#{resource_id}").attr('href', move_path)
 
-      
+  # draggable
+  $('.resourceList').sortable()
+  $('.resourceList').disableSelection()
+  $('.resourceList').on 'sortupdate', (e, ui)->
+    collection_id = $(@).attr('data-collection-id')
+    $.ajax
+      data: $(@).sortable('serialize')#.replace(/resource\[\]=/g, '')
+      type: 'PUT'
+      url: "/collections/#{collection_id}/sort"

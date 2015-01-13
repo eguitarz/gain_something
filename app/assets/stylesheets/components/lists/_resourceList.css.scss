@@ -123,6 +123,14 @@
     background-color: $white;
   }
 
+  %resourceList-skin-default_item {
+    background-color: rgba(255,255,255,0.8);
+  }
+
+  %resourceList-skin-default_item__drag {
+    @include box-shadow("0 0 3px 0 #{$black}", '', false);
+  }
+
   %resourceList-skin-default_title {
     font-weight: 900;
   }
@@ -150,6 +158,14 @@
 
   #{$selector} {
     @extend %resourceList-skin-default;
+
+    #{$selector}_item {
+      @extend %resourceList-skin-default_item;
+      &.ui-sortable-helper {
+        @extend %resourceList-skin-default_item__drag;
+        .resourceList_bottomTools, .resourceList_tools { opacity: 0; }
+      }
+    }
 
     #{$selector}_preview {
       #{$selector}_preview_digest {
