@@ -25,7 +25,7 @@ module ResourcesHelper
 	def print_title(resource, link='', with_link=true)
 		if with_link
 			link = link.present? ? link : resource.url
-			haml_concat link_to(resource.title, link, title: resource.title)
+			haml_concat link_to(resource.title, link, title: resource.title, target: '_blank')
 		else
 			haml_concat resource.title
 		end
@@ -48,7 +48,7 @@ module ResourcesHelper
 	def print_description(resource, link='')
 		link = resource.url unless link.present?
 		haml_concat link_to(
-			get_partial_string(resource.description, 200, '...'), link
+			get_partial_string(resource.description, 200, '...'), link, target: '_blank'
 		)
 	end
 
@@ -100,7 +100,7 @@ module ResourcesHelper
 	def thumbnail_lambda
 		
 		lambda do |resource, link|
-			haml_tag :a, href: link, title: resource.title do
+			haml_tag :a, href: link, title: resource.title, target: '_blank' do
 				haml_tag(:div, class: 'resourceList_preview_thumbnails_thumb', style: "background-image:url(#{resource.thumbnail})")
 			end
 		end
