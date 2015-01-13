@@ -40,10 +40,11 @@
         - if resource.collection.belongs_to? current_user
           = link_to collection_resource_move_path(@collection, resource, owned_collections_exclude_self.first.id), method: 'put', id: "resource-moveto-#{resource.id}", remote: true do
             .btn-square
+              = icon('arrow-right')
         - else
           = link_to collection_resource_copy_path(@collection, resource, owned_collections_exclude_self.first.id), method: 'put', id: "resource-moveto-#{resource.id}", remote: true do
             .btn-square
-            = icon('arrow-right')
+              = icon('arrow-right')
       - else
         %select
           %option
