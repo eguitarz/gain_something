@@ -1,5 +1,5 @@
 #lightbox_display
-  = link_to resource.url do
+  = link_to resource.url, target: '_blank' do
     .display_image_container{style:"background-image:url(#{resource.thumbnail});"}
   #lightbox_text_container
     #lightbox_display_description
