@@ -1,7 +1,12 @@
+- draggable_class = 'draggable' if resource.collection.belongs_to? current_user
 .resourceList_item.deletable{id: "resource-#{resource.id}"}
   .row
-    .icon-column>
-      - resource_icon(resource.mime)
+    .icon-column{class: draggable_class}>
+      .animation-icon.animation-icon-before
+        - resource_icon(resource.mime)
+      .animation-icon.animation-icon-after
+        .btn-resource
+          = icon('arrows-v')
     .resourceList_title.col-80>
       - link = resource.is_fulltext? ? collection_resource_path(@collection, resource) : resource.url
       - print_title(resource, link)

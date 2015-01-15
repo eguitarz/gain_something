@@ -34,7 +34,9 @@ module CollectionsHelper
   end
 
   def print_collection_create_button(collection)
-    haml_concat link_to('<div class="btn-large btn-success">Create Collection</div>'.html_safe, new_collection_path, class: 'right')
+    if current_user.present?
+      haml_concat link_to('<div class="btn-large btn-success">Create Collection</div>'.html_safe, new_collection_path, class: 'right')
+    end
   end
 
   def print_collection_delete_button(collection)

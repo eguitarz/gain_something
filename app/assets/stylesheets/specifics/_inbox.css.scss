@@ -239,3 +239,21 @@ body.landings #main {
 .visibility {
   vertical-align: text-bottom;
 }
+
+.animation-icon-before {
+  transform-origin: 0 0;
+  @include transition("opacity #{$fast} ease-out", false);
+}
+
+.draggable:hover .animation-icon-before {
+  opacity: 0;
+}
+
+.animation-icon-after {
+  opacity: 0;
+  @include transition("opacity #{$fast} ease-in", false);
+}
+
+.draggable:hover .animation-icon-after {
+  opacity: 1;
+}
