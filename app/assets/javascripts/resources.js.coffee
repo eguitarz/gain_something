@@ -110,4 +110,6 @@ $(document).on 'page:change', ->
 			editor.focus()
 
 	# parse markdown
-	$('#lightbox_display').html marked(decodeURIComponent($('#desc-value').val()))
+	parsedHtml = marked(decodeURIComponent($('#desc-value').val()))
+	$('#lightbox_display').html parsedHtml
+	$('.description').html parsedHtml
