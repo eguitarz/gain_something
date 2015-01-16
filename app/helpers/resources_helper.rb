@@ -25,7 +25,7 @@ module ResourcesHelper
 	def print_title(resource, link='', with_link=true)
 		if with_link
 			link = link.present? ? link : resource.url
-			if resource.mime == 'text'
+			if resource.mime == 'text' || resource.mime == 'video'
 				haml_concat link_to(resource.title, link, title: resource.title)
 			else
 				haml_concat link_to(resource.title, link, title: resource.title, target: '_blank')

@@ -9,9 +9,8 @@
 		.single-col
 			.title.col-100
 				- print_title(@resource, '', false)
-		- if has_embedded_or_thumbnail?(@resource)
-			.embed.col-100
-				- print_embedded_or_thumbnail(@resource)
+		.embed.col-100
+			- print_embed(@resource) if @resource.embedded_html.present?
 		%input{id:'desc-value', type:'hidden', value: get_description(@resource) }
 		.description.col-100
 			- if @resource.mime != 'text'
