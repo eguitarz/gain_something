@@ -8,7 +8,7 @@
 
 		.single-col
 			.title.col-100
-				- print_title(@resource, false)
+				- print_title(@resource, '', false)
 		- if has_embedded_or_thumbnail?(@resource)
 			.embed.col-100
 				- print_embedded_or_thumbnail(@resource)
