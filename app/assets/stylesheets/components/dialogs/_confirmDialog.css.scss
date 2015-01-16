@@ -21,6 +21,10 @@
     overflow: hidden;
   }
 
+  %confirmDialog_text {
+    overflow: hidden;
+  }
+
   %confirmDialog_buttons {
     position: absolute;
     right: 0;
@@ -46,6 +50,10 @@
 
     #{$selector}_title {
       @extend %confirmDialog_title;
+    }
+
+    #{$selector}_text {
+      @extend %confirmDialog_text;
     }
 
     #{$selector}_buttons {

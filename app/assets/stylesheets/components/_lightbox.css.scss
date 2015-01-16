@@ -67,6 +67,10 @@
   %lightbox_text_container {
     display: inline-block;
     vertical-align: top;
+    line-height: 140%;
+    h1 {
+      line-height: 140%;
+    }
   }
 
   %lightbox_title {

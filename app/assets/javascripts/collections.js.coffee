@@ -48,11 +48,11 @@ $(document).on 'page:change', ->
   $('#lightbox .btn-close').click ->
     quitLightbox()
 
-  $('#lightbox_previous_button').click ->
-    setNextItemInLightbox(getCurrentId(), false)
+  # $('#lightbox_previous_button').click ->
+  #   setNextItemInLightbox(getCurrentId(), false)
 
-  $('#lightbox_next_button').click ->
-    setNextItemInLightbox(getCurrentId(), true)
+  # $('#lightbox_next_button').click ->
+  #   setNextItemInLightbox(getCurrentId(), true)
 
   $('.editable input').on 'focus', ->
     $(@).parent('.editable').removeClass 'saved'

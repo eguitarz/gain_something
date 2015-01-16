@@ -1,4 +1,2 @@
-- if @resource.embedded_html.present?
-  $("#lightbox .player .display").html("#{j(@resource.embedded_html.html_safe)}");
-- elsif @resource.thumbnail.present?
-  $("#lightbox .player .display").html("<img src=\"#{j(@resource.thumbnail)}\">");
+- html = render partial: "partials/lightbox_#{@resource.mime}", :locals => {resource: @resource} 
+$('#lightbox_player').html(html)
