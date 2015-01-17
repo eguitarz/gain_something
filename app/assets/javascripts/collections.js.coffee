@@ -155,3 +155,10 @@ $(document).on 'page:change', ->
       data: $(@).sortable('serialize')#.replace(/resource\[\]=/g, '')
       type: 'PUT'
       url: "/collections/#{collection_id}/sort"
+
+  # bind edit title input
+  $('.resourceList_title_edit input').blur ->
+    $(@).parents('.resourceList_item').removeClass('_is_editable')
+  .on 'keyup', (e)->
+    console.log $(@)
+    $(@).parents('.resourceList_item').removeClass('_is_editable') if e.keyCode == 27

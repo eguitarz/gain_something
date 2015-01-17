@@ -9,7 +9,14 @@
           = icon('arrows-v')
     .resourceList_title.col-80>
       - link = resource.is_fulltext? ? collection_resource_path(@collection, resource) : resource.url
-      - print_title(resource, link)
+      .resourceList_title_show
+        - print_title(resource, link)
+      .resourceList_title_edit
+        .col-80>
+          = form_for resource, url: collection_resource_path(@collection, resource), method: 'PATCH', remote: true do |f|
+            = f.text_field :title
+        .col-20.tip
+          "Enter" to update
         
     .resourceList_tools.col-10
       - print_resource_tools(@collection, resource, resource_counter)

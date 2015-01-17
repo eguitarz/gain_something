@@ -1,0 +1,3 @@
+link = $("#resource-#{@resource.id}").find('.resourceList_title_show a')
+link.attr('title', "#{@resource.title}").text("#{@resource.title}");
+$("#resource-#{@resource.id}").removeClass('_is_editable');

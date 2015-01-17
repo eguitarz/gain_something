@@ -41,15 +41,20 @@ class ResourcesController < ApplicationController
 	end
 
 	def edit
-		@mime = @resource.mime
-		redirect_to collection_resource_url(@collection.id) if @mime != 'text'
+		respond_to do |format|
+			format.html {}
+			format.js {}
+		end
 	end
 
 	def update
 		@resource = Resource.find params[:id] 
 		@resource.update resource_params
 
-		redirect_to collection_url(@collection.id)
+		respond_to do |format|
+			format.html { redirect_to collection_url(@collection.id) }
+			format.js {}
+		end
 	end
 
 	def destroy

@@ -4,9 +4,9 @@
 
 .content
   = form_for [@collection, @resource] do |f|
-    = f.hidden_field :mime, value: @mime
-    - if @mime == 'text'
-      = f.text_field :title, placeholder: 'Edit title here', autofocus: true
+    = f.hidden_field :mime, value: @resource.mime
+    = f.text_field :title, placeholder: 'Edit title here', autofocus: true
+    - if @resource.mime == 'text'
       .toolbar.row
         .col-100
           = f.button 'H1', id:'h1-btn', class: 'btn-editor btn-edit'

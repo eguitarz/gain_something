@@ -20,6 +20,18 @@
     line-height: 160%;
   }
 
+  %resourceList_title_show__is_editable {
+    display: none;
+  }
+
+  %resourceList_title_edit {
+    display: none;
+  }
+
+  %resourceList_title_edit__is_editable {
+    display: block;
+  }
+
   %resourceList_tools {
     opacity: 0;
     vertical-align: top;
@@ -80,6 +92,10 @@
 
     #{$selector}_title {
       @extend %resourceList_title;
+
+      #{$selector}_title_edit {
+        @extend %resourceList_title_edit;
+      }
     }
 
     #{$selector}_tools {
@@ -100,6 +116,14 @@
           @extend %resourceList_preview_thumbnails_thumb;
         }
       }
+    }
+
+    ._is_editable #{$selector}_title_show {
+      @extend %resourceList_title_show__is_editable;
+    }
+
+    ._is_editable #{$selector}_title_edit {
+      @extend %resourceList_title_edit__is_editable;
     }
 
     #{$selector}_item:hover #{$selector}_bottomTools {
@@ -133,6 +157,29 @@
 
   %resourceList-skin-default_title {
     font-weight: 900;
+  }
+
+  %resourceList-skin-default_title_edit {
+    form {
+      margin: 0;
+    }
+
+    input {
+      background-color: $lightblue;
+      font-size: 1rem;
+      padding: 2px 4px;
+    }
+
+    & > div {
+      display: inline-block;
+    }
+
+    .tip {
+      color: $grey;
+      font-size: 0.4em;
+      text-align: center;
+      vertical-align: middle;
+    }
   }
 
   %resourceList-skin-default_tools_link {
@@ -176,6 +223,10 @@
 
   #{$selector}_title {
     @extend %resourceList-skin-default_title;
+
+    #{$selector}_title_edit {
+      @extend %resourceList-skin-default_title_edit;
+    }
   }
 
   #{$selector}_tools_link {
