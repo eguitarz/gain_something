@@ -1,9 +1,10 @@
 .navbar
 	.navbar_item.col-40>
 	.navbar_item.col-60>
-		= link_to edit_collection_resource_path(@collection, @resource) do
-			.btn-large.right
-				Edit Resource
+		- if @collection.belongs_to? current_user
+			= link_to edit_collection_resource_path(@collection, @resource) do
+				.btn-large.right
+					Edit Resource
 
 - html_title(@resource.title.first(50))
 - html_description(@resource.description)
