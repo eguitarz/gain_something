@@ -50,9 +50,10 @@ module ResourcesHelper
 	end
 
 	def print_description(resource, link='')
+		target = '_blank' unless resource.is_fulltext?
 		link = resource.url unless link.present?
 		haml_concat link_to(
-			get_partial_string(resource.description, 200, '...'), link, target: '_blank'
+			get_partial_string(resource.description, 200, '...'), link, target: target
 		)
 	end
 
@@ -104,7 +105,8 @@ module ResourcesHelper
 	def thumbnail_lambda
 		
 		lambda do |resource, link|
-			haml_tag :a, href: link, title: resource.title, target: '_blank' do
+			target = '_blank' unless resource.is_fulltext?
+			haml_tag :a, href: link, title: resource.title, target: target do
 				haml_tag(:div, class: 'resourceList_preview_thumbnails_thumb', style: "background-image:url(#{resource.thumbnail})")
 			end
 		end
