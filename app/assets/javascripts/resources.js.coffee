@@ -26,8 +26,8 @@ initEditorButtons = (editor)->
 			when 'h3' then  "### H3 title here"
 			when 'italic' then "**"
 			when 'bold' then "*"
-			when 'link' then "[TEXT_TO_LINK](THE_URL)"
-			when 'image' then "![IMAGE_DESCRIPTION](IMAGE_URL)"
+			when 'link' then "[TEXT](URL)"
+			when 'image' then "![DESCRIPTION](URL)"
 
 	getCursorPosition = (type)->
 		'end'
