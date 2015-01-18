@@ -26,7 +26,13 @@
 				- message_to_public = 'Change visibility to “public” ?'
 				- message_to_private = 'Change visibility to “only me” ?'
 				- confirm_message = @collection.is_visible? ? message_to_private : message_to_public
-				= link_to collection_visibility_path(@collection), :'data-confirm' => confirm_message, method: 'put', remote: true, id: "collection-visibility-#{@collection.id}", :'data-modal' => 'true', :'data-message-to-public' => message_to_public, :'data-message-to-private' => message_to_private, class: 'right' do 
+				- if @collection.belongs_to? current_user
+					= link_to collection_visibility_path(@collection), :'data-confirm' => confirm_message, method: 'put', remote: true, id: "collection-visibility-#{@collection.id}", :'data-modal' => 'true', :'data-message-to-public' => message_to_public, :'data-message-to-private' => message_to_private, class: 'right' do 
+						.collection_is_public_visibility
+							= "#{icon('globe')} public".html_safe
+						.collection_is_private_visibility
+							= "#{icon('lock')} only me".html_safe
+				- else
 					.collection_is_public_visibility
 						= "#{icon('globe')} public".html_safe
 					.collection_is_private_visibility
