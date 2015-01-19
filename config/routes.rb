@@ -22,7 +22,6 @@ Rails.application.routes.draw do
 
   get 'hi' => 'landings#index'
   get '/u/:username' => 'users#show', as: :user
-  get '/u/:username/:direct_edit_id' => 'collection#show'
 
   # get 'user/:username' => 'users#show'
   # Example of regular route:
