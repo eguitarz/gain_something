@@ -3,6 +3,10 @@
     = link_to "<div class=\"btn-large btn-delete\">Delete this item</div>".html_safe, collection_resource_path(@collection.id, @resource.id), method: :delete, class: 'right'
 
 .content
+  .backLink
+    = link_to collection_resource_path(@collection.id, @resource.id), id: 'navbar_back' do
+      = " #{icon('arrow-left')} Go Back".html_safe
+
   = form_for [@collection, @resource] do |f|
     = f.hidden_field :mime, value: @resource.mime
     = f.text_field :title, placeholder: 'Edit title here', autofocus: true
@@ -24,4 +28,3 @@
 
     .submission
       = f.submit 'Update', class: 'btn-normal'
-      = f.button 'Cancel', class: 'btn-normal btn-cancel', :'data-dest' => "#{collection_path(@collection.id)}"
