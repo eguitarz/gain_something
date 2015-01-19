@@ -22,10 +22,15 @@ class CollectionsController < ApplicationController
   end
 
   def show
-    @is_preview = params[:p] || false
-    @resource_index = (params[:idx] || -1).to_i
+    @resource_index = (params[:idx] || 0).to_i
     @resources = @collection.resources.order(:priority, :created_at)
     @current_resource = @resources[@resource_index] if @resource_index >= 0 && @resource_index < @resources.length
+    @partial_url = request.original_url
+
+    respond_to do |format|
+      format.html {}
+      format.js  {}
+    end
   end
 
   def new

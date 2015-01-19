@@ -12,11 +12,17 @@
 		= csrf_meta_tags
 		= analytics_init if Rails.env.production? or Rails.env.development?
 - body_class = params[:action]
-- body_class += ' _is_lightbox_mode' if params[:p] == '1'
+- body_class += ' _is_lightbox_mode' if params[:idx]
 %body{id: "#{params[:controller]}", class: body_class}
 	= render partial: 'partials/dialog'
-	- if @current_resource.present?
-		= render partial: 'partials/lightbox', :locals => {resource: @current_resource}
+
+	- if params[:controller] == 'collections' && params[:action] == 'show'
+		- lightbox_class = @current_resource.description.present? ?  '' : '_has_no_description'
+		- lightbox_class = @current_resource.thumbnail.present? ? lightbox_class : '_has_no_thumbnail ' + lightbox_class
+		- lightbox_class = " _is_#{@current_resource.mime} " + lightbox_class
+		#lightbox{class: lightbox_class}
+			= render partial: 'partials/lightbox'
+	
 	- if flash[:error].present? || flash[:notice].present?
 		#notifier
 			= flash[:error]

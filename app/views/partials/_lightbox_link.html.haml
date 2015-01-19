@@ -8,7 +8,7 @@
       #lightbox_display_description
         = auto_link resource.description
   - else
-    #lightbox_text_container
+    #lightbox_text_container{style: 'width: 100%'}
       %h1#lightbox_title
         - print_title(resource, false)
       #lightbox_display_description

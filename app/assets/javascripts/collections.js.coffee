@@ -23,12 +23,6 @@ $(document).on 'page:change', ->
   bindCancelButton('.btn-cancel')
   bindKeypress('#collection_name, #collection_description')
 
-  $('.embed').click (e)->
-    # $('body').addClass 'present'
-    # window.history.pushState(null, 'GS', $(@).data('base-url'))
-    # updateLightbox($(@))
-    window.location = $(@).data('base-url')
-
   quitLightbox = ->
     $('iframe').first().attr('src', '')
     $('#lightbox .player .content').html ''
@@ -38,21 +32,11 @@ $(document).on 'page:change', ->
     newUrl = window.location.href.replace(window.location.search, '')
     window.history.pushState(null, 'GS',  newUrl)
 
-  # prevent passing click event to #lightbox
-  $('#lightbox_player, #lightbox_previous_button, #lightbox_next_button').click (e)->
-    e.stopPropagation();
-
-  $('#lightbox').click ->
-    quitLightbox()
+  $('#lightbox').click (e)->
+    quitLightbox() if !$(e.target).hasClass('prevent-quit') && $(e.target).parents('.prevent-quit').length == 0
 
   $('#lightbox .btn-close').click ->
     quitLightbox()
-
-  # $('#lightbox_previous_button').click ->
-  #   setNextItemInLightbox(getCurrentId(), false)
-
-  # $('#lightbox_next_button').click ->
-  #   setNextItemInLightbox(getCurrentId(), true)
 
   $('.editable input').on 'focus', ->
     $(@).parent('.editable').removeClass 'saved'
@@ -71,65 +55,19 @@ $(document).on 'page:change', ->
   $('.editable').on 'ajax:success', (e, data)->
     $(@).addClass('saved').find('input').blur()
 
-  updateUrl = (url)->
-    window.location = url
-
-  updateLightbox = ($element)->
-    $('#lightbox').removeClass()
-    $('#lightbox').addClass $element.data('mime')
-
   $('#lightbox._is_text #lightbox_display').html marked(decodeURIComponent($('#preview-desc-value').val()))
 
-  getResourceCount = ()->    
-    parseInt( $('#lightbox_resource_count').val(), 10)
-
-  getCurrentId = ()->
-    try
-      resourceIndex = window.location.search.substr(1).split('&').filter (k)->
-        k.indexOf('idx') >= 0
-      currentId = resourceIndex[0].split('=')[1]
-      currentId = parseInt(currentId, 10)
-    catch error
-      return -1
-
-  hasPreviousItem = ()->
-    getCurrentId() > 0
-
-  hasNextItem = () ->
-    getCurrentId() < getResourceCount() - 1
-
-  if hasPreviousItem()
-    $('#lightbox_previous_button').removeClass 'hide'
-  else
-    $('#lightbox_previous_button').addClass 'hide'
-
-  if hasNextItem()
-    $('#lightbox_next_button').removeClass 'hide'
-  else
-    $('#lightbox_next_button').addClass 'hide'
-
-  setNextItemInLightbox = (id, isNext)->
-    nextId = if isNext then id + 1 else id - 1
-    if nextId >= 0 && nextId < getResourceCount()
-      window.location.search = "p=1&idx=#{nextId}"
-
   $(document).on 'keyup', (e)->
-    if e.keyCode == 39
-      keyEvent = 'right'
-    if e.keyCode == 37
-      keyEvent = 'left'
+    isLightboxMode = $('body').hasClass('_is_lightbox_mode')
+    $('.btn-next').click() if e.keyCode == 39 && isLightboxMode
+    $('.btn-prev').click() if e.keyCode == 37 && isLightboxMode
+    
     if e.keyCode == 27
-      quitLightbox()
-      $('body').removeClass '_is_confirmation'
+      quitLightbox() # for lightbox
+      $('body').removeClass '_is_confirmation' # for dialogs
 
-    if keyEvent && $('body').hasClass('_is_lightbox_mode') && window.location.search 
-      currentId = getCurrentId()
-      if currentId >= 0
-        if keyEvent == 'left'
-          setNextItemInLightbox(currentId, false)
-        else if keyEvent == 'right'
-          setNextItemInLightbox(currentId, true)
 
+  # move to collection
   $('.selectable-resource').on 'change', (e)->
     new_collection_id = $('option:selected', @).val()
 

@@ -1,18 +1,11 @@
-- lightbox_class = resource.description.present? ?  '' : '_has_no_description'
-- lightbox_class = resource.thumbnail.present? ? lightbox_class : '_has_no_thumbnail ' + lightbox_class
-- lightbox_class = " _is_#{resource.mime} " + lightbox_class
-#lightbox{class: lightbox_class}
-  %input{type: 'hidden', value: @collection.resources.count, id: 'lightbox_resource_count'}
-  #lightbox_player_wrapper
-    #lightbox_previous_button
-      .btn-round.btn-prev
-        = icon('angle-left')
-    #lightbox_next_button
-      .btn-round.btn-next
-        = icon('angle-right')
+#lightbox_player_wrapper
+  #lightbox_next_prev_buttons
+    - idx = (params[:idx] || 0).to_i
+    = render partial: "partials/lightbox_next_prev_buttons", :locals => {idx: idx}
     
-    #lightbox_player
-      = render partial: "partials/lightbox_#{resource.mime}", :locals => {resource: resource} 
-    #lightbox_close_button
-      .btn-round.btn-close
-        = icon('close')
+  
+  #lightbox_player.prevent-quit
+    = render partial: "partials/lightbox_#{@current_resource.mime}", :locals => {resource: @current_resource} if @current_resource.present?
+  #lightbox_close_button.prevent-quit
+    .btn-round.btn-close.btn-lightbox
+      = icon('close')

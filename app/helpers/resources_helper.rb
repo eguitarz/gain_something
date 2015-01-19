@@ -77,7 +77,7 @@ module ResourcesHelper
 		end
 
 		haml_tag :div, class: 'btn-square right' do
-			haml_concat link_to(icon('eye'), collection_resource_path(collection, resource), remote: true, class: 'right embed', id: "resource_#{resource_counter}", :"data-mime" => resource.mime, :'data-base-url' => collection_path(@collection.id, p: 1, idx: resource_counter))
+			haml_concat link_to(icon('eye'), collection_path(collection, idx: resource_counter), remote: true, class: 'right', id: "resource_#{resource_counter}")
 		end
 
 		if collection.belongs_to?(current_user)
