@@ -17,9 +17,9 @@
 	= render partial: 'partials/dialog'
 
 	- if params[:controller] == 'collections' && params[:action] == 'show'
-		- lightbox_class = @current_resource.description.present? ?  '' : '_has_no_description'
-		- lightbox_class = @current_resource.thumbnail.present? ? lightbox_class : '_has_no_thumbnail ' + lightbox_class
-		- lightbox_class = " _is_#{@current_resource.mime} " + lightbox_class
+		- lightbox_class = @current_resource.description.present? ?  '' : '_has_no_description' if @current_resource
+		- lightbox_class = @current_resource.thumbnail.present? ? lightbox_class : '_has_no_thumbnail ' + lightbox_class  if @current_resource
+		- lightbox_class = " _is_#{@current_resource.mime} " + lightbox_class  if @current_resource
 		#lightbox{class: lightbox_class}
 			= render partial: 'partials/lightbox'
 	
