@@ -23,6 +23,7 @@ class ResourcesController < ApplicationController
 
 	def create
 		@resource = @collection.resources.build(resource_params)
+		@collection.touch
 		create_and_append_embed(@resource) unless @resource.mime == 'text'
 
 		if @resource.mime == 'error'
