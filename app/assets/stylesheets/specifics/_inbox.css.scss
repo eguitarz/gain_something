@@ -257,3 +257,104 @@ body.landings #main {
 .draggable:hover .animation-icon-after {
   opacity: 1;
 }
+
+
+// discover
+body#discovery {
+  height: auto;
+  background: $bluegrey-900;
+}
+
+#discovery #main {
+  background: $bluegrey-900;
+  color: $bluegrey-50;
+
+  pre, code, a, a:visited {
+    color: $bluegrey-50;    
+  }
+
+  a, a:hover {
+    text-decoration: underline;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    margin-top: 0;
+  }
+}
+
+#resourceMapWrapper {
+  display: inline-block;
+  padding-top: 80px;
+  width: 50%;
+  @include transition("opacity 1s cubic-bezier(.2, .3, .25, .9)", false);
+}
+
+#resourceMapWrapper._is_preload {
+  opacity: 0.25;
+}
+
+#resourceMap {
+  background-color: $bluegrey-900;
+  padding: 2px;
+  margin: 0 40px;
+  line-height: 0;
+}
+
+.resourceMap_grid {
+  display: inline-block;
+  width: 120px;
+  height: 120px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: $bluegrey-600;
+  color: $white;
+  // margin: 4px 2px;
+  border: 2px solid $bluegrey-900;
+  padding: 4px;
+  font-size: 0.6rem;
+  line-height: 140%;
+  overflow: hidden;
+
+  &:hover {
+    // outline: 2px solid $grey;
+    border-color: $grey;
+  }
+}
+
+.resourceMap_grid._is_focus {
+  // outline: 2px solid $bluegrey-50;
+  border-color: $bluegrey-50;
+}
+
+#resourceDisplayerWrapper {
+  position: fixed;
+  top: 80px;
+  right: 0;
+  width: 50%;
+  height: 680px;
+}
+
+#resourceDisplayer {
+  color: $bluegrey-50;
+  margin: 4px 60px;
+  height: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.resourceDisplayer_item {
+  display: none;
+
+  img {
+    max-width: 100%;
+    margin: auto;
+  }
+}
+
+.resourceDisplayer_item._is_show {
+  display: block;
+}
+
+.resourceDisplayer_item_title {
+  line-height: 140%;
+}

@@ -1,4 +1,4 @@
-- draggable_class = 'draggable' if resource.collection.belongs_to? current_user
+- draggable_class = 'draggable' if resource.collection.belongs_to? @user
 .resourceList_item.deletable{id: "resource-#{resource.id}"}
   .row
     .icon-column{class: draggable_class}>
@@ -39,17 +39,18 @@
   .row
     .icon-column>
     .resourceList_bottomTools
-      - if resource.collection.belongs_to? current_user
-        move to
-      - else
-        copy to
-      - if @owned_collections.count > 1
+      - if @owned_collections && @owned_collections.count > 1
+        - if resource.collection.belongs_to? @user
+          move to
+        - else
+          copy to
+
         %select{class: 'selectable-resource', :'data-resource-id' => resource.id, :'data-collection-id' => @collection.id}
           - owned_collections_exclude_self = @owned_collections.reject{|c| c.id == @collection.id }
           - owned_collections_exclude_self.each do |c|
             %option{value: c.id}
               = c.name.first(50)
-        - if resource.collection.belongs_to? current_user
+        - if resource.collection.belongs_to? @user
           = link_to collection_resource_move_path(@collection, resource, owned_collections_exclude_self.first.id), method: 'put', id: "resource-moveto-#{resource.id}", remote: true do
             .btn-square
               = icon('arrow-right')
@@ -57,7 +58,3 @@
           = link_to collection_resource_copy_path(@collection, resource, owned_collections_exclude_self.first.id), method: 'put', id: "resource-moveto-#{resource.id}", remote: true do
             .btn-square
               = icon('arrow-right')
-      - else
-        %select
-          %option
-            you don't have other collections

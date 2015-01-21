@@ -57,6 +57,10 @@ module ResourcesHelper
 		)
 	end
 
+	def encode(string)
+		URI.encode(string)
+	end
+
 	def get_description(resource)
 		if resource && resource.description.present?
 			URI.encode(resource.description)
@@ -80,7 +84,7 @@ module ResourcesHelper
 			haml_concat link_to(icon('eye'), collection_path(collection, idx: resource_counter), remote: true, class: 'right', id: "resource_#{resource_counter}")
 		end
 
-		if collection.belongs_to?(current_user)
+		if collection.belongs_to?(@user || current_user)
 			haml_tag :div, class: 'btn-square right' do
 				haml_concat link_to(icon('edit'), edit_collection_resource_path(collection, resource), class: 'right', remote: true)
 			end

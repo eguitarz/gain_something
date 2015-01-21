@@ -1,0 +1,34 @@
+.navbar
+  .navbar_item.col-40>
+  .navbar_item.col-60>
+
+- items = []
+- 35.times.each do |i|
+  - title = Forgery(:lorem_ipsum).title(random: true)
+  - description = Forgery('lorem_ipsum').paragraphs(3, random: true)
+  - items << {id: i, title: title, description: description}
+
+#resourceMapWrapper._is_preload>
+  #resourceMap
+    - @resources.each do |item|
+      - if item.thumbnail.present?
+        .resourceMap_grid{id: "item_#{item.id}", style: "background-image:url(#{item.thumbnail})"}>
+      - else
+        .resourceMap_grid{id: "item_#{item.id}"}>
+          = item.title
+
+
+#resourceDisplayerWrapper
+  #resourceDisplayer
+    - @resources.each do |item|
+      .resourceDisplayer_item{id: "display_item_#{item.id}", :'data-mime' => item.mime}
+        %h2.resourceDisplayer_item_title
+          = item.title
+
+        - if item.thumbnail.present?
+          = image_tag item.thumbnail
+
+        .resourceDisplayer_item_description
+          = item.description
+        - if item.mime == 'text' && item.description.present?
+          %input{type: 'hidden', class: 'resourceDisplayer_item_description_markdown', value: encode(item.description)}
