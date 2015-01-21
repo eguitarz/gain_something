@@ -2,12 +2,6 @@
   .navbar_item.col-40>
   .navbar_item.col-60>
 
-- items = []
-- 35.times.each do |i|
-  - title = Forgery(:lorem_ipsum).title(random: true)
-  - description = Forgery('lorem_ipsum').paragraphs(3, random: true)
-  - items << {id: i, title: title, description: description}
-
 #resourceMapWrapper._is_preload>
   #resourceMap
     - @resources.each do |item|
