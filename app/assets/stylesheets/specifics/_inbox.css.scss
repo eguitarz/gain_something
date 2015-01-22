@@ -258,13 +258,55 @@ body.landings #main {
   opacity: 1;
 }
 
+//collections
+
 .collection_thumbnails {
   margin: 10px 0;
+  @include transition("opacity 0.6s 0.6s ease-in", false); 
 }
 
 .collection_thumbnail {
   display: inline-block;
   background-size: cover;
+  background-color: $lightgrey;
   width: 48px;
   height: 48px;
+}
+
+._is_preloading .collection_thumbnails {
+  opacity: 0;
+}
+
+.collection_title {
+  @include transition("opacity 200ms 200ms ease-out, -webkit-transform 200ms 200ms ease-out", false);
+}
+
+._is_preloading .collection_title {
+  opacity: 0;
+  @include transform("scale(1.2)");
+}
+
+._is_preloading .collections {
+  opacity: 0.25; 
+  @include transform('translateY(-120px)');
+}
+
+.collections {
+  @include transition("all 200ms ease-out", false); 
+}
+
+.brand {
+  @include transition("all 200ms 1200ms ease-out", false);  
+}
+
+._is_preloading .brand {
+  opacity: 0;
+}
+
+.resourceList {
+  @include transition("all 800ms 200ms ease-out", false);
+}
+
+._is_preloading .resourceList {
+  opacity: 0;
 }
