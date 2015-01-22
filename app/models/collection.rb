@@ -7,6 +7,7 @@ class Collection < ActiveRecord::Base
   paginates_per 10
 
   scope :visible, -> { where(is_visible: true) }
+
   default_scope { order(:name) }
 
   def belongs_to?(user)
@@ -15,5 +16,9 @@ class Collection < ActiveRecord::Base
 
   def find_resource(id)
     self.resources.where id: id
+  end
+
+  def resources_with_thumbnail
+    resources.with_thumbnail
   end
 end

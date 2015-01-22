@@ -1,5 +1,5 @@
 module CollectionsHelper
-  def collection_subtitle(collection, show_user=true)
+  def collection_subtitle(collection)
     haml_tag :div, class: 'subtitle' do
 
       if collection.description.present?
@@ -9,7 +9,11 @@ module CollectionsHelper
           end
         end
       end
+    end
+  end
 
+  def collection_info(collection, show_user=true)
+    haml_tag :div, class: 'subtitle' do
       if show_user
         haml_tag :a, href: "#{user_path(collection.user.username)}" do
           haml_concat collection.user.name

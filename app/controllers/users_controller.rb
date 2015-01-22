@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 		@user = User.where(username: params[:username]).first
 
     if @user.present?
-      if current_user.present? && @user.id == current_user.id
+      if user_signed_in? && @user == current_user
         @collections = @user.collections.order(:name).page params[:page]
       else
         @collections = @user.collections.visible.order(:name).page params[:page]
