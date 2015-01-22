@@ -20,7 +20,6 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'discovery' => 'discovery#index', as: :discover
   get 'hi' => 'landings#index'
   get '/u/:username' => 'users#show', as: :user
 
