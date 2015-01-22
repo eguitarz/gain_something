@@ -59,5 +59,21 @@ $(document).on('page:change', function() {
   };
 
   $('body').removeClass('_is_preloading');
+  $('a[data-remote!=true]').on('click', function(e) {
+    var link = this;
+    var href = $(link).attr('href');
+
+    // external link
+    if (href.match('^https?:\/\/')) {
+
+    } else {
+      $('body').addClass('_is_preloading');
+      e.preventDefault();
+      setTimeout( function() {
+        window.location.pathname = href;
+      }, 200);
+    }
+  });
+
 
 });
