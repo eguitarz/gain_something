@@ -21,6 +21,8 @@
     @extend %button;
     margin: 2px;
     padding: 2px;
+    text-align: left;
+    vertical-align: text-bottom;
     @include border-radius(0);
   }
 
