@@ -10,4 +10,12 @@ class Resource < ActiveRecord::Base
   def is_fulltext?
     self.mime == 'text' || self.mime == 'video' || self.mime == 'collcetion'
   end
+
+  def is_title_only?
+    !self.description.present? && !self.content.present? && !self.embedded_html.present?
+  end
+
+  def is_text?
+    self.mime == 'text'
+  end
 end

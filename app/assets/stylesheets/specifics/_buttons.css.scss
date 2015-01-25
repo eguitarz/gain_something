@@ -5,7 +5,7 @@
 @include iconButton('.btn-icon');
 @include editorButton('.btn-editor');
 @include resourceButton('.btn-resource');
-@include roundButton('.btn-round', 32px, 1.4em, false);
+@include roundButton('.btn-round', 2em, false);
 
 .btn-square {
   margin-top: 0;  
@@ -58,12 +58,4 @@
   &:before {
     content: '☰';
   }
-}
-
-.fa-close {
-  text-indent: 2px;
-}
-
-.fa-angle-right {
-  text-indent: 2px;
 }

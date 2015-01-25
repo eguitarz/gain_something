@@ -1,11 +1,22 @@
-#lightbox_player_wrapper
-  #lightbox_next_prev_buttons
-    - idx = (params[:idx] || 0).to_i
-    = render partial: "partials/lightbox_next_prev_buttons", :locals => {idx: idx}
-    
+#lightbox_next_prev_buttons
+  = render partial: "partials/lightbox_next_prev_buttons"
   
-  #lightbox_player.prevent-quit
-    = render partial: "partials/lightbox_#{@current_resource.mime}", :locals => {resource: @current_resource} if @current_resource.present?
-  #lightbox_close_button.prevent-quit
-    .btn-round.btn-close.btn-lightbox
-      = icon('close')
+- if @current_resource
+  #lightbox_player.lightbox_player.prevent-quit
+    %h1.lightbox_player_title
+      = @current_resource.title
+    .lightbox_player_subtitle
+      = link_to 'original', @current_resource.url, target: '_blank' unless @current_resource.is_text?
+    .lightbox_player_content
+      - if @current_resource.thumbnail.present? && @current_resource.mime == 'link' || @current_resource.mime == 'photo'
+        - if @next_resource.present?
+          = link_to image_tag(@current_resource.thumbnail), collection_path(@collection, rid: @next_resource.id), remote: true
+        - elsif @prev_resource.present?
+          = link_to image_tag(@current_resource.thumbnail), collection_path(@collection, rid: @prev_resource.id), remote: true
+      .lightbox_player_html
+        - if @current_resource.content.present?
+          = @current_resource.content.html_safe
+        - elsif @current_resource.embedded_html.present?
+          = @current_resource.embedded_html.html_safe
+        - elsif @current_resource.description.present?
+          = @current_resource.description.html_safe

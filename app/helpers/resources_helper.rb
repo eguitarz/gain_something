@@ -8,7 +8,7 @@ module ResourcesHelper
 		when 'video'
 			content = icon('video-camera')
 		when 'link'
-			content = icon('external-link')
+			content = icon('link')
 		when 'rich'
 			content = icon('link')
 		when 'photo'
@@ -22,17 +22,8 @@ module ResourcesHelper
 		end
 	end
 
-	def print_title(resource, link='', with_link=true)
-		if with_link
-			link = link.present? ? link : resource.url
-			if resource.mime == 'text' || resource.mime == 'video'
-				haml_concat link_to(resource.title, link, title: resource.title)
-			else
-				haml_concat link_to(resource.title, link, title: resource.title, target: '_blank')
-			end
-		else
-			haml_concat resource.title
-		end
+	def print_title(resource)
+		haml_concat link_to(resource.title, collection_path(resource.collection, rid: resource.id), remote: true)
 	end
 
 	def has_embedded_or_thumbnail?(resource)
@@ -49,11 +40,11 @@ module ResourcesHelper
 		# end
 	end
 
-	def print_description(resource, link='')
-		target = '_blank' unless resource.is_fulltext?
-		link = resource.url unless link.present?
+	def print_description(resource)
 		haml_concat link_to(
-			get_partial_string(resource.description, 200, '...'), link, target: target
+			get_partial_string(resource.description, 200, '...'), 
+			collection_path(resource.collection, rid: resource.id), 
+			remote: true
 		)
 	end
 
@@ -80,13 +71,15 @@ module ResourcesHelper
 			end
 		end
 
-		haml_tag :div, class: 'btn-square right' do
-			haml_concat link_to(icon('eye'), collection_path(collection, idx: resource_counter), remote: true, class: 'right', id: "resource_#{resource_counter}")
-		end
-
 		if collection.belongs_to?(@user || current_user)
 			haml_tag :div, class: 'btn-square right' do
-				haml_concat link_to(icon('edit'), edit_collection_resource_path(collection, resource), class: 'right', remote: true)
+				haml_concat link_to(icon('edit'), edit_collection_resource_path(collection, resource), remote: true)
+			end
+		end
+
+		if resource.mime != 'text'
+			haml_tag :div, class: 'btn-square right' do
+				haml_concat link_to(icon('globe'), resource.url, target: '_blank')
 			end
 		end
 
@@ -102,19 +95,9 @@ module ResourcesHelper
 	end
 
 	def print_thumbnail_link(resource)
-		link = resource.is_fulltext? ? collection_resource_path(resource.collection, resource) : resource.url
-		thumbnail_lambda.call(resource, link)
-	end
-
-	def thumbnail_lambda
-		
-		lambda do |resource, link|
-			target = '_blank' unless resource.is_fulltext?
-			haml_tag :a, href: link, title: resource.title, target: target do
-				haml_tag(:div, class: 'resourceList_preview_thumbnails_thumb', style: "background-image:url(#{resource.thumbnail})")
-			end
+		haml_tag :a, href: collection_path(resource.collection, rid: resource.id), title: resource.title, :'data-remote' => true do
+			haml_tag(:div, class: 'resourceList_preview_thumbnails_thumb', style: "background-image:url(#{resource.thumbnail})")
 		end
-
 	end
 
 end

@@ -310,3 +310,51 @@ body.landings #main {
 ._is_preloading .resourceList {
   opacity: 0;
 }
+
+.fa-close {
+  font-weight: 100;
+}
+
+
+.lightbox_player {
+  background-color: $white;
+  padding: 40px;
+  min-height: 80%;
+
+  img {
+    margin: 20px 0;
+    display: block;
+  }
+}
+
+.lightbox_player_title {
+  margin-top: 0;
+  line-height: 140%;
+}
+
+.lightbox_player_subtitle {
+  margin-top: 0;
+  line-height: 140%;
+  font-size: 0.8em;
+
+  a {
+    color: $blue;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+}
+
+.lightbox_player_html {
+  margin: 10px 0;
+}
+
+._is_title_only .lightbox_player_title {
+  font-size: 4em;
+  text-align: center;
+}
+
+.lightbox_loader {
+  height: 100%;
+}

@@ -14,13 +14,10 @@
   }
 }
 
-@mixin roundButton($selector, $size: 32px, $font-size: 1.4em, $defaultSkin: true) {
+@mixin roundButton($selector, $font-size: 1.4em, $defaultSkin: true) {
   #{$selector} {
     @extend %roundButton;
     font-size: $font-size;
-    width: $size;
-    height: $size;
-    line-height: $size - 2;
   }
 
   @if $defaultSkin != false {
@@ -34,7 +31,7 @@
 // define component placeholders for component skin (no selector here)
 @include importOnce('roundButton-skin-default') {
   %roundButton-skin-default {
-    color: $white;
+    color: rgba(0, 0, 0, 0.6);
     border: 1px solid $white;
     opacity: 0.65;
     border-radius: 100%;

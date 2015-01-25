@@ -10,7 +10,7 @@
     .resourceList_title.col-80>
       - link = resource.is_fulltext? ? collection_resource_path(@collection, resource) : resource.url
       .resourceList_title_show
-        - print_title(resource, link)
+        - print_title(resource)
       .resourceList_title_edit
         .col-80>
           = form_for resource, url: collection_resource_path(@collection, resource), method: 'PATCH', remote: true do |f|
@@ -30,12 +30,12 @@
         - if resource.description.present?
           .inline-block.col-60>
             .resourceList_preview_digest
-              - print_description(resource, link) unless resource.mime == 'photo'
+              - print_description(resource) unless resource.mime == 'photo'
       - elsif resource.description.present?
         .inline-block.col-80>
           .resourceList_preview_digest
             - link = resource.is_fulltext? ? collection_resource_path(resource.collection, resource) : resource.url
-            - print_description(resource, link)
+            - print_description(resource)
   .row
     .icon-column>
     .resourceList_bottomTools

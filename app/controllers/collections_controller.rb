@@ -22,14 +22,24 @@ class CollectionsController < ApplicationController
   end
 
   def show
-    @resource_index = (params[:idx] || 0).to_i
+    # @resource_index = (params[:i] || 0).to_i
     @resources = @collection.resources.order(:priority, :created_at)
-    @current_resource = @resources[@resource_index] if @resource_index >= 0 && @resource_index < @resources.length
+    @current_resource = Resource.where(id:params[:rid]).first if params[:rid]
     @partial_url = request.original_url
 
+    if @current_resource
+      idx = @resources.index @current_resource
+      if idx + 1 <= @resources.count
+        @next_resource = @resources[idx + 1]
+      end
+      if idx > 0
+        @prev_resource = @resources[idx - 1]
+      end
+    end
+    
     respond_to do |format|
       format.html {}
-      format.js  {}
+      format.js {}
     end
   end
 

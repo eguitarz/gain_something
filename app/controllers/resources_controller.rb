@@ -4,21 +4,17 @@ require 'json'
 RESOURCE_LIMIT = 150
 
 class ResourcesController < ApplicationController
-	before_action :get_collection, only: [:new, :show, :create, :edit, :update, :destroy, :change_parent]
-	before_action :get_resource, only: [:show, :destroy, :edit, :change_parent, :copy]
+	before_action :get_collection, only: [:new, :create, :edit, :update, :destroy, :change_parent]
+	before_action :get_resource, only: [:destroy, :edit, :change_parent, :copy]
 	before_action only: [:new, :create, :edit, :update, :destroy, :change_parent] do
     require_owner @collection.user
   end
-	before_action :require_user_signed_in, except: [:show]
+	before_action :require_user_signed_in
 	before_action :check_resources_limit, only: [:new, :create]
-	before_action :check_visibility, only: [:show]
 
 	def new
 		@mime = params[:mime]
 		@resource = Resource.new
-	end
-
-	def show
 	end
 
 	def create
@@ -150,6 +146,12 @@ class ResourcesController < ApplicationController
 		resource.thumbnail = embed[:thumbnail]
 		resource.thumbnail_width = embed[:thumbnail_width]
 		resource.description = embed[:description]
+
+		if resource.mime == 'link'
+			extraction = extract_from_url(resource.url)
+			resource.content = extraction[:content]
+		end
+
 	end
 
 	def create_embed_by_url(url)
@@ -168,6 +170,18 @@ class ResourcesController < ApplicationController
 		}
 	end
 
+	def extract_from_url(url)
+		embedly_api = Embedly::API.new key: 'b782de7414f440b5bf31d9c76409acf9'
+		obj = embedly_api.extract :url => url
+		p obj
+		{
+			content: obj[0]['content'],
+			url: url,
+			title: obj[0]['title'] || url,
+			type: obj[0]['type']  || 'unknown'
+		}
+	end
+
 	def check_resources_limit
 	  if @collection.resources.count >= RESOURCE_LIMIT
 	    flash[:error] = "Reached the limit of resources: #{RESOURCE_LIMIT}"
@@ -175,10 +189,4 @@ class ResourcesController < ApplicationController
 	  end
 	end
 
-	def check_visibility
-    if !@resource.collection.is_visible? && (!current_user.present? || @resource.collection.user.id != current_user.id)
-      flash[:notice] = 'This resource belong to a private collection, only author can access it.'
-      redirect_to :root
-    end
-  end
 end
