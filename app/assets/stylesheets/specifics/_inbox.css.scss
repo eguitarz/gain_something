@@ -348,6 +348,13 @@ body.landings #main {
 
 .lightbox_player_html {
   margin: 10px 0;
+
+  a{
+    text-decoration: underline;
+  }
+  a:hover {
+   text-decoration: none; 
+  }
 }
 
 ._is_title_only .lightbox_player_title {

@@ -20,7 +20,7 @@ class ResourcesController < ApplicationController
 	def create
 		@resource = @collection.resources.build(resource_params)
 		@collection.touch
-		extract(@resource) unless @resource.mime == 'text'
+		@resource.extract unless @resource.mime == 'text'
 
 		if @resource.mime == 'error'
 			flash[:error] = 'Some error happend while fetching your resource'
@@ -134,69 +134,6 @@ class ResourcesController < ApplicationController
 	def resource_params
 		params.require(:resource).permit(:title, :url, :mime, :description, :provider_name, 
 			:provider_url, :thumbnail, :thumbnail_width)
-	end
-
-	def extract(resource)
-		extraction = extract_from_url(resource.url)
-		resource.title = extraction[:title].first(255)
-		resource.embedded_html = extraction[:html]
-		resource.mime = extraction[:type] == 'html' ? 'link' : extraction[:type]
-		resource.provider_name = extraction[:provider_name]
-		resource.provider_url = extraction[:provider_url]
-		resource.description = extraction[:description]
-		resource.content = extraction[:content]
-
-		if extraction[:images] && !extraction[:media].empty?
-			image = extraction[:images].first
-			if image.present?
-				resource.thumbnail = image['url']
-				resource.thumbnail_width = image['width']
-				resource.thumbnail_height = image['height']
-			end
-		end
-
-		if extraction[:media] && !extraction[:media].empty?
-			media = extraction[:media]
-			if media.present?
-				resource.mime = media.type if media.type.present?
-				resource.embedded_html = media.html if media.html.present?
-			end
-		end
-
-	end
-
-	def create_embed_by_url(url)
-		embedly_api = Embedly::API.new key: 'b782de7414f440b5bf31d9c76409acf9'
-		obj = embedly_api.oembed :url => url
-		{
-			html: obj[0]['html'],
-			url: url,
-			title: obj[0]['title'] || url,
-			type: obj[0]['type']  || 'unknown',
-			provider_name: obj[0]['provider_name'],
-			provider_url: obj[0]['provider_url'],
-			thumbnail: obj[0]['thumbnail_url'],
-			thumbnail_width: obj[0]['thumbnail_width'],
-			description: obj[0]['description']
-		}
-	end
-
-	def extract_from_url(url)
-		embedly_api = Embedly::API.new key: 'b782de7414f440b5bf31d9c76409acf9'
-		extracted_obj = embedly_api.extract(:url => url)[0]
-		{
-			html: extracted_obj['html'],
-			title: extracted_obj['title'] || url,
-			url: url,
-			type: extracted_obj['type']  || 'unknown',
-			provider_name: extracted_obj['provider_name'],
-			provider_url: extracted_obj['provider_url'],
-			images: extracted_obj['images'],
-			media: extracted_obj['media'],
-			description: extracted_obj['description'],
-			content: extracted_obj['content'],
-			type: extracted_obj['type']  || 'unknown'
-		}
 	end
 
 	def check_resources_limit
