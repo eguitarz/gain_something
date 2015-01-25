@@ -45,7 +45,7 @@ class ResourcesController < ApplicationController
 		@resource.update resource_params
 
 		respond_to do |format|
-			format.html { redirect_to collection_url(@collection.id) }
+			format.html { redirect_to collection_url(@collection.id, rid: @resource.id) }
 			format.js {}
 		end
 	end

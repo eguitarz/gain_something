@@ -2,12 +2,13 @@
   = render partial: "partials/lightbox_next_prev_buttons"
   
 - if @current_resource
+  %input{id: 'lightbox-markdownDescription', type:'hidden', value: get_description(@current_resource) }
   #lightbox_player.lightbox_player.prevent-quit
     %h1.lightbox_player_title
       = @current_resource.title
       .lightbox_player_subtitle
         = link_to 'original', @current_resource.url, target: '_blank' unless @current_resource.is_text?
-        - if @current_resource.is_text?
+        - if @current_resource.is_text? && @collection.belongs_to?(current_user)
           = link_to 'edit this article', edit_collection_resource_path(@collection, @current_resource)
     .lightbox_player_content
       - if @current_resource.thumbnail.present? && @current_resource.should_present_thumbnail?

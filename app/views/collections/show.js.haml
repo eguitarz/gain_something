@@ -7,7 +7,7 @@
 
 
   // translate markdown
-  $('#lightbox._is_text #lightbox_display').html(marked(decodeURIComponent($('#preview-desc-value').val())));
+  $('#lightbox._is_text .lightbox_player_html').html(marked(decodeURIComponent($('#lightbox-markdownDescription').val())));
 
   // update lightbox class
   - lightbox_class = @current_resource.description.present? ?  '' : '_has_no_description'
