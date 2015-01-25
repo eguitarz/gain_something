@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150122213804) do
+ActiveRecord::Schema.define(version: 20150125055116) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,7 +61,7 @@ ActiveRecord::Schema.define(version: 20150122213804) do
 
   create_table "resources", force: true do |t|
     t.integer  "collection_id"
-    t.string   "title",           null: false
+    t.string   "title",            null: false
     t.string   "mime"
     t.text     "description"
     t.text     "url"
@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(version: 20150122213804) do
     t.string   "thumbnail"
     t.string   "thumbnail_width"
     t.text     "content"
+    t.integer  "thumbnail_height"
   end
 
   create_table "users", force: true do |t|

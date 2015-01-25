@@ -18,4 +18,12 @@ class Resource < ActiveRecord::Base
   def is_text?
     self.mime == 'text'
   end
+
+  def is_photo?
+    self.mime == 'photo'
+  end
+
+  def should_present_thumbnail?
+    !self.content.present? && !self.embedded_html.present?
+  end
 end

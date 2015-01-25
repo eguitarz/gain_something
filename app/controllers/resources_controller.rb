@@ -20,7 +20,7 @@ class ResourcesController < ApplicationController
 	def create
 		@resource = @collection.resources.build(resource_params)
 		@collection.touch
-		create_and_append_embed(@resource) unless @resource.mime == 'text'
+		extract(@resource) unless @resource.mime == 'text'
 
 		if @resource.mime == 'error'
 			flash[:error] = 'Some error happend while fetching your resource'
@@ -136,20 +136,32 @@ class ResourcesController < ApplicationController
 			:provider_url, :thumbnail, :thumbnail_width)
 	end
 
-	def create_and_append_embed(resource)
-		embed = create_embed_by_url(resource.url)
-		resource.title = embed[:title].first(255)
-		resource.embedded_html = embed[:html]
-		resource.mime = embed[:type]
-		resource.provider_name = embed[:provider_name]
-		resource.provider_url = embed[:provider_url]
-		resource.thumbnail = embed[:thumbnail]
-		resource.thumbnail_width = embed[:thumbnail_width]
-		resource.description = embed[:description]
+	def extract(resource)
+		extraction = extract_from_url(resource.url)
+		resource.title = extraction[:title].first(255)
+		resource.embedded_html = extraction[:html]
+		resource.mime = extraction[:type] == 'html' ? 'link' : extraction[:type]
+		resource.provider_name = extraction[:provider_name]
+		resource.provider_url = extraction[:provider_url]
+		resource.description = extraction[:description]
+		resource.content = extraction[:content]
 
-		if resource.mime == 'link'
-			extraction = extract_from_url(resource.url)
-			resource.content = extraction[:content]
+		if extraction[:images] && !extraction[:media].empty?
+			image = extraction[:images].first
+			if image.present?
+				resource.thumbnail = image['url']
+				resource.thumbnail_width = image['width']
+				resource.thumbnail_height = image['height']
+			end
+		end
+
+		p extraction
+		if extraction[:media] && !extraction[:media].empty?
+			media = extraction[:media]
+			if media.present?
+				resource.mime = media.type
+				resource.embedded_html = media.html
+			end
 		end
 
 	end
@@ -172,13 +184,19 @@ class ResourcesController < ApplicationController
 
 	def extract_from_url(url)
 		embedly_api = Embedly::API.new key: 'b782de7414f440b5bf31d9c76409acf9'
-		obj = embedly_api.extract :url => url
-		p obj
+		extracted_obj = embedly_api.extract(:url => url)[0]
 		{
-			content: obj[0]['content'],
+			html: extracted_obj['html'],
+			title: extracted_obj['title'] || url,
 			url: url,
-			title: obj[0]['title'] || url,
-			type: obj[0]['type']  || 'unknown'
+			type: extracted_obj['type']  || 'unknown',
+			provider_name: extracted_obj['provider_name'],
+			provider_url: extracted_obj['provider_url'],
+			images: extracted_obj['images'],
+			media: extracted_obj['media'],
+			description: extracted_obj['description'],
+			content: extracted_obj['content'],
+			type: extracted_obj['type']  || 'unknown'
 		}
 	end
 

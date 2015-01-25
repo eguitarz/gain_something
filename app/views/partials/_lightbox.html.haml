@@ -7,12 +7,12 @@
       = @current_resource.title
       .lightbox_player_subtitle
         = link_to 'original', @current_resource.url, target: '_blank' unless @current_resource.is_text?
+        - if @current_resource.is_text?
+          = link_to 'edit this article', edit_collection_resource_path(@collection, @current_resource)
     .lightbox_player_content
-      - if @current_resource.thumbnail.present? && @current_resource.mime == 'link' || @current_resource.mime == 'photo'
-        - if @next_resource.present?
-          = link_to image_tag(@current_resource.thumbnail), collection_path(@collection, rid: @next_resource.id), remote: true
-        - elsif @prev_resource.present?
-          = link_to image_tag(@current_resource.thumbnail), collection_path(@collection, rid: @prev_resource.id), remote: true
+      - if @current_resource.thumbnail.present? && @current_resource.should_present_thumbnail?
+        = link_to image_tag(@current_resource.thumbnail), @current_resource.url, target: '_blank'
+
       .lightbox_player_html
         - if @current_resource.content.present?
           = @current_resource.content.html_safe

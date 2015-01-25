@@ -4,7 +4,7 @@
 
 .content
   .backLink
-    = link_to collection_resource_path(@collection.id, @resource.id), id: 'navbar_back' do
+    = link_to collection_path(@collection.id, rid: @resource.id), id: 'navbar_back' do
       = " #{icon('arrow-left')} Go Back".html_safe
 
   = form_for [@collection, @resource] do |f|
