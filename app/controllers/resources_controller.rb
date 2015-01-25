@@ -155,12 +155,11 @@ class ResourcesController < ApplicationController
 			end
 		end
 
-		p extraction
 		if extraction[:media] && !extraction[:media].empty?
 			media = extraction[:media]
 			if media.present?
-				resource.mime = media.type
-				resource.embedded_html = media.html
+				resource.mime = media.type if media.type.present?
+				resource.embedded_html = media.html if media.html.present?
 			end
 		end
 
