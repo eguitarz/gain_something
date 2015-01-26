@@ -6,7 +6,7 @@
     - collection_subtitle(collection)
   .collection_thumbnails
     = link_to collection_path(collection) do
-      - collection.resources_with_thumbnail.first(4).each do |r|
+      - collection.resources_with_thumbnail.last(4).each do |r|
         .collection_thumbnail{style: "background-image:url(#{r.thumbnail})"}>
   .collection_info
     - collection_info(collection, !is_user_controller?(params[:controller]) )

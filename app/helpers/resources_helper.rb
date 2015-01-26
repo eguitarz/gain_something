@@ -62,26 +62,24 @@ module ResourcesHelper
 
 	def print_resource_tools(collection, resource, resource_counter)
 		if collection.belongs_to?(current_user)
-			# haml_tag :div, class: 'btn-square right' do
 			haml_concat link_to( icon('trash'), \
 				collection_resource_path(collection, resource), \
 				class: 'btn-square right', \
 				remote: true, \
 				:'data-confirm' => "Delete resource - ”#{resource.title}” ?", :'data-modal' => true,\
 				method: :delete, id: "resource_#{resource.id}")
-			# end
 		end
 
 		if collection.belongs_to?(@user || current_user)
-			# haml_tag :div, class: 'btn-square right' do
-			haml_concat link_to(icon('edit'), edit_collection_resource_path(collection, resource), remote: true, class: 'btn-square right')
-			# end
+			if resource.is_text?
+				haml_concat link_to(icon('edit'), edit_collection_resource_path(collection, resource), class: 'btn-square right')
+			else 
+				haml_concat link_to(icon('edit'), edit_collection_resource_path(collection, resource), remote: true, class: 'btn-square right')
+			end
 		end
 
 		if resource.mime != 'text'
-			# haml_tag :div, class: 'btn-square right' do
 			haml_concat link_to(icon('globe'), resource.url, target: '_blank', class: 'btn-square right')
-			# end
 		end
 
 	end

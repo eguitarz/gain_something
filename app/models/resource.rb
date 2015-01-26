@@ -21,6 +21,10 @@ class Resource < ActiveRecord::Base
     self.mime == 'text'
   end
 
+  def is_link?
+    self.mime == 'link'
+  end
+
   def is_photo?
     self.mime == 'photo'
   end

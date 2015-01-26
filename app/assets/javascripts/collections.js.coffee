@@ -55,14 +55,22 @@ $(document).on 'page:change', ->
   $('.editable').on 'ajax:success', (e, data)->
     $(@).addClass('saved').find('input').blur()
 
+  isLightboxMode = $('body').hasClass('_is_lightbox_mode')
   $(document).on 'keyup', (e)->
-    isLightboxMode = $('body').hasClass('_is_lightbox_mode')
     $('.btn-next').click() if e.keyCode == 39 && isLightboxMode
     $('.btn-prev').click() if e.keyCode == 37 && isLightboxMode
-    
     if e.keyCode == 27
       quitLightbox() # for lightbox
       $('body').removeClass '_is_confirmation' # for dialogs
+
+  $(document).on 'keydown', (e)->
+    SCROLL_SIZE = 30
+    player = $('#lightbox_player')[0]
+    playerHeight = $('#lightbox_player').height() - 60
+    scrollHeight = Math.max(player.scrollHeight, player.clientHeight)
+    $('#lightbox_player').scrollTop(player.scrollTop + SCROLL_SIZE) if e.keyCode == 40 && isLightboxMode
+    $('#lightbox_player').scrollTop(player.scrollTop - SCROLL_SIZE) if e.keyCode == 38 && isLightboxMode
+    $('#lightbox_player').scrollTop(player.scrollTop + playerHeight) if e.keyCode == 32 && isLightboxMode
 
 
   # move to collection
@@ -96,5 +104,4 @@ $(document).on 'page:change', ->
   $('.resourceList_title_edit input').blur ->
     $(@).parents('.resourceList_item').removeClass('_is_editable')
   .on 'keyup', (e)->
-    console.log $(@)
     $(@).parents('.resourceList_item').removeClass('_is_editable') if e.keyCode == 27
