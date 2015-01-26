@@ -70,7 +70,7 @@ initEditorButtons = (editor)->
 	$('#preview-btn').on 'click', ->
 		$('body').toggleClass 'preview-mode'
 
-		$('#markdown-preview').html marked(editor.getValue())
+		$('#markdown-preview').html marked(editor.getValue(), {breaks: true})
 		
 
 bindCancelButton = (selector)->

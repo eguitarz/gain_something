@@ -55,8 +55,6 @@ $(document).on 'page:change', ->
   $('.editable').on 'ajax:success', (e, data)->
     $(@).addClass('saved').find('input').blur()
 
-  $('#lightbox._is_text #lightbox_display').html marked(decodeURIComponent($('#preview-desc-value').val()))
-
   $(document).on 'keyup', (e)->
     isLightboxMode = $('body').hasClass('_is_lightbox_mode')
     $('.btn-next').click() if e.keyCode == 39 && isLightboxMode
