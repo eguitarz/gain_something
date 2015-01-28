@@ -9,7 +9,7 @@
     height: 100%;
     z-index: 9999;
     opacity: 0;
-    @include transition('transform 800ms, opacity 500ms ease-out');
+    @include transition('all 600ms');
     @include transform('scale(0)');
   }
 

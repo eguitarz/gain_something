@@ -64,6 +64,7 @@ $(document).on 'page:change', ->
       $('body').removeClass '_is_confirmation' # for dialogs
 
   $(document).on 'keydown', (e)->
+    isLightboxMode = $('body').hasClass('_is_lightbox_mode')
     SCROLL_SIZE = 30
     player = $('#lightbox_player')[0]
     playerHeight = $('#lightbox_player').height() - 60
