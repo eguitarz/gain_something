@@ -315,6 +315,11 @@ body.landings #main {
   font-weight: 100;
 }
 
+._is_lightbox_mode #lightbox {
+  @include transform('scale(1)');
+  opacity: 1;
+}
+
 
 .lightbox_player {
   background-color: $white;
@@ -364,4 +369,13 @@ body.landings #main {
 
 .lightbox_loader {
   height: 100%;
+}
+
+#navbar_back {
+  .fa {
+    @include transition('all 300ms');
+  }
+  &:hover .fa {
+    @include transform('scaleX(1.1) translateX(-3px)');
+  }
 }

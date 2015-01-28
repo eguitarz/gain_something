@@ -5,10 +5,12 @@
   %lightbox {
     position: fixed;
     top: 0;
-    left: -9999em;
     width: 100%;
     height: 100%;
     z-index: 9999;
+    opacity: 0;
+    @include transition('transform 800ms, opacity 500ms ease-out');
+    @include transform('scale(0)');
   }
 
   %lightbox_player_wrapper {
