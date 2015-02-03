@@ -1,0 +1,7 @@
+- resource = render partial: 'resources/resource', locals: {resource: @resource}
+$('._is_updating_element').removeClass('_is_updating_element').after("#{j(resource)}");
+var collection_id = $('.resourceList').attr('data-collection-id');
+$.ajax({data: $('.resourceList').sortable('serialize'),type: 'PUT',url: "/collections/"+collection_id+"/sort"});
+$('.resourceList').sortable();
+$('.resourceList').sortable('disable');
+$('.resourceList').disableSelection();

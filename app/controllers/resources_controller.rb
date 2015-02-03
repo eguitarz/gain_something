@@ -1,16 +1,16 @@
 require 'embedly'
 require 'json'
 
-RESOURCE_LIMIT = 150
+RESOURCE_LIMIT = 10000
 
 class ResourcesController < ApplicationController
-	before_action :get_collection, only: [:new, :create, :edit, :update, :destroy, :change_parent]
+	before_action :get_collection, only: [:new, :create, :edit, :update, :destroy, :change_parent, :create_resource, :create_header]
 	before_action :get_resource, only: [:destroy, :edit, :change_parent, :copy]
-	before_action only: [:new, :create, :edit, :update, :destroy, :change_parent] do
+	before_action only: [:new, :create, :edit, :update, :destroy, :change_parent, :create_resource, :create_header] do
     require_owner @collection.user
   end
 	before_action :require_user_signed_in
-	before_action :check_resources_limit, only: [:new, :create]
+	before_action :check_resources_limit, only: [:new, :create, :create_resource, :create_header]
 
 	def new
 		@mime = params[:mime]
@@ -31,6 +31,35 @@ class ResourcesController < ApplicationController
 		end
 
 		redirect_to collection_url(@collection.id)
+	end
+
+	def create_resource
+		@resource = @collection.resources.build(url: params[:url])
+		@collection.touch
+		@resource.extract unless @resource.mime == 'text'
+
+		if @resource.mime == 'error'
+			flash[:error] = 'Some error happend while fetching your resource'
+		end
+		
+		unless @collection.save
+			flash[:error] = [@collection.errors.full_messages.join(', '), @resource.errors.full_messages.join(', ')].join(', ')
+		end
+
+		respond_to do |format|
+			format.json { render json: @resource}
+		end
+	end
+
+	def create_header
+		@user = current_user
+		@resource = @collection.resources.build(url: '', title: params[:title], mime: 'header' )
+		unless @collection.save
+			flash[:error] = [@collection.errors.full_messages.join(', '), @resource.errors.full_messages.join(', ')].join(', ')
+		end
+		respond_to do |format|
+			format.js {}
+		end
 	end
 
 	def edit

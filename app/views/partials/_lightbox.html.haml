@@ -12,6 +12,8 @@
             = link_to edit_collection_resource_path(@collection, @current_resource) do
               = icon('edit')
               Edit Article
+        - elsif @current_resource.is_header?
+          // do nothing
         - else
           = link_to @current_resource.url, target: '_blank' do
             = icon('external-link')

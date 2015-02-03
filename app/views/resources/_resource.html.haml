@@ -1,5 +1,5 @@
 - draggable_class = 'draggable' if resource.collection.belongs_to? @user
-.resourceList_item.deletable{id: "resource-#{resource.id}"}
+.resourceList_item.deletable{id: "resource-#{resource.id}", class: "resourceList_#{resource.mime}", :'data-resource-id' => "#{resource.id}"}
   .row
     .icon-column{class: draggable_class}>
       .animation-icon.animation-icon-before
@@ -19,7 +19,7 @@
           "Enter" to update
         
     .resourceList_tools.col-10
-      - print_resource_tools(@collection, resource, resource_counter)
+      - print_resource_tools(@collection, resource)
       
   - if resource.thumbnail.present? || resource.description.present?
     .resourceList_preview
@@ -39,8 +39,8 @@
   .row
     .icon-column>
     .resourceList_bottomTools
-      - if @owned_collections && @owned_collections.count > 1
-        - if resource.collection.belongs_to? @user
+      - if @owned_collections && @owned_collections.count > 1 && resource.mime != 'header'
+        - if resource.collection.belongs_to?(@user)
           move to
         - else
           copy to
@@ -58,3 +58,14 @@
           = link_to collection_resource_copy_path(@collection, resource, owned_collections_exclude_self.first.id), method: 'put', id: "resource-moveto-#{resource.id}", remote: true do
             .btn-square
               = icon('arrow-right')
+- if resource.collection.belongs_to? @user
+  .resourceList_newElement{id: "new_element_#{resource.id}"}
+    .resourceList_detectingArea
+    .resourceList_newElement_row.row
+      .icon-column>
+        .btn-square.btn-new-element
+          = icon('plus')
+      .col-80
+        = form_tag collection_create_header_path(@collection), class:'collection_cerateByUrlForm', remote: true do
+          = text_field_tag :title, '', placeholder: 'Type header here', class: 'collection_createByUrlForm_url'
+          = label_tag '"Enter" to create header'

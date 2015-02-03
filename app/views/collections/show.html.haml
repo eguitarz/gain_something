@@ -1,57 +1,59 @@
 - html_title(@collection.name.first(50))
 - html_description(@collection.description)
 .navbar
-	.navbar_item.col-40>
-	.navbar_item.col-60>
-		= #link_to "<div class=\"btn-large btn-publish\">#{icon('lock')}</div>".html_safe, collection_path(@collection.id), class: 'right'
-		- print_collection_delete_button(@collection)
+  .navbar_item.col-40>
+  .navbar_item.col-60>
+    = #link_to "<div class=\"btn-large btn-publish\">#{icon('lock')}</div>".html_safe, collection_path(@collection.id), class: 'right'
+    - print_collection_delete_button(@collection)
 
 - visibility_class = @collection.is_visible? ? '_is_public' : '_is_private'
 #collection.content{class: visibility_class}
-	.backLink
-		= link_to "#{user_path(@collection.user.username)}", id: 'navbar_back' do
-			= "	#{icon('arrow-left')} Go Back".html_safe
+  .backLink
+    = link_to "#{user_path(@collection.user.username)}", id: 'navbar_back' do
+      = " #{icon('arrow-left')} Go Back".html_safe
 
-	.collection-header
-		.row
-			.col-80.title>
-				- if @collection.belongs_to?(current_user)
-					= form_for @collection, remote:true, html: {class: 'no-margin editable'} do |f|
-						= f.text_field :name
-						.saved-icon
-							= icon('check')
-				- else
-					= @collection.name
-			.col-20.visibility
-				- message_to_public = 'Change visibility to “public” ?'
-				- message_to_private = 'Change visibility to “only me” ?'
-				- confirm_message = @collection.is_visible? ? message_to_private : message_to_public
-				- if @collection.belongs_to? current_user
-					= link_to collection_visibility_path(@collection), :'data-confirm' => confirm_message, method: 'put', remote: true, id: "collection-visibility-#{@collection.id}", :'data-modal' => 'true', :'data-message-to-public' => message_to_public, :'data-message-to-private' => message_to_private, class: 'right' do 
-						.collection_is_public_visibility
-							= "#{icon('globe')} public".html_safe
-						.collection_is_private_visibility
-							= "#{icon('lock')} only me".html_safe
-				- else
-					.collection_is_public_visibility
-						= "#{icon('globe')} public".html_safe
-					.collection_is_private_visibility
-						= "#{icon('lock')} only me".html_safe
+  .collection-header
+    .row
+      .col-80.title>
+        - if @collection.belongs_to?(current_user)
+          = form_for @collection, remote:true, html: {class: 'no-margin editable'} do |f|
+            = f.text_field :name
+            .saved-icon
+              = icon('check')
+        - else
+          = @collection.name
+      .col-20.visibility
+        - message_to_public = 'Change visibility to “public” ?'
+        - message_to_private = 'Change visibility to “only me” ?'
+        - confirm_message = @collection.is_visible? ? message_to_private : message_to_public
+        - if @collection.belongs_to? current_user
+          = link_to collection_visibility_path(@collection), :'data-confirm' => confirm_message, method: 'put', remote: true, id: "collection-visibility-#{@collection.id}", :'data-modal' => 'true', :'data-message-to-public' => message_to_public, :'data-message-to-private' => message_to_private, class: 'right' do 
+            .collection_is_public_visibility
+              = "#{icon('globe')} public".html_safe
+            .collection_is_private_visibility
+              = "#{icon('lock')} only me".html_safe
+        - else
+          .collection_is_public_visibility
+            = "#{icon('globe')} public".html_safe
+          .collection_is_private_visibility
+            = "#{icon('lock')} only me".html_safe
 
-	.document.row
-		.collection_description.col-100
-			- if @collection.belongs_to?(current_user)
-				= form_for @collection, remote:true, html: {class: 'no-margin editable'} do |f|
-					= f.text_field :description, placeholder: 'Description (optional)'
-					.saved-icon
-						= icon('check')
-			- else
-				= @collection.description
+  .document.row
+    .collection_description.col-100
+      - if @collection.belongs_to?(current_user)
+        = form_for @collection, remote:true, html: {class: 'no-margin editable'} do |f|
+          = f.text_field :description, placeholder: 'Description (optional)'
+          .saved-icon
+            = icon('check')
+      - else
+        = @collection.description
 
-	- if @collection.belongs_to?(current_user)
-		.row.document-buttons
-			.col-100
-				= link_to "<div class=\"btn-small\">#{icon('plus')} Article</div>".html_safe, new_collection_resource_path(@collection.id, mime: 'text')
-				= link_to "<div class=\"btn-small\">#{icon('plus')} Link</div>".html_safe, new_collection_resource_path(@collection.id, mime: 'link')
-	.resourceList{:'data-collection-id' => @collection.id}
-		= render @resources
+  - if @collection.belongs_to?(current_user)
+    .row.document-buttons
+      .col-100
+        = link_to "<div class=\"btn-small\">#{icon('plus')} Article</div>".html_safe, new_collection_resource_path(@collection.id, mime: 'text')
+        %span.collection_newResource
+          = link_to "<div class=\"btn-small\">#{icon('plus')} Link</div>".html_safe, new_collection_resource_path(@collection.id, mime: 'link')
+
+  .resourceList{:'data-collection-id' => @collection.id}
+    = render @resources

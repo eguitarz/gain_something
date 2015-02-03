@@ -17,6 +17,10 @@ class Resource < ActiveRecord::Base
     !self.description.present? && !self.content.present? && !self.embedded_html.present?
   end
 
+  def is_header?
+    self.mime == 'header'
+  end
+
   def is_text?
     self.mime == 'text'
   end

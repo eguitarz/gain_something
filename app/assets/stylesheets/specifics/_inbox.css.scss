@@ -379,3 +379,84 @@ body.landings #main {
     @include transform('scaleX(1.1) translateX(-3px)');
   }
 }
+
+.resourceList_newElement {
+  position: relative;
+  height: 40px;
+  max-height: 40px;
+}
+
+.btn-new-element {
+  position: absolute;
+  left: 0;
+  opacity: 0;
+  @include transition('all 300ms');
+}
+
+._is_adding_element .btn-new-element {
+  @include transform('rotate(45deg)');
+  opacity: 1;
+}
+
+.resourceList_creationTools {
+  overflow: hidden;
+  // background-color: $green;
+  @include transition('height 100ms');
+  margin: 0 0 20px 0;
+}
+
+.resourceList_detectingArea {
+  position: absolute;
+  top: 0;
+  left: -20%;
+  width: 120%;
+  height: 40px;
+
+  &:hover + .row > .icon-column > .btn-new-element{
+    opacity: 1;
+  }
+}
+.resourceList_newElement_row {
+  @include transition('all 300ms');
+  margin: 5px;
+}
+
+.btn-item {
+  pointer-events: none;
+  opacity: 0;
+}
+
+._is_adding_element .btn-item {
+  pointer-events: default;
+  opacity: 1;
+}
+
+._is_adding_element .collection_cerateByUrlForm {
+  display: block;
+}
+
+.collection_cerateByUrlForm {
+  display: none;
+  border-radius: 3px;
+  input {
+    width: 40%;
+    border: 1px solid $lightgrey;
+    border-radius: 3px;
+    padding: 4px 8px;
+    font-size: 0.9em;
+  }
+  label {
+    font-size: 0.6em;
+    color: $grey;
+  }
+}
+
+.resourceList_header {
+  .resourceList_title_show{
+    padding: 10px 0;
+    border-top: 1px solid $lightgrey;
+    border-bottom: 1px solid $lightgrey;
+    text-align: center;
+    letter-spacing: 2px;
+  }
+}

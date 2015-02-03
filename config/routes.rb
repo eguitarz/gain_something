@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   resources :collections do
     put 'toggle_visibility' => 'collections#toggle_visibility', as: :visibility
     put 'sort' => 'collections#sort', as: :sort
+    post 'create_header' => 'resources#create_header', as: :create_header
+    post 'create_resource' => 'resources#create_by_url', as: :create_resource
     resources :resources do
       put 'move/:new_collection_id' => 'resources#change_parent', as: :move
       put 'copy/:new_collection_id' => 'resources#copy', as: :copy

@@ -13,6 +13,8 @@ module ResourcesHelper
 			content = icon('link')
 		when 'photo'
 			content = icon('photo')
+		when 'header'
+			content = ''
 		else
 			content = icon('question')
 		end
@@ -60,7 +62,7 @@ module ResourcesHelper
 		end
 	end
 
-	def print_resource_tools(collection, resource, resource_counter)
+	def print_resource_tools(collection, resource)
 		if collection.belongs_to?(current_user)
 			haml_concat link_to( icon('trash'), \
 				collection_resource_path(collection, resource), \
@@ -78,7 +80,7 @@ module ResourcesHelper
 			end
 		end
 
-		if resource.mime != 'text'
+		if resource.mime != 'text' && resource.mime != 'header'
 			haml_concat link_to(icon('globe'), resource.url, target: '_blank', class: 'btn-square right')
 		end
 

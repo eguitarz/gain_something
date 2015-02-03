@@ -68,10 +68,8 @@ $(document).on 'page:change', ->
     SCROLL_SIZE = 30
     player = $('#lightbox_player')[0]
     playerHeight = $('#lightbox_player').height() - 60
-    scrollHeight = Math.max(player.scrollHeight, player.clientHeight)
     $('#lightbox_player').scrollTop(player.scrollTop + SCROLL_SIZE) if e.keyCode == 40 && isLightboxMode
     $('#lightbox_player').scrollTop(player.scrollTop - SCROLL_SIZE) if e.keyCode == 38 && isLightboxMode
-    $('#lightbox_player').scrollTop(player.scrollTop + playerHeight) if e.keyCode == 32 && isLightboxMode
 
 
   # move to collection
@@ -88,16 +86,19 @@ $(document).on 'page:change', ->
   $('.resourceList').sortable()
   $('.resourceList').sortable('disable')
   $('.resourceList').disableSelection()
-  $('.draggable').hover ->
+  $('.resourceList').on 'mouseenter', '.draggable', ->
     $('.resourceList').sortable('enable')
     $('.resourceList').disableSelection()
-  , ->
+  .on 'mouseleave', '.draggable', ->
     $('.resourceList').sortable('disable')
     $('.resourceList').enableSelection()
-  $('.resourceList').on 'sortupdate', (e, ui)->
+  $('#collection').on 'sortupdate', '.resourceList',  (e, ui)->
+    if ui && ui.item
+      resource_id = $(ui.item[0]).attr('data-resource-id')
+      $("#new_element_#{resource_id}").appendTo($(ui.item[0]))
     collection_id = $(@).attr('data-collection-id')
     $.ajax
-      data: $(@).sortable('serialize')#.replace(/resource\[\]=/g, '')
+      data: $(@).sortable('serialize')
       type: 'PUT'
       url: "/collections/#{collection_id}/sort"
 
@@ -106,3 +107,13 @@ $(document).on 'page:change', ->
     $(@).parents('.resourceList_item').removeClass('_is_editable')
   .on 'keyup', (e)->
     $(@).parents('.resourceList_item').removeClass('_is_editable') if e.keyCode == 27
+
+  # line toolbar
+  $('.btn-new-element').click ->
+    $(@).parents('.resourceList_newElement').siblings().removeClass('_is_adding_element')
+    $(@).parents('.resourceList_newElement').toggleClass('_is_adding_element')
+    $(@).parents('.resourceList_newElement').find('.collection_createByUrlForm_url').focus()
+
+  # ajax new resource
+  $('.collection_cerateByUrlForm').on 'submit', ->
+    $(@).parents('.resourceList_newElement').removeClass('_is_adding_element').addClass('_is_updating_element')
