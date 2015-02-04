@@ -83,7 +83,7 @@ $(document).on 'page:change', ->
     $("#resource-moveto-#{resource_id}").attr('href', move_path)
 
   # draggable
-  $('.resourceList').sortable()
+  $('.resourceList').sortable({placeholder: '_is_dragging'})
   $('.resourceList').sortable('disable')
   $('.resourceList').disableSelection()
   $('.resourceList').on 'mouseenter', '.draggable', ->
@@ -95,12 +95,20 @@ $(document).on 'page:change', ->
   $('#collection').on 'sortupdate', '.resourceList',  (e, ui)->
     if ui && ui.item
       resource_id = $(ui.item[0]).attr('data-resource-id')
-      $("#new_element_#{resource_id}").appendTo($(ui.item[0]))
+      console.log $(@).sortable('serialize')
+      if $(ui.item[0]).prev().is('.resourceList_newElement')
+        $(ui.item[0]).after $("#new_element_#{resource_id}")
+      else
+        $(ui.item[0]).before $("#new_element_#{resource_id}")
     collection_id = $(@).attr('data-collection-id')
     $.ajax
       data: $(@).sortable('serialize')
       type: 'PUT'
       url: "/collections/#{collection_id}/sort"
+  .on 'sortstart', (e, ui)->
+    $('.resourceList').addClass '_is_sorting'
+  .on 'sortstop', (e, ui)->
+    $('.resourceList').removeClass '_is_sorting'
 
   # bind edit title input
   $('.resourceList_title_edit input').blur ->

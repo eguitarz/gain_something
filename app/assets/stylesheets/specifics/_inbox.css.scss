@@ -460,3 +460,10 @@ body.landings #main {
     letter-spacing: 2px;
   }
 }
+
+._is_dragging {
+  height: 180px;
+  width: 100%;
+  border: 1px dashed $grey;
+  background-color: $lightgrey;
+}
