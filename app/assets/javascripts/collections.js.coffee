@@ -83,31 +83,25 @@ $(document).on 'page:change', ->
     $("#resource-moveto-#{resource_id}").attr('href', move_path)
 
   # draggable / sorting
-  $('.resourceList').sortable({placeholder: '_is_dragging'})
-  $('.resourceList').sortable('disable')
-  $('.resourceList').disableSelection()
+  $('.sortable').sortable({placeholder: '_is_dragging'})
+  $('.sortable').sortable('disable')
+  $('.sortable').disableSelection()
   $('.resourceList').on 'mouseenter', '.draggable', ->
-    $('.resourceList').sortable('enable')
-    $('.resourceList').disableSelection()
-    $('.resourceList_newElement').each ->
-      $(@).appendTo($(@).prev()) if $(@).prev().is('.resourceList_item')
+    $('.sortable').sortable('enable')
+    $('.sortable').disableSelection()
   .on 'mouseleave', '.draggable', ->
-    $('.resourceList').sortable('disable')
-    $('.resourceList').enableSelection()
-    $('.resourceList_newElement').each ->
-      $(@).parent().after($(@)) if $(@).parent().is('.resourceList')
-  $('#collection').on 'sortupdate', '.resourceList',  (e, ui)->
-    collection_id = $(@).attr('data-collection-id')
+    $('.sortable').sortable('disable')
+    $('.sortable').enableSelection()
+  $('#collection').on 'sortupdate', '.sortable',  (e, ui)->
+    collection_id = $('.resourceList').attr('data-collection-id')
     $.ajax
       data: $(@).sortable('serialize')
       type: 'PUT'
       url: "/collections/#{collection_id}/sort"
   .on 'sortstart', (e, ui)->
-    $('.resourceList').addClass '_is_sorting'
+    $('.sortable').addClass '_is_sorting'
   .on 'sortstop', (e, ui)->
-    $('.resourceList').removeClass '_is_sorting'
-    $('.resourceList_newElement').each ->
-      $(@).parent().after($(@)) if $(@).parent().is('.resourceList')
+    $('.sortable').removeClass '_is_sorting'
 
   # bind edit title input
   $('.resourceList_title_edit input').blur ->
@@ -115,12 +109,15 @@ $(document).on 'page:change', ->
   .on 'keyup', (e)->
     $(@).parents('.resourceList_item').removeClass('_is_editable') if e.keyCode == 27
 
-  # line toolbar
-  $('.btn-new-element').click ->
-    $(@).parents('.resourceList_newElement').siblings().removeClass('_is_adding_element')
-    $(@).parents('.resourceList_newElement').toggleClass('_is_adding_element')
-    $(@).parents('.resourceList_newElement').find('.collection_createByUrlForm_url').focus()
+  # new header btn
+  $('.resourceList').on 'click', '.btn-new-element', ->
+    clickedElement = @
+    $('.resourceList_newElement').each ->
+      if $(@).is $(clickedElement).parents('.resourceList_newElement')
+        $(clickedElement).parents('.resourceList_newElement').toggleClass('_is_adding_element').find('.collection_createByUrlForm_url').focus()
+      else
+        $(@).removeClass('_is_adding_element')
 
   # ajax new resource
-  $('.collection_cerateByUrlForm').on 'submit', ->
+  $('.resourceList').on 'submit', '.collection_cerateByUrlForm', ->
     $(@).parents('.resourceList_newElement').removeClass('_is_adding_element').addClass('_is_updating_element')

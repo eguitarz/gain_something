@@ -56,4 +56,8 @@
           = link_to "<div class=\"btn-small\">#{icon('plus')} Link</div>".html_safe, new_collection_resource_path(@collection.id, mime: 'link')
 
   .resourceList{:'data-collection-id' => @collection.id}
-    = render @resources
+    .resourceList_item
+      - if @collection.belongs_to? @user
+        = render partial: 'resources/new_header'
+    .sortable
+      = render @resources

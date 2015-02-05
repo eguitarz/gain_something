@@ -254,6 +254,10 @@ body.landings #main {
   @include transition("opacity #{$fast} ease-in", false);
 }
 
+.draggable .btn-resource {
+  cursor: pointer;
+}
+
 .draggable:hover .animation-icon-after {
   opacity: 1;
 }

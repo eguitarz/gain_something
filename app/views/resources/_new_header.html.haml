@@ -1,0 +1,10 @@
+.resourceList_newElement
+  .resourceList_detectingArea
+  .resourceList_newElement_row.row
+    .icon-column>
+      .btn-square.btn-new-element
+        = icon('plus')
+    .col-80
+      = form_tag collection_create_header_path(@collection), class:'collection_cerateByUrlForm', remote: true do
+        = text_field_tag :title, '', placeholder: 'Type header here', class: 'collection_createByUrlForm_url'
+        = label_tag '"Enter" to create header'

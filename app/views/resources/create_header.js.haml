@@ -1,7 +1,9 @@
 - resource = render partial: 'resources/resource', locals: {resource: @resource}
-$('._is_updating_element').removeClass('_is_updating_element').after("#{j(resource)}");
+var newHeaderBtn = $('._is_updating_element').removeClass('_is_updating_element');
+if (newHeaderBtn.parents('.sortable').length > 0) { newHeaderBtn.parents('.resourceList_item').after("#{j(resource)}"); } else { newHeaderBtn.parents('.resourceList_item').siblings('.sortable').prepend("#{j(resource)}"); }
+
 var collection_id = $('.resourceList').attr('data-collection-id');
-$.ajax({data: $('.resourceList').sortable('serialize'),type: 'PUT',url: "/collections/"+collection_id+"/sort"});
-$('.resourceList').sortable({placeholder: '_is_dragging'});
-$('.resourceList').sortable('disable');
-$('.resourceList').disableSelection();
+$.ajax({data: $('.sortable').sortable('serialize'),type: 'PUT',url: "/collections/"+collection_id+"/sort"});
+$('.sortable').sortable({placeholder: '_is_dragging'});
+$('.sortable').sortable('disable');
+$('.sortable').disableSelection();
