@@ -4,7 +4,7 @@ class Collection < ActiveRecord::Base
 
   validates :name, length: { minimum: 2, maximum: 200 }, allow_blank: false
   validates :description, length: { maximum: 140 }
-  paginates_per 10
+  paginates_per 30
 
   scope :visible, -> { where(is_visible: true) }
 
