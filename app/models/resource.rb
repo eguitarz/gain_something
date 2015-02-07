@@ -39,23 +39,19 @@ class Resource < ActiveRecord::Base
 
   def extract
     extraction = nil
-    extractor = 'diffbot'
 
     begin
       extraction = extract_from_diffbot(self.url)
       if extraction[:type] != 'article' && extraction[:type] != 'product' && extraction[:type] != 'image'
         extraction = extract_from_embedly(self.url)
-        extractor = 'embedly'
       end
     rescue Exception => e
       extraction = extract_from_embedly(self.url)
-      extractor = 'embedly'
     end
 
-    self.extractor = extractor
     self.title = extraction[:title].first(255)
     self.embedded_html = extraction[:html]
-    p extraction
+
     if extraction[:type] == 'html' || extraction[:type] == 'article' || extraction[:type] == 'product'
       self.mime = 'link'
     elsif extraction[:type] == 'image'
@@ -82,7 +78,7 @@ class Resource < ActiveRecord::Base
       end
     end
 
-    if extractor == 'embedly' && extraction[:media] && !extraction[:media].empty?
+    if self.extractor == 'embedly' && extraction[:media] && !extraction[:media].empty?
       media = extraction[:media]
       if media.present?
         self.mime = media.type if media.type.present?
@@ -110,6 +106,8 @@ class Resource < ActiveRecord::Base
   end
 
   def extract_from_embedly(url)
+    self.extractor = 'embedly'
+
     embedly_api = Embedly::API.new key: EMBEDLY_KEY
     extracted_obj = embedly_api.extract(:url => url)[0]
     {
@@ -127,6 +125,7 @@ class Resource < ActiveRecord::Base
   end
 
   def extract_from_diffbot(url)
+    self.extractor = 'diffbot'
 
     response = JSON.parse Net::HTTP.get("api.diffbot.com", "/v3/analyze?token=diffbotdotcomtestdrive&url=#{CGI.escape(url)}")
     obj = nil

@@ -1,7 +1,7 @@
 require 'embedly'
 require 'json'
 
-RESOURCE_LIMIT = 10000
+RESOURCE_LIMIT = 500
 
 class ResourcesController < ApplicationController
 	before_action :get_collection, only: [:new, :create, :edit, :update, :destroy, :change_parent, :create_resource, :create_header]

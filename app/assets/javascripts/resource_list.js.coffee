@@ -17,7 +17,7 @@ setEditStatus = (isSaved)->
     $('body').addClass('unsaved')
 
 $(document).on 'page:change', ->
-  return unless $('body#resources').length > 0
+  return unless $('body#resources, body#collections').length > 0
   console.log 'running resource_list.js - ' + (new Date)
 
   bindCancelButton('.btn-cancel')
