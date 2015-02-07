@@ -1,0 +1,17 @@
+- if @current_resource.present?
+  $('body').addClass('_is_lightbox_mode');
+  - lightbox = render(partial: "partials/lightbox")
+  $('#lightbox').removeClass().addClass("_is_#{@current_resource.mime}");
+  $('#lightbox .lightbox_loader').html("#{j(lightbox.html_safe)}");
+  window.history.pushState(null, 'GS', "#{@partial_url}");
+
+
+  // translate markdown
+  $('#lightbox._is_text .lightbox_player_html').html(marked(decodeURIComponent($('#lightbox-markdownDescription').val()), {breaks: true}));
+
+  // update lightbox class
+  - lightbox_class = @current_resource.description.present? ?  '' : '_has_no_description'
+  - lightbox_class = @current_resource.thumbnail.present? ? lightbox_class : '_has_no_thumbnail ' + lightbox_class
+  - lightbox_class = " _is_#{@current_resource.mime} " + lightbox_class
+  - lightbox_class = @current_resource.is_title_only? ? '_is_title_only ' + lightbox_class : lightbox_class
+  $('#lightbox').removeClass().addClass("#{j(lightbox_class)}");

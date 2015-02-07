@@ -24,6 +24,7 @@ Rails.application.routes.draw do
 
   get 'hi' => 'landings#index'
   get '/u/:username' => 'users#show', as: :user
+  get '/r/:rid' => 'resources#show', as: :resource
 
   # get 'user/:username' => 'users#show'
   # Example of regular route:

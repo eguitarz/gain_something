@@ -22,7 +22,6 @@ class CollectionsController < ApplicationController
   end
 
   def show
-    # @resource_index = (params[:i] || 0).to_i
     @resources = @collection.resources.order(:priority, :created_at)
     @current_resource = Resource.where(id:params[:rid]).first if params[:rid]
     @partial_url = request.original_url
@@ -39,7 +38,7 @@ class CollectionsController < ApplicationController
     
     respond_to do |format|
       format.html {}
-      format.js {}
+      # format.js {}
     end
   end
 

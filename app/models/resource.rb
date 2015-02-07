@@ -38,29 +38,55 @@ class Resource < ActiveRecord::Base
   end
 
   def extract
-    extraction = extract_from_url(self.url)
+    extraction = nil
+    extractor = 'diffbot'
+
+    begin
+      extraction = extract_from_diffbot(self.url)
+      if extraction[:type] != 'article' && extraction[:type] != 'product' && extraction[:type] != 'image'
+        extraction = extract_from_embedly(self.url)
+        extractor = 'embedly'
+      end
+    rescue Exception => e
+      extraction = extract_from_embedly(self.url)
+      extractor = 'embedly'
+    end
+
+    self.extractor = extractor
     self.title = extraction[:title].first(255)
     self.embedded_html = extraction[:html]
-    self.mime = extraction[:type] == 'html' ? 'link' : extraction[:type]
+    p extraction
+    if extraction[:type] == 'html' || extraction[:type] == 'article' || extraction[:type] == 'product'
+      self.mime = 'link'
+    elsif extraction[:type] == 'image'
+      self.mime = 'photo'
+      self.thumbnail = self.url
+      self.thumbnail_width = extraction[:thumbnail_width]
+      self.thumbnail_height = extraction[:thumbnail_height]
+    else
+      self.mime = extraction[:type]
+    end
     self.provider_name = extraction[:provider_name]
     self.provider_url = extraction[:provider_url]
     self.description = extraction[:description]
     self.content = extraction[:content]
 
-    if extraction[:images] && !extraction[:media].empty?
+    if extraction[:images]
       image = extraction[:images].first
       if image.present?
         self.thumbnail = image['url']
-        self.thumbnail_width = image['width']
-        self.thumbnail_height = image['height']
+        # self.thumbnail_width = image['width']
+        # self.thumbnail_height = image['height']
+        self.thumbnail_width = image['pixel_width']
+        self.thumbnail_height = image['pixel_height']
       end
     end
 
-    if extraction[:media] && !extraction[:media].empty?
+    if extractor == 'embedly' && extraction[:media] && !extraction[:media].empty?
       media = extraction[:media]
       if media.present?
         self.mime = media.type if media.type.present?
-        self.embedded_html = media.html if media.html.present?
+        self.embedded_html = media.html if media.html && media.html.present?
       end
     end
 
@@ -83,7 +109,7 @@ class Resource < ActiveRecord::Base
     }
   end
 
-  def extract_from_url(url)
+  def extract_from_embedly(url)
     embedly_api = Embedly::API.new key: EMBEDLY_KEY
     extracted_obj = embedly_api.extract(:url => url)[0]
     {
@@ -96,8 +122,31 @@ class Resource < ActiveRecord::Base
       images: extracted_obj['images'],
       media: extracted_obj['media'],
       description: extracted_obj['description'],
-      content: extracted_obj['content'],
-      type: extracted_obj['type']  || 'unknown'
+      content: extracted_obj['content']
+    }
+  end
+
+  def extract_from_diffbot(url)
+
+    response = JSON.parse Net::HTTP.get("api.diffbot.com", "/v3/analyze?token=diffbotdotcomtestdrive&url=#{CGI.escape(url)}")
+    obj = nil
+    if response['objects']
+      obj = response['objects'][0]
+    end
+
+    {
+      html: obj['html'],
+      title: obj['title'] || obj['label'] || url,
+      url: url,
+      type: obj['type']  || 'unknown',
+      # provider_name: extracted_obj['provider_name'],
+      # provider_url: extracted_obj['provider_url'],
+      images: obj['images'],
+      media: obj['videos'],
+      description: obj['text'],
+      thumbnail_width: obj['naturalWidth'],
+      thumbnail_height: obj['naturalHeight']
+      # content: extracted_obj['content'],
     }
   end
 end

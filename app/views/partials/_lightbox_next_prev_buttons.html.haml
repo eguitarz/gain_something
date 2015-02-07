@@ -1,11 +1,11 @@
 - if @prev_resource.present?
   #lightbox_previous_button.prevent-quit
-    = link_to collection_path(@collection, rid: @prev_resource.id), remote: true do
+    = link_to resource_path(@prev_resource.id), remote: true do
       .btn-round.btn-prev
         = icon('angle-left')
 
 - if @next_resource.present?
   #lightbox_next_button.prevent-quit
-    = link_to collection_path(@collection, rid: @next_resource.id), remote: true do
+    = link_to resource_path(@next_resource.id), remote: true do
       .btn-round.btn-next
         = icon('angle-right')

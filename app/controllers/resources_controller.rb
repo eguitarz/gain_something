@@ -17,6 +17,30 @@ class ResourcesController < ApplicationController
 		@resource = Resource.new
 	end
 
+	def show
+		@user = current_user
+		@current_resource = Resource.where(id:params[:rid]).first 
+		redirect_to :root unless @current_resource
+		@collection = @current_resource.collection
+		@resources = @collection.resources.order(:priority, :created_at)
+    @partial_url = request.original_url
+
+    if @current_resource
+      idx = @resources.index @current_resource
+      if idx + 1 <= @resources.count
+        @next_resource = @resources[idx + 1]
+      end
+      if idx > 0
+        @prev_resource = @resources[idx - 1]
+      end
+    end
+    
+    respond_to do |format|
+      format.html { render 'collections/show'}
+      format.js {}
+    end
+	end
+
 	def create
 		@resource = @collection.resources.build(resource_params)
 		@collection.touch

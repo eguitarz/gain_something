@@ -25,7 +25,7 @@ module ResourcesHelper
 	end
 
 	def print_title(resource)
-		haml_concat link_to(resource.title, collection_path(resource.collection, rid: resource.id), remote: true)
+		haml_concat link_to(strip_tags(resource.title), resource_path(resource.id), remote: true)
 	end
 
 	def has_embedded_or_thumbnail?(resource)
@@ -45,7 +45,7 @@ module ResourcesHelper
 	def print_description(resource)
 		haml_concat link_to(
 			get_partial_string(resource.description, 200, '...'), 
-			collection_path(resource.collection, rid: resource.id), 
+			resource_path(resource.id), 
 			remote: true
 		)
 	end
@@ -96,7 +96,7 @@ module ResourcesHelper
 	end
 
 	def print_thumbnail_link(resource)
-		haml_tag :a, href: collection_path(resource.collection, rid: resource.id), title: resource.title, :'data-remote' => true do
+		haml_tag :a, href: resource_path(resource.id), title: resource.title, :'data-remote' => true do
 			haml_tag(:div, class: 'resourceList_preview_thumbnails_thumb', style: "background-image:url(#{resource.thumbnail})")
 		end
 	end

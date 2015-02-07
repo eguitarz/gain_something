@@ -16,7 +16,7 @@
 %body._is_preloading{id: "#{params[:controller]}", class: body_class}
   = render partial: 'partials/dialog'
 
-  - if params[:controller] == 'collections' && params[:action] == 'show'
+  - if (params[:controller] == 'collections' || params[:controller] == 'resources') && params[:action] == 'show'
     - if @current_resource
       - lightbox_class = @current_resource.description.present? ?  '' : '_has_no_description'
       - lightbox_class = @current_resource.thumbnail.present? ? lightbox_class : '_has_no_thumbnail ' + lightbox_class
