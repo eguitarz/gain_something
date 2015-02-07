@@ -43,7 +43,6 @@ class ResourcesController < ApplicationController
 
 	def create
 		@resource = @collection.resources.build(resource_params)
-		@collection.touch
 		@resource.extract unless @resource.mime == 'text'
 
 		if @resource.mime == 'error'

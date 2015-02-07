@@ -9,6 +9,9 @@ class Resource < ActiveRecord::Base
   scope :visible, -> { joins(:collection).where('is_visible = ?', true) }
   scope :with_thumbnail, -> { where("thumbnail <> ''" ) }
 
+  after_update :touch_collection
+  after_create :touch_collection
+
   def is_fulltext?
     self.mime == 'text' || self.mime == 'video' || self.mime == 'collcetion'
   end
@@ -147,5 +150,9 @@ class Resource < ActiveRecord::Base
       thumbnail_height: obj['naturalHeight']
       # content: extracted_obj['content'],
     }
+  end
+
+  def touch_collection
+    self.collection.touch
   end
 end
