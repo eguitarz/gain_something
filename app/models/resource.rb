@@ -49,6 +49,7 @@ class Resource < ActiveRecord::Base
         extraction = extract_from_embedly(self.url)
       end
     rescue Exception => e
+      puts e
       extraction = extract_from_embedly(self.url)
     end
 
