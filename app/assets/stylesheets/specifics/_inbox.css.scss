@@ -471,3 +471,9 @@ body.landings #main {
   border: 1px dashed $grey;
   background-color: $lightgrey;
 }
+
+.resourceList_timeago {
+  font-size: 0.6em;
+  color: $grey;
+  text-align: right;
+}

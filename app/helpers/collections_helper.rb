@@ -22,6 +22,8 @@ module CollectionsHelper
       end
 
       haml_concat "#{collection.resources.count} items"
+      haml_concat ' · '
+      haml_concat "#{time_ago_in_words(collection.updated_at)} ago"
     end
   end
 
