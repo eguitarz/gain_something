@@ -15,6 +15,7 @@
 .btn-delete {
   position: relative;
   z-index: 10;
+  color: $grey;
 
   &:hover {
     color: $red;
@@ -40,22 +41,4 @@
     color: $red;
     border-color: $red;
   } 
-}
-
-.btn-menu {
-  position: absolute;
-  top: 1.428em;
-  left: 2.857em;
-  width: 32px;
-  height: 32px;
-  line-height: 32px;
-  background-color: #333;
-  z-index: 90;
-  cursor: pointer;
-  color: $white;
-  text-align: center;
-
-  &:before {
-    content: '☰';
-  }
 }

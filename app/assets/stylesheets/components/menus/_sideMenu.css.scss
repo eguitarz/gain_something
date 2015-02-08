@@ -2,19 +2,22 @@
 
 // define component placeholders for component contents (no selector here)
 @include importOnce('sideMenu') {
-  $sideMenu-padding-top: 40px;
+  $sideMenu-padding-top: 0;
 
   %sideMenu {
     position: fixed;
     top: 0;
     left: 0;
     margin: 0;
+    width: 100%;
     padding: $sideMenu-padding-top 0 0 0;
-    min-height: 100%;
+    z-index: 100;
   }
 
   %sideMenu_item {
-    padding: 5px 25px;
+    display: inline-block;
+    padding: 10px 25px;
+    font-size: 1.4em;
   }
 }
 
@@ -37,7 +40,9 @@
 @include importOnce('sideMenu-skin-default') {
   %sideMenu-skin-default {
     color: $white;
-    background-color: $darkgrey;
+    background-color: rgba(255,255,255,0.95);
+    border-bottom: 1px solid $lightgrey;
+    @include box-shadow('0 0 1px rgba(0,0,0,0.15)');
   }
 
   %sideMenu-skin-default_item {
@@ -45,11 +50,11 @@
   }
 
   %sideMenu-skin-default_item_hover {
-    color: $white;
+    color: $black;
   }
 
   %sideMenu-skin-default_item_link {
-    color: $grey;
+    color: $black;
   }
 
 }

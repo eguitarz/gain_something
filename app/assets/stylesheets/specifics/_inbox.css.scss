@@ -159,11 +159,11 @@ body.preview-mode {
 .brand {
   font-size: 18px;
   letter-spacing: 5px;
-  padding-bottom: 20px;
+  padding-bottom: 5px;
 }
 
 .brand-row {
-  padding-bottom: 20px;
+  // border-bottom: 1px solid $lightgrey;
 }
 
 .banner {
@@ -238,6 +238,13 @@ body.landings #main {
 
 .visibility {
   vertical-align: text-bottom;
+  margin: 0 10px;
+  a {
+    color: $grey;
+  }
+  a:hover {
+    color: $black;
+  }
 }
 
 .animation-icon-before {
@@ -300,7 +307,7 @@ body.landings #main {
 }
 
 .brand {
-  @include transition("all 200ms 1200ms ease-out", false);  
+  @include transition("all 200ms ease-out", false);  
 }
 
 ._is_preloading .brand {
@@ -476,4 +483,27 @@ body.landings #main {
   font-size: 0.6em;
   color: $grey;
   text-align: right;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.collection-new {
+  @include transition("all 800ms 200ms", false);
+  opacity: 1;
+  font-size: 0.8em;
+  color: $grey;
+  a, a:hover {
+    color: $green;
+  }
+}
+
+._is_preloading .collection-new {
+  opacity: 0;
+}
+
+.collection_toolbar {
+  
+
 }

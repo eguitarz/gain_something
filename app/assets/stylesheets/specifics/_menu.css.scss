@@ -1,24 +1,37 @@
-.users\/sessions #menu,
-.users\/sessions .btn-menu {
+.users\/sessions #menu{
   display: none;
-}
-
-#menu .scrollable {
-  display: none;
-  width: 240px;
-}
-
-._siteMenu_is_open #menu .scrollable {
-  display: block;
-}
-
-._siteMenu_is_open #main {
-  @include transform("translate(#{$shift-distance})", false);
-}
-
-._siteMenu_is_open #overlay {
-  @include transform("translate(#{$shift-distance})", false);
-  display: block;
 }
 
 @include sideMenu('.sideMenu');
+
+@mixin menuHeader {
+  @include transition("all 200ms ease-out", false);  
+  position: absolute;
+  width: 60%;
+  left: 20%;
+  color: rgba(0,0,0,0.67);
+  text-align: center;
+  font-size: 1.4em;
+  padding: 10px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+#user_show_menu_header {
+  @include menuHeader;
+}
+
+._is_scroll_L0 #user_show_menu_header {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#collection_show_menu_header {
+  @include menuHeader;
+}
+
+._is_scroll_L1 #collection_show_menu_header {
+  opacity: 1;
+  pointer-events: auto;
+}

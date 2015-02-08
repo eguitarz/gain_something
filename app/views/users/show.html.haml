@@ -1,11 +1,16 @@
-- print_collection_create_button(@collection)
+- content_for :user_show_menu_header do
+  - "#{@user.username}'s collections"
 
 .content
   .collection-header
     .brand-row.row
       .col-100.brand>
         = "#{@user.username}'s collections"
-
+  - if current_user
+    .collection-new
+      = link_to new_collection_path, class: '' do
+        = icon('plus-square')
+        New Collection
   .collection-container
     .collections
       - if is_current_user?(@user)

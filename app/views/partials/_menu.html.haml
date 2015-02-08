@@ -1,12 +1,14 @@
 #menu.sideMenu
-  %ul.scrollable
-    -# %li.sideMenu_item
-    -#  = link_to 'Home', root_path, class: 'sideMenu_link'
+  #user_show_menu_header
+    = yield :user_show_menu_header
+  #collection_show_menu_header
+    = yield :collection_show_menu_header
+  %ul
     - if current_user
-      %li.sideMenu_item
-        = link_to 'My collections', user_path(current_user.username), class: 'sideMenu_link'
-      %li.sideMenu_item
-        = link_to 'Log Out', destroy_user_session_path, method: 'DELETE', class: 'sideMenu_link'
+      %li.sideMenu_item.col-80>
+        = link_to icon('list'), user_path(current_user.username), class: 'sideMenu_link'
+      %li.sideMenu_item.col-20.text-right>
+        = link_to icon('sign-out'), destroy_user_session_path, method: 'DELETE', class: 'sideMenu_link'
     - else
       %li.sideMenu_item
-        = link_to 'Log In', new_user_session_path, class: 'sideMenu_link'
+        = link_to icon('sign-in'), new_user_session_path, class: 'sideMenu_link'
