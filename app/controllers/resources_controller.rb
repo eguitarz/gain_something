@@ -9,7 +9,7 @@ class ResourcesController < ApplicationController
 	before_action only: [:new, :create, :edit, :update, :destroy, :change_parent, :create_resource, :create_header] do
     require_owner @collection.user
   end
-	before_action :require_user_signed_in
+	before_action :require_user_signed_in, except: [:show]
 	before_action :check_resources_limit, only: [:new, :create, :create_resource, :create_header]
 
 	def new
