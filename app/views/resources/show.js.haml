@@ -11,6 +11,3 @@
   - lightbox_class = " _is_#{@current_resource.mime} " + lightbox_class
   - lightbox_class = @current_resource.is_title_only? ? '_is_title_only ' + lightbox_class : lightbox_class
   $('#lightbox').removeClass().addClass("#{j(lightbox_class)}");
-
-  // translate markdown
-  $('#lightbox._is_text .lightbox_player_html').html(marked(decodeURIComponent($('#lightbox-markdownDescription').val()), {breaks: true}));

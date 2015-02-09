@@ -32,3 +32,7 @@
       - if @current_resource.is_link? && !@current_resource.content.present? && !@current_resource.embedded_html.present? && @current_resource.description.present?
         .lightbox_player_subtitle
           = link_to "See More", @current_resource.url, target: '_blank'
+  // translate markdown
+  - if @current_resource.is_text?
+    :javascript
+      $('#lightbox._is_text .lightbox_player_html').html(marked(decodeURIComponent($('#lightbox-markdownDescription').val()), {breaks: true}));
