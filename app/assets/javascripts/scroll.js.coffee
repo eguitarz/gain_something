@@ -4,6 +4,8 @@ scrollL2Height = 280
 scrollLevels = [scrollL0Height, scrollL1Height, scrollL2Height]
 
 $(document).on 'page:change', ->
+  return if $('body').is('#landings')
+
   $(window).scroll ->
     for h, i in scrollLevels
       if $(window).scrollTop() >= h

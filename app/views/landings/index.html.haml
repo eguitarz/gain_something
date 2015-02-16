@@ -1,2 +1,75 @@
-.brand
-	Gain Something
+.landingPage_indicator_list
+  .landingPage_indicator
+    .landingPage_indicator_selected
+      = icon('circle')
+    .landingPage_indicator_unselected
+      = icon('circle-o')
+  .landingPage_indicator
+    .landingPage_indicator_selected
+      = icon('circle')
+    .landingPage_indicator_unselected
+      = icon('circle-o')
+  .landingPage_indicator
+    .landingPage_indicator_selected
+      = icon('circle')
+    .landingPage_indicator_unselected
+      = icon('circle-o')
+  .landingPage_indicator
+    .landingPage_indicator_selected
+      = icon('circle')
+    .landingPage_indicator_unselected
+      = icon('circle-o')
+
+.landingPage_navbar
+  = link_to new_user_session_path do
+    .landingPage_signin.btn-normal
+      = icon('user')
+      Log In
+
+#landingPage._is_ready{page:0}
+  #landingPage_p0
+    .landingPage_p0_wrapper
+      .ringsContainer
+        - 10.times.each do |i|
+          .ring._is_inited
+      .landingPage_p0_box
+        .landingPage_p0_brand
+          %span.landingPage_p0_logo
+            = icon('square')
+          %span.landingPage_p0_name
+            Collk
+        .landingPage_p0_brand_description
+          A productive read later website.
+    .landingPage_account
+      .landingPage_signupForm
+        = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+          = devise_error_messages!
+          .row
+            = f.email_field :email, placeholder: 'email'
+          .row
+            = f.password_field :password, autocomplete: "off", placeholder: 'password', id: 'pwd'
+          .row
+            = f.text_field :username, autofocus: true, placeholder: 'username'
+          .row
+            .landingPage_signup.btn-normal
+              = icon('user')
+              Sign Up
+  #landingPage_p1.landingPage
+    .landingPage_feature
+      .landingPage_feature_title
+        Organize links is easy
+      .landingPage_gif{style:"background-image:url(#{image_url('collk_sort.gif')})", src:"#{image_url('collk_sort.gif')}"}
+        = image_tag '', width: '100%'
+      }
+  #landingPage_p2.landingPage
+    .landingPage_feature
+      .landingPage_feature_title
+        Quick review any document on internet
+      .landingPage_gif{style:"background-image:url(#{image_url('collk_lightbox.gif')})", src:"#{image_url('collk_lightbox.gif')}"}
+        = image_tag '', width: '100%'
+  #landingPage_p3.landingPage
+    .landingPage_feature
+      .landingPage_feature_title
+        Built-in markdown editor
+      .landingPage_gif{style:"background-image:url(#{image_url('collk_markdown.gif')})", src:"#{image_url('collk_markdown.gif')}"}
+        = image_tag '', width: '100%'

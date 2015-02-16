@@ -1,0 +1,288 @@
+body#landings {
+  overflow: hidden;
+}
+
+body#landings._is_scroll_L0 #landingPage {
+
+}
+
+body#landings._is_scroll_L1 #landingPage {
+  @include transform('translateY(-100%)');
+}
+
+body#landings._is_scroll_L2 #landingPage {
+  @include transform('translateY(-200%)');
+}
+
+body#landings._is_scroll_L3 #landingPage {
+  @include transform('translateY(-300%)');
+}
+
+#landingPage {
+  @include transition('all 500ms ease-out');
+  @include transform('translateY(0)');
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  color: $black;
+
+  input {
+    border-radius: 999em;
+    padding: 0 16px;
+    height: 38px;
+    border: 1px solid $grey;
+  }
+}
+
+#landingPage_p0 {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: $bluegrey;
+  color: $bluegrey-50;
+}
+
+.ringsContainer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  overflow: hidden;
+}
+
+.ring {
+  @include transition('all 3000ms', false);
+  position: absolute;
+  background-color: rgba(255,255,255,0.35);
+  border: 2px solid rgba(255,255,255,0.75);
+  border-radius: 999em;
+  opacity: 0.3;
+  -webkit-backface-visibility: hidden;
+}
+
+._is_inited.ring {
+  @include transform('scale(0)');
+  opacity: 0;
+}
+
+._is_hovered.ring {
+  background-color: $orange;
+  border-color: $orange;
+}
+
+.landingPage {
+  @include transition('all 500ms');
+  height: 100%;
+}
+
+.landingPage_p0_wrapper {
+  position: relative;
+  width: 100%;
+  height: 50%;
+  background-color: $bluegrey-900;
+  border-bottom: 1px solid $bluegrey-900;
+  @include box-shadow('0 1px 1px rgba(0,0,0,0.75)');
+}
+
+.landingPage_p0_box {
+  position: relative;
+  top: 50%;
+  font-size: 3em;
+  line-height: 1em;
+  text-align: center;
+  padding-bottom: 5px;
+  margin-bottom: 20px;
+  pointer-events: none;
+}
+
+.landingPage_p0_brand {
+  padding: 10px 0;
+}
+
+.landingPage_p0_logo {
+  margin: 0 10px;
+}
+
+.landingPage_p0_name {
+  letter-spacing: 0.2em;
+}
+
+.landingPage_p0_brand_description {
+  text-align: center;
+  font-size: 0.6em;
+  font-weight: 100;
+}
+
+.landingPage_account {
+  width: 100%;
+  padding: 20px 0;
+  background-color: $bluegrey-100;
+  text-align: center;
+
+  .btn-normal { opacity: 1; }
+}
+
+.landingPage_signup {
+  display: inline-block;
+  margin: 20px 10px 0 10px;
+  padding: 10px 40px;
+  width: 200px !important;
+  @include box-shadow('0 1px 1px rgba(0,0,0,0.75)');
+}
+
+.landingPage_signin {
+  display: inline-block;
+  float: right;
+  color: #fff;
+  opacity: 0.75;
+  border: 0;
+}
+
+.landingPage_signup {
+  background-color: $green;
+  color: $white;
+  border-color: $white;
+  &:hover { background-color: hsl(120,40%,60%); }
+}
+
+.landingPage_signupForm {
+  width: 320px;
+  margin: 20px auto;
+}
+
+._is_scroll_L1 #landingPage_p1 {
+  background-color: $orange;
+}
+._is_scroll_L2 #landingPage_p2 {
+  background-color: $purple;
+}
+._is_scroll_L3 #landingPage_p3 {
+  background-color: $lime;
+}
+
+._is_scroll_L1 #landingPage_p1 .landingPage_gif,
+._is_scroll_L2 #landingPage_p2 .landingPage_gif,
+._is_scroll_L3 #landingPage_p3 .landingPage_gif {
+  border: 1px solid $grey;
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.45);
+}
+
+.landingPage_feature {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.landingPage_feature_title {
+  font-size: 2.5em;
+  line-height: 1.4em;
+  text-align: center;
+  padding: 1em 0;
+  background-color: $bluegrey-900;
+  color: $white;
+}
+
+.landingPage_snapshot {
+  width: 80%;
+  height: 80%;
+  margin: auto;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.landingPage_gif {
+  @include transition('all 500ms');
+  width: 60%;
+  max-width: 620px;
+  height: 537px;
+  margin: 60px auto;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  background-color: $white;
+}
+
+._is_orange {
+  background-color: $orange;
+  border-color: $orange;
+  color: $white;
+}
+
+._is_purple {
+  background-color: $purple;
+  border-color: $purple;
+  color: $white;
+}
+
+._is_lime {
+  background-color: $lime;
+  border-color: $lime;
+}
+
+.landingPage_indicator_list {
+  @include transition('all 500ms');
+  position: fixed;
+  right: 40px;
+  top: 40%;
+  width: 40px;
+  z-index: 100;
+}
+
+._is_scroll_L0 .landingPage_indicator_list {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.landingPage_indicator {
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.landingPage_indicator_selected {
+  color: rgba(255, 255, 255, 1);
+  display: none;
+}
+
+.landingPage_indicator_unselected {
+  color: rgba(255,255,255,0.67);
+  display: block;
+  &:hover {
+    color: rgba(255, 255, 255, 1);
+  }
+}
+
+._is_scroll_L0 .landingPage_indicator:nth-child(1) .landingPage_indicator_selected {
+  display: block;
+}
+
+._is_scroll_L0 .landingPage_indicator:nth-child(1) .landingPage_indicator_unselected {
+  display: none;
+}
+
+._is_scroll_L1 .landingPage_indicator:nth-child(2) .landingPage_indicator_selected {
+  display: block;
+}
+
+._is_scroll_L1 .landingPage_indicator:nth-child(2) .landingPage_indicator_unselected {
+  display: none;
+}
+
+._is_scroll_L2 .landingPage_indicator:nth-child(3) .landingPage_indicator_selected {
+  display: block;
+}
+
+._is_scroll_L2 .landingPage_indicator:nth-child(3) .landingPage_indicator_unselected {
+  display: none;
+}
+
+._is_scroll_L3 .landingPage_indicator:nth-child(4) .landingPage_indicator_selected {
+  display: block;
+}
+
+._is_scroll_L3 .landingPage_indicator:nth-child(4) .landingPage_indicator_unselected {
+  display: none;
+}

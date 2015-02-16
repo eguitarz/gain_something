@@ -29,6 +29,8 @@
     height: 100%;
     color: #000;
     min-height: 100%;
+    margin: 0;
+    padding: 0;
 
     &.siteMenuOpened {
       height: 100%;
@@ -102,6 +104,21 @@
     border: 0;
     resize: none;
   }
+
+  blockquote {
+    position: relative;
+    padding: 20px 0;
+  }
+
+  blockquote:before {
+    position: absolute;
+    top: 0;
+    left: 20%;
+    content: ' ';
+    width: 60%;
+    border-top: 1px solid $lightgrey;
+  }
+
 
   pre {
     font-family: $title-fonts;

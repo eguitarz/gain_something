@@ -1,1 +1,6 @@
 @include navbar('.navbar');
+@include navbar('.landingPage_navbar');
+.landingPage_navbar {
+  top: 0;
+  z-index: 200;
+}

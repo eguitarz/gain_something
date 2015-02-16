@@ -4,7 +4,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create
     super
     resource.collections << Collection.create({name: "#{@user.username}'s inbox", description: 'My first collection'})
-    resource.save!
+    resource.save
+    # redirect_to :back unless resource.save
   end
 
   def new

@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'collections#index'
+  root 'landings#index'
   
   resources :collections do
     put 'toggle_visibility' => 'collections#toggle_visibility', as: :visibility
@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   end
 
   get 'hi' => 'landings#index'
+
   get '/u/:username' => 'users#show', as: :user
   get '/r/:rid' => 'resources#show', as: :resource
 
