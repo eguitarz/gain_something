@@ -120,6 +120,7 @@ body#landings._is_scroll_L3 #landingPage {
   text-align: center;
 
   .btn-normal { opacity: 1; }
+  @include box-shadow('0 2px 1px rgba(0,0,0,0.35)');
 }
 
 .landingPage_signup {
@@ -285,4 +286,24 @@ body#landings._is_scroll_L3 #landingPage {
 
 ._is_scroll_L3 .landingPage_indicator:nth-child(4) .landingPage_indicator_unselected {
   display: none;
+}
+
+._is_preloading .landingPage_p0_nextPage {
+  opacity: 0;
+  @include transform('translateY(200px)');
+}
+
+.landingPage_p0_nextPage {
+  @include transition('all 1000ms');
+  font-size: 1.4em;
+  line-height: 1em;
+  padding: 40px;
+  text-align: center;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.67);
+  overflow: hidden;
+}
+
+.landingPage_p0_nextPage:hover {
+  color: #fff;
 }
