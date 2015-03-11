@@ -1,6 +1,7 @@
 .collection-container {
   width: 100%;
   padding: 40px 0;
+  overflow: hidden;
 }
 
 .collection-header {
@@ -352,6 +353,7 @@ body.landings #main {
   margin-top: 0;
   line-height: 140%;
   font-size: 0.6rem;
+  text-align: left;
 
   a {
     color: $blue;
@@ -374,8 +376,9 @@ body.landings #main {
 }
 
 ._is_title_only .lightbox_player_title {
-  font-size: 4em;
+  font-size: 2em;
   text-align: center;
+  overflow: hidden;
 }
 
 .lightbox_loader {

@@ -1,8 +1,14 @@
 - if @current_resource.present?
   $('body').addClass('_is_lightbox_mode');
   - lightbox = render(partial: "partials/lightbox")
+  - lightbox_navigator = render(partial: "partials/lightbox_navigator")
   $('#lightbox').removeClass().addClass("_is_#{@current_resource.mime}");
   $('#lightbox .lightbox_loader').html("#{j(lightbox.html_safe)}");
+
+  $('#lightbox_next_prev_buttons').html("#{j(lightbox_navigator.html_safe)}");
+  $('#lightbox_previous_button').css('top', $(window).innerHeight()/2);
+  $('#lightbox_next_button').css('top', $(window).innerHeight()/2);
+  
   window.history.pushState(null, 'GS', "#{@partial_url}");
 
   // update lightbox class

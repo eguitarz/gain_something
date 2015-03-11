@@ -9,6 +9,8 @@
     height: 100%;
     z-index: 9999;
     opacity: 0;
+    overflow-y: scroll;
+    overflow-x: hidden;
     @include transition('all 600ms');
     @include transform('scale(0)');
   }
@@ -31,8 +33,6 @@
     // padding-bottom: 56.2%;
     /* the above value * 0.5 */
     // margin-top: -28.1%;
-    overflow-y: scroll;
-    overflow-x: hidden;
     max-height: 90%;
     // min-height: 100%;
   }
@@ -85,18 +85,27 @@
     display: block;
   }
 
+  %lightbox_prev_next_buttons {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 10000;
+  }
+
   %lightbox_previous_button {
     position: absolute;
-    top: 50%;
-    left: -32px;
-    margin-top: -40px;
+    // top: 50%;
+    // left: -32px;
+    left: 32px;
+    // margin-top: -40px;
   }
 
   %lightbox_next_button {
     position: absolute;
-    top: 50%;
-    right: -32px;
-    margin-top: -40px;
+    // top: 50%;
+    // right: -32px;
+    right: 32px;
+    // margin-top: -40px;
   }
 
   %lightbox_close_button {
@@ -109,23 +118,27 @@
 
 @mixin lightbox($selector, $defaultSkin: true) {
 
+  #{$selector}_next_prev_buttons {
+    @extend %lightbox_prev_next_buttons; 
+  }
+
+  #{$selector}_previous_button {
+    @extend %lightbox_previous_button;
+  }
+
+  #{$selector}_next_button {
+    @extend %lightbox_next_button; 
+  }
+
+  #{$selector}_close_button {
+    @extend %lightbox_close_button; 
+  }
+
   #{$selector} {
     @extend %lightbox;
 
     #{$selector}_player_wrapper {
       @extend %lightbox_player_wrapper;
-
-      #{$selector}_previous_button {
-        @extend %lightbox_previous_button;
-      }
-
-      #{$selector}_next_button {
-        @extend %lightbox_next_button; 
-      }
-
-      #{$selector}_close_button {
-        @extend %lightbox_close_button; 
-      }
 
       #{$selector}_player {
         @extend %lightbox_player;

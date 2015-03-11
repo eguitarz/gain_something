@@ -22,6 +22,9 @@
       - lightbox_class = @current_resource.thumbnail.present? ? lightbox_class : '_has_no_thumbnail ' + lightbox_class
       - lightbox_class = " _is_#{@current_resource.mime} " + lightbox_class
       - lightbox_class = @current_resource.is_title_only? ? '_is_title_only ' + lightbox_class : lightbox_class
+
+    #lightbox_next_prev_buttons
+      = render partial: "partials/lightbox_navigator"
     #lightbox{class: lightbox_class || ''}
       #lightbox_player_wrapper
         .lightbox_loader

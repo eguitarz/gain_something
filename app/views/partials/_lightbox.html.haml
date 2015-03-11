@@ -1,6 +1,3 @@
-#lightbox_next_prev_buttons
-  = render partial: "partials/lightbox_next_prev_buttons"
-  
 - if @current_resource
   %input{id: 'lightbox-markdownDescription', type:'hidden', value: get_description(@current_resource) }
   #lightbox_player.lightbox_player.prevent-quit
